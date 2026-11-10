@@ -2,8 +2,10 @@
 
 An explorable, low-poly 3D Ephesus as it stood during Paul's stay (Acts 19–20, about AD 53–55), for a senior youth group studying Ephesians.
 
-**Status: DRAFT, waiting for your approval. Nothing is built yet.**
-Historian review of this plan: see `docs/history-notes.md`.
+**Status: waiting for your approval. Nothing is built yet.**
+The historian has reviewed this plan and its corrections are folded in. Full findings, sources, and the list of things it could not verify are in `docs/history-notes.md`.
+
+A note on dates: Paul's stay is usually put at about AD 52–55. The emperor Claudius died in October 54, so by the time of the riot Nero was emperor.
 
 ---
 
@@ -37,7 +39,7 @@ Historian review of this plan: see `docs/history-notes.md`.
 
 ## 2. The map
 
-The real city is laid out around two hills with a valley street between them. We keep the real arrangement and directions but shrink distances by roughly 5–8×, so harbor to theatre is about a 30-second walk and the whole city is crossable in 3–4 minutes. The Temple of Artemis really stood about 2 km outside the city; here it is a 1-minute walk beyond the gate and visible from high ground.
+The real city is laid out around two hills with a valley street between them. We keep the real arrangement and directions but shrink distances by roughly 5–8×, so harbor to theatre is about a 30-second walk and the whole city is crossable in 3–4 minutes. The Temple of Artemis really stood about 2 km outside the city; here it is a 1-minute walk beyond the gate. The hill hides it from the theatre and the upper square, as it did in reality, so it comes into view from the Magnesian Gate and along the road.
 
 ```
                                   NORTH
@@ -46,7 +48,7 @@ The real city is laid out around two hills with a valley street between them. We
     and Koressian Gate: blocked                               │   ARTEMIS    │
     off, "road continues")                                    └──────┬───────┘
               :                                                      │
-              :            ░░ Mt Pion ░░                             │ Sacred
+              :            ░ Panayırdağ ░                            │ Sacred
   ~~~~~~      :          ╔══════════╗  ░░░░                          │ Road
   ~~~~~~      :          ║  GREAT   ║   ░░░░░                        │ (tombs,
   HARBOR ═══ Harbor ═════╣ THEATRE  ║    ░░░░                        │ fields,
@@ -55,7 +57,7 @@ The real city is laid out around two hills with a valley street between them. We
   ~~~~~~   │syn.│*       ║ Theatre–      ┌─────┐                     │
            └────┘        ║ agora street  │Hall │*                    │
         ┌───────────────┐║ ("Marble St") │Tyr. │   ┌────┐┌────┐┌───┐ │
-        │  COMMERCIAL   │║               └─────┘   │Pry-││sac.││cou│ │
+        │  COMMERCIAL   │║               └─────┘   │Pry-││sac.││cou│*│
         │    AGORA      │║                         │tan.││prec││ncl│ │
         │ ●1 seal stalls│║                         └────┘└────┘└───┘ │
         │  silversmiths │║                        ╔═════════════════╗│
@@ -66,11 +68,13 @@ The real city is laid out around two hills with a valley street between them. We
                                ╲╲ Curetes Street  ╚═════════════════╝
                                 ╲╲═══════════════════╝
                           ▓▓ terrace houses ▓▓  (monuments along street)
-                         ░░░░ Mt Preon (Bülbüldağ) ░░░░   ── city wall on ridge ──
+                         ░░░░░░░ Bülbüldağ ░░░░░░░░░░░░   ── city wall on ridge ──
 
    * = location unknown; placed by us and labelled "imagined" in the game
    ● = example fragment spots (full list in section 5)
 ```
+
+**Hill names.** We use the modern Turkish names first: Panayırdağ (probably ancient Mt Pion) to the north and Bülbüldağ (probably ancient Mt Preon) to the south. Scholars still argue about which ancient name belongs to which hill, and the plaques will say so.
 
 City walls (built about 290 BC under Lysimachus) run along the hill ridges and close the map edges naturally. The sea closes the west.
 
@@ -86,21 +90,22 @@ Each gets an info plaque with two clearly separated parts: **"What we know"** an
 |---|---|---|
 | 1 | **Harbor and quay** | Merchant ships, cranes, cargo, gulls. Ephesus was the great port of the province of Asia; the harbor was slowly silting up. |
 | 2 | **Harbor Street** | The road from the quay to the theatre. The grand colonnaded "Arcadian Way" tourists see is a rebuild from about AD 400, so ours is a plainer paved street. |
-| 3 | **Great Theatre** | Built into Mt Pion, begun in the Hellenistic period and being enlarged in the 1st century. We show scaffolding on part of it. Scene of Acts 19:23–41. |
+| 3 | **Great Theatre** | Built into Panayırdağ in the Hellenistic period. We show the older, smaller Greek theatre, without the top tier of seats. The huge version tourists see (often quoted at 21,500–25,000 seats) comes from a rebuild that current excavators date mostly after Paul's time, so we quote no seat count. Exactly how it looked in the 50s is uncertain, and the plaque says so. Scene of Acts 19:23–41. |
 | 4 | **Theatre-to-agora street** | Later called Marble Street (the marble paving is much later). Ours is stone-paved. |
-| 5 | **Commercial agora (Tetragonos Agora)** | Large square market ringed by shop rows. Stalls: pottery, fish, cloth, spices, bronze, seal-cutters, moneychangers. |
-| 6 | **Gate of Mazaeus and Mithridates** | South gate of the agora, built 4/3 BC by two freedmen of Augustus's household. A genuine landmark Paul would have walked through. |
-| 7 | **Silversmiths' workshops** | Acts 19:24 says Demetrius made silver shrines of Artemis. Inscriptions confirm a silversmiths' guild at Ephesus. The exact street is our choice. |
+| 5 | **Commercial agora (Tetragonos Agora)** | Large square market ringed by shop rows. Stalls: pottery, fish, cloth, spices, bronze, seal-cutters, moneychangers. On the east side a new hall is going up (dedicated AD 54–59, under Nero), so that is where we show a building site with scaffolding. |
+| 6 | **Gate of Mazaeus and Mithridates** | South gate of the agora, built 4/3 BC by two men freed from slavery in the emperor's family (the households of Augustus and Agrippa). A genuine landmark Paul would have walked through. |
+| 7 | **Silversmiths' workshops** | Acts 19:24 says Demetrius made silver shrines of Artemis. Inscriptions from Ephesus mention an association of silversmiths, though most are later than Paul. No silver shrines have been found (silver gets melted down); small terracotta and marble ones have. The exact street is our choice. |
 | 8 | **Triodos ("three ways") and the empty lot** | The junction below Curetes Street. A plaque marks where the Library of Celsus *will* stand: "You're about 60 years too early." |
-| 9 | **Curetes Street (the Embolos)** | Sloping street lined with honorary monuments that existed by the 50s: the Octagon tomb, the Heroon of Androklos, the Memmius Monument. |
-| 10 | **Terrace houses** | Wealthy hillside homes on the south side of Curetes Street, with courtyard, wall paintings and mosaic floors. One is enterable (the household scene). |
-| 11 | **State agora** | The upper civic square, laid out under Augustus, with a small temple in the middle. |
+| 9 | **Curetes Street (the Embolos)** | Sloping street lined with tombs and monuments that existed by the 50s: the Octagon (a tomb; whose it was is not known), the Heroon of Androklos, the Memmius Monument, and the Pollio Monument at the top of the street (its fountain is a later addition, so ours has none). |
+| 10 | **Terrace houses** | Wealthy hillside homes on the south side of Curetes Street, built around a courtyard. The famous paintings and mosaics visitors see today are mostly 2nd–3rd century, so ours is decorated more plainly. One is enterable (the household scene). |
+| 11 | **State agora** | The upper civic square, rebuilt under Augustus, with a small temple in the middle. Which god or ruler the temple honoured is not known (Isis, Julius Caesar and Roma, and Augustus have all been proposed). |
 | 12 | **Basilica Stoa** | Long three-aisled hall on the north side of the state agora, dedicated about AD 11. |
 | 13 | **Prytaneion** | City hall with the sacred hearth of Hestia, whose fire was never allowed to go out. |
-| 14 | **Sacred precinct and council house** | Between the Prytaneion and the council house stood a precinct linked to the cult of Rome and the emperor. The council met nearby; the building visible today is 2nd century, so ours is a simpler hall marked "reconstruction." |
+| 14 | **Sacred precinct** | A walled precinct beside the Prytaneion, probably linked to the cult of Rome and the emperor's family. Which cult exactly is debated. |
 | 15 | **Magnesian Gate** | The south-east city gate, from the 3rd century BC. Start of the road to the temple. |
-| 16 | **Sacred Road** | Runs outside the walls around Mt Pion, past roadside tombs and fields. |
-| 17 | **Temple of Artemis (Artemision)** | One of the Seven Wonders: a forest of 127 Ionic columns (Pliny), about four times the footprint of the Parthenon. Altar court in front. Sellers of offerings outside. |
+| 16 | **Sacred Road** | Runs outside the walls around Panayırdağ, past roadside tombs and fields. |
+| 17 | **Temple of Artemis (Artemision)** | One of the Seven Wonders: a forest of Ionic columns (the Roman writer Pliny says 127; the true count is uncertain) and about three times the footprint of the Parthenon, nearly four by Pliny's measurements. It faces west, with the great altar in front on the west side. Sellers of offerings outside. The hill behind it is bare (the castle and church there today are centuries later). The goddess's statue is not copied from the famous museum statues, which are later. |
+| 17b | **Fishery toll-office** (small, optional) | At the harbor. An inscription of AD 54–59 records the fishermen and fish-sellers paying for it, so it is new or being built. |
 | 18 | **City walls** | Lysimachus's walls on the ridges. Scenery and boundary. |
 
 ### Imagined placements (real from Acts, location unknown)
@@ -108,36 +113,37 @@ Each gets an info plaque with two clearly separated parts: **"What we know"** an
 | # | Location | Scripture | Where we put it |
 |---|---|---|---|
 | 19 | **Synagogue** | Acts 19:8 | A modest hall in a residential block between the harbor street and the agora. No synagogue has been found at Ephesus, though a Jewish community is well attested. |
-| 20 | **Lecture hall of Tyrannus** | Acts 19:9 | A rented hall on a side street east of the theatre–agora street. Some manuscripts add that Paul taught "from the fifth hour to the tenth" (about 11 am to 4 pm, siesta time); plaque says so and flags it as uncertain. |
+| 20 | **Lecture hall of Tyrannus** | Acts 19:9 | A hall on a side street east of the theatre–agora street (Acts does not say whether Paul rented it). Some manuscripts add that Paul taught "from the fifth hour to the tenth" (about 11 am to 4 pm, siesta time); plaque says so and flags it as uncertain. |
 | 21 | **Priscilla and Aquila's workshop and home** | Acts 18:18–26; 1 Cor 16:19 | A shop in the row beside the agora with living space behind and above, where the house church meets. |
 | 22 | **Scroll-burning site** | Acts 19:19 | A small open square near the Triodos, with a scorched patch of paving. Acts says it was done publicly but not where. |
+| 23 | **Council house** | (not in Acts) | The city council certainly existed, but the council building visible today dates to about AD 100 and nothing earlier was found beneath it. Ours is a plain hall beside the precinct, labelled as a guess. |
 
 ### Deliberately left out (did not exist yet)
 
-Library of Celsus (about AD 110–117), Temple of Hadrian, Hadrian's Gate, Temple of Domitian, Scholastica (Varius) Baths, Fountain of Trajan, Hercules Gate, the public latrines, Harbor Baths and gymnasium, Vedius and East gymnasia, Fountain of Pollio's later form, the marble-paved Arcadian Way with its street lamps, the Church of Mary, the Basilica of St John, the "House of the Virgin Mary," and the Cave of the Seven Sleepers. Also no "Paul's prison" tower presented as fact (that is a later tradition).
+Library of Celsus (about AD 110–117), Temple of Hadrian, Hadrian's Gate, Temple of Domitian, Scholastica (Varius) Baths, Fountain of Trajan, Hercules Gate, the public latrines, Harbor Baths and gymnasium, Vedius and East gymnasia, the Fountain of Laecanius Bassus, the Serapeion, the Theatre Gymnasium, the Stoa of Damianus on the Sacred Road, the marble-paved Arcadian Way with its street lamps, the Church of Mary, the Basilica of St John, the "House of the Virgin Mary," and the Cave of the Seven Sleepers. Also no "Paul's prison" tower presented as fact (that is a later tradition).
 
-Everyday-life checks: no tomatoes, potatoes, maize, peppers or oranges on market stalls; tunics and cloaks rather than togas for most people; coins and prices in denarii/drachmas; no stirrups, glass windowpanes in shopfronts, or printed books (scrolls and wax tablets only).
+Everyday-life checks: no tomatoes, potatoes, maize, peppers or oranges on market stalls; tunics and cloaks rather than togas for most people; coins and prices in denarii/drachmas; no stirrups, barrels, wheelbarrows, glass windowpanes in shopfronts, or printed books (scrolls and wax tablets only); ships steer with side oars, not a stern rudder; no prickly pear, agave or eucalyptus in the scenery; Roman men clean-shaven; statues and temples painted, not bare white; shop signs in Greek; no crosses, churches or Star of David. The historian's longer list is in `docs/history-notes.md`.
 
 ---
 
 ## 4. Characters
 
-All are fictional portrayals. Named people from Acts are marked †. Names for invented characters are placeholders for the historian and scripture-writer to confirm.
+All are fictional portrayals. Named people from Acts are marked †. Invented characters have names that were common in the region and that no New Testament figure shares, so players don't mix them up.
 
 | Character | Where | Conversation themes | Ephesians link |
 |---|---|---|---|
 | **Demetrius**† the silversmith | His workshop, commercial agora | Sales of shrines are down; pride in his craft; fear for the city's honour and his workers' wages. Not a cartoon villain. | Sets up the riot; Eph 1:19–23 |
 | **Priscilla**† and **Aquila**† | Their leather/tent workshop | Why they left Rome (Claudius's edict), working with Paul, hosting the church in their home, teaching Apollos | Eph 1:1–14; 4:1–16 |
-| **Synagogue elder** | Synagogue | Three months of Paul's teaching, why some were persuaded and some weren't, the hope of Israel. Portrayed with respect, not as a foil. | Eph 2:11–18 |
-| **Student** at the Hall of Tyrannus | Hall of Tyrannus | Daily discussions, people from all over Asia hearing the message, what "mystery" means to a Greek | Eph 3 |
-| **Pilgrim** devoted to Artemis | Sacred Road / temple | Why she came, what Artemis means to her city and family; sincere devotion taken seriously | Eph 1:19–23; 2:19–22 |
-| **Former magician** | Scroll-burning site | The "Ephesian letters" (famous magic charms), the sons of Sceva incident, what burning 50,000 silver coins' worth cost him | Eph 5:8–14; 3 |
-| **Roman soldier** | Near the state agora / gate | His kit piece by piece, keeping the peace in a free city, boredom and duty | Eph 6:10–20 |
-| **Household**: householder, a daughter or son about the players' age, and an **enslaved worker** | Terrace house | How a Roman household was ordered and who had power. The enslaved worker speaks for themself: honest about not being free, without graphic detail. The game does not soften slavery or pretend the letter abolished it; the journal note names what was radical in the passage (masters and slaves share one Master who shows no favouritism) and what Christians later had to reckon with. | Eph 5:21–6:9 |
+| **Theodotus**, a synagogue elder | Synagogue | Three months of Paul's teaching, why some were persuaded and some weren't, the hope of Israel. Portrayed with respect, not as a foil. | Eph 2:11–18 |
+| **Metrodorus**, a student | Hall of Tyrannus | Daily discussions, people from all over Asia hearing the message, what "mystery" means to a Greek, and what it meant in the Jewish Scriptures | Eph 3 |
+| **Ammia**, a pilgrim devoted to Artemis | Sacred Road / temple | Why she came, what Artemis means to her city and family; sincere devotion taken seriously | Eph 1:19–23; 2:19–22 |
+| **Zosimus**, a former magician | Scroll-burning site | The "Ephesian letters" (famous magic charms), the sons of Sceva incident, what giving up his scrolls cost him. (The 50,000 silver coins in Acts 19:19 is the total for everyone's books, not one man's.) | Eph 5:8–14; 3 |
+| **Valens**, a Roman soldier | Near the Basilica Stoa | His kit piece by piece, life far from his unit, boredom and duty. Asia had no legion, so he is one man on loan to the governor's staff, not city police, and he takes no part in the riot. Day to day he wears tunic, cloak, hobnailed boots and a belt with sword and dagger; his helmet, mail shirt, big shield and spear are stacked beside him. No red-and-plate movie legionary. | Eph 6:10–20 |
+| **Household**: **Menander** the householder, his wife **Stratonice**, their daughter **Charite** (about the players' age), and **Eirene**, an enslaved worker | Terrace house | How a Roman household was ordered and who had power. The enslaved worker speaks for themself: honest about not being free, without graphic detail. The game does not soften slavery or pretend the letter abolished it; the journal note names what was radical in the passage (masters and slaves share one Master who shows no favouritism) and what Christians later had to reckon with. | Eph 5:21–6:9 |
 
 **Background life (non-speaking):** shoppers, porters, a fishmonger, children, a street philosopher, donkeys, goats, dogs, chickens, pigeons, gulls. Some give a one-line "bark" when tapped.
 
-**In the riot scene only:** the town clerk (unnamed in Acts), Gaius† and Aristarchus†, Alexander†. Their words come from Acts 19 (WEB).
+**In the riot scene only:** the town clerk (unnamed in Acts), Gaius† and Aristarchus†, Alexander†. Only Demetrius, the crowd and the town clerk speak, in words from Acts 19 (WEB); Acts gives the other three no lines, so neither do we.
 
 **Paul:** seen from across the room teaching at the Hall of Tyrannus. He has no dialogue tree. Tapping him shows his own words about his Ephesus years from Acts 20:18–21 (WEB), labelled as spoken later at Miletus. During the riot the narration notes, as Acts does, that his friends would not let him enter the theatre.
 
@@ -145,7 +151,7 @@ All are fictional portrayals. Named people from Acts are marked †. Names for i
 
 ## 5. The "Letter Fragments" quest
 
-**A framing note you should know about.** Ephesians was written several years *after* Paul left the city (most date it to about AD 60–62, from prison; some scholars think a student of Paul wrote it later, and some early copies lack the words "at Ephesus," so it may have been a circular letter for the region). So a letter fragment lying in the street in AD 54 would itself be an anachronism. Proposed solution: the opening screen says plainly, *"You are a visitor from the future. The letter hasn't been written yet. As you explore, you'll find pieces of what will one day be read aloud in this city."* The fragments glow, clearly not part of the ancient world. The journal includes a short "About this letter" page stating the dating honestly.
+**A framing note you should know about.** Ephesians was written *after* Paul left the city. The letter presents itself as written by Paul in prison, which would put it around AD 60–62. Scholars are divided: many think a follower of Paul wrote it in his name a decade or more later, and many others hold that Paul wrote it himself. Some of the earliest copies lack the words "at Ephesus," so it may have been a circular letter for churches across the region. The journal's "About this letter" page will lay this out evenly and leave the question open, and you can adjust that wording to fit your congregation. So a letter fragment lying in the street in AD 54 would itself be an anachronism. Proposed solution: the opening screen says plainly, *"You are a visitor from the future. The letter hasn't been written yet. As you explore, you'll find pieces of what will one day be read aloud in this city."* The fragments glow, clearly not part of the ancient world. The journal includes a short "About this letter" page stating the dating honestly.
 
 Nine fragments (your eight, with Eph 2:11–22 split in two so both the synagogue and the civic centre get one):
 
@@ -153,8 +159,8 @@ Nine fragments (your eight, with Eph 2:11–22 split in two so both the synagogu
 |---|---|---|---|
 | 1 | Eph 1:1–14 | Seal-cutter's stall, commercial agora | Merchants pressed a seal into wax or clay to mark goods as theirs and guarantee delivery. "Sealed with the Holy Spirit of promise." |
 | 2 | Eph 2:11–18 | Synagogue | "Far off" and "near"; the dividing wall broken down; one new people. |
-| 3 | Eph 2:19–22 | Prytaneion / state agora | Citizenship was precious and restricted here. "Fellow citizens… a holy temple," built of people, within sight of the road to Artemis's temple of stone. |
-| 4 | Eph 3:1–13 | Hall of Tyrannus | Mystery cults kept secrets for insiders. Paul's "mystery" is a secret God has now told everyone. |
+| 3 | Eph 2:19–22 | Prytaneion / state agora | Citizenship was precious and restricted in a Greek city like this one, which ran its own affairs under the Roman governor. "Fellow citizens… a holy temple," built of people, within sight of the road to Artemis's temple of stone. |
+| 4 | Eph 3:1–13 | Hall of Tyrannus | Paul's word "mystery" comes mainly from the Jewish Scriptures (Daniel): God's hidden plan, now revealed. In a city full of mystery cults with secrets for insiders, a mystery told to everyone would have stood out. |
 | 5 | Eph 4:1–16 | Great Theatre, top rows | A crowd of thousands that Acts says mostly didn't know why it had gathered, set beside "one body… one Spirit." |
 | 6 | Eph 5:8–14 | Scroll-burning site | People stepping publicly out of the dark. "Walk as children of light." |
 | 7 | Eph 5:21–6:9 | Terrace house courtyard | Household instructions read in the kind of home they addressed. |
@@ -165,7 +171,7 @@ Each fragment gives: the full WEB passage, a 2–4 sentence "Why here?" note, an
 
 **Riot trigger:** after 5 of 9 fragments, a message says a crowd is gathering at the theatre. The player chooses when to go.
 
-**Optional epilogue (if you like it):** after the riot, a quiet scene at the harbor. Acts 20:1 notes Paul said goodbye and left for Macedonia. Unlocks Eph 3:14–21 (Paul's prayer for the church) as a closing journal page.
+**Optional epilogue (if you like it):** after the riot, a quiet scene at the harbor. Acts 20:1 says Paul said goodbye and left for Macedonia; it does not say he sailed from here, so the scene is labelled imagined. Unlocks Eph 3:14–21 (Paul's prayer for the church) as a closing journal page.
 
 ---
 
@@ -173,12 +179,16 @@ Each fragment gives: the full WEB passage, a 2–4 sentence "Why here?" note, an
 
 A scripted scene of about three minutes, watched from the theatre seats. The player can look around but not leave until it ends (or tap "Skip").
 
-1. Demetrius speaks to the craftsmen (Acts 19:25–27).
-2. The crowd pours into the theatre; Gaius and Aristarchus are swept along. Shown as jostling, with no injuries.
-3. Confusion: "Some therefore cried one thing, and some another… most of them didn't know why they had come together." (19:32)
-4. Alexander tries to speak; the chant begins: **"Great is Artemis of the Ephesians!"** The chant swells with on-screen text and synthesized crowd sound. Acts says it lasted about two hours; ours lasts about 30 seconds with a caption saying so.
-5. The town clerk quiets the crowd and delivers his speech (19:35–40), then dismisses the assembly.
-6. Narration closes; journal gains an "Acts 19" page with three discussion questions.
+1. **At the workshops.** Demetrius speaks to a gathering of craftsmen (Acts 19:25–27). They are filled with anger and the chant breaks out for the first time: **"Great is Artemis of the Ephesians!"** (19:28)
+2. **The rush.** The city fills with confusion and the crowd rushes into the theatre, having seized Gaius and Aristarchus, Paul's travel companions (19:29). Shown as being pulled along by the arms; no one is hurt. Gaius and Aristarchus say nothing, as in Acts.
+3. **Outside.** Paul wants to go in. The disciples won't let him, and some of the Asiarchs (leading officials of the province who were his friends) send word begging him not to (19:30–31).
+4. **Confusion.** "Some therefore cried one thing, and some another… most of them didn't know why they had come together." (19:32)
+5. **Alexander.** He is pushed forward and motions to speak, but "when they perceived that he was a Jew," the crowd shouts him down (19:33–34). He never gets a word out. The narration names this plainly: the crowd's anger turns on a whole people, not only on Paul.
+6. **Two hours.** The chant swells with on-screen text and synthesized crowd sound. Ours lasts about 30 seconds with a caption giving the real length.
+7. **The town clerk** quiets the crowd and gives his speech (19:35–40), then dismisses the assembly (19:41).
+8. Narration closes; the journal gains an "Acts 19" page with three discussion questions.
+
+All spoken lines are quoted from Acts 19 (WEB): Demetrius, the crowd, and the town clerk are the only ones who speak.
 
 Tone: loud and tense, not violent. No weapons drawn, no one hurt.
 
