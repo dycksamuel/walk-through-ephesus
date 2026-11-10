@@ -2,7 +2,7 @@
 
 An explorable, low-poly 3D Ephesus as it stood during Paul's stay (Acts 19–20, about AD 53–55), for a senior youth group studying Ephesians.
 
-**Status: waiting for your approval. Nothing is built yet.**
+**Status: approved. Phase 1 (walkable layout) is built.**
 The historian has reviewed this plan and its corrections are folded in. Full findings, sources, and the list of things it could not verify are in `docs/history-notes.md`.
 
 A note on dates: Paul's stay is usually put at about AD 52–55. The emperor Claudius died in October 54, so by the time of the riot Nero was emperor.
@@ -151,7 +151,15 @@ All are fictional portrayals. Named people from Acts are marked †. Invented ch
 
 ## 5. The "Letter Fragments" quest
 
-**A framing note you should know about.** Ephesians was written *after* Paul left the city. The letter presents itself as written by Paul in prison, which would put it around AD 60–62. Scholars are divided: many think a follower of Paul wrote it in his name a decade or more later, and many others hold that Paul wrote it himself. Some of the earliest copies lack the words "at Ephesus," so it may have been a circular letter for churches across the region. The journal's "About this letter" page will lay this out evenly and leave the question open, and you can adjust that wording to fit your congregation. So a letter fragment lying in the street in AD 54 would itself be an anachronism. Proposed solution: the opening screen says plainly, *"You are a visitor from the future. The letter hasn't been written yet. As you explore, you'll find pieces of what will one day be read aloud in this city."* The fragments glow, clearly not part of the ancient world. The journal includes a short "About this letter" page stating the dating honestly.
+**How the letter fits the timeline.** Ephesians was written *after* Paul left the city. The letter presents itself as written by Paul in prison, which would put it around AD 60–62. Scholars are divided: many think a follower of Paul wrote it in his name a decade or more later, and many others hold that Paul wrote it himself. Some of the earliest copies lack the words "at Ephesus," so it may have been a circular letter for churches across the region. The journal's "About this letter" page lays this out evenly.
+
+So a piece of the letter lying in the street during Paul's stay would be an anachronism. You suggested moving the game's date to after the letter was sent. Moving *everything* later would cost us the things you approved in the same reply: Paul teaching in the Hall of Tyrannus, the scroll-burning as a fresh event, and the riot happening live. So the plan does it this way instead:
+
+- **The frame is set after the letter arrives.** The opening screen: the letter has just reached the church in Ephesus, carried by Tychicus (Eph 6:21), and is being read aloud in a house church. An older member of the church says, "You weren't here in Paul's years. Come, I'll show you the city as it was."
+- **The walk is their memory of Paul's years** (about AD 52–55). Everything you explore is the city of that time.
+- **The fragments are lines of the letter being read**, heard at the places they bring to mind. No time travel and nothing out of place in the ancient world.
+
+If you would rather have the whole game set in the 60s, with Paul gone and the riot told as a story from the past, say so before Phase 3 and I will rework the characters to fit.
 
 Nine fragments (your eight, with Eph 2:11–22 split in two so both the synagogue and the civic centre get one):
 
@@ -244,10 +252,11 @@ Each phase ends the same way: playtester run (phone 390×844 with touch, desktop
 
 ---
 
-## 10. Things I need from you
+## 10. Decisions made
 
-1. **Publishing.** GitHub Pages has to be switched on once by you: repo **Settings → Pages → Source: "GitHub Actions"** (the repo must be public on a free account). GitHub only publishes from the main branch by default, and I am working on a separate branch, so at the end of each phase I would open a pull request for you to merge (one click). Is that OK, or would you rather I be allowed to publish from my working branch?
-2. **The "visitor from the future" framing** for the fragments (section 5). OK?
-3. **Nine fragments, riot after five**, and the optional harbor epilogue. OK?
-4. **Paul's appearance** limited to a non-speaking figure with Acts 20 quoted (section 4). OK?
-5. **The household scene** approach (section 4). This is the most sensitive part; tell me if your congregation would want it handled differently.
+1. **Publishing:** GitHub Pages is switched on (source: GitHub Actions). Each phase goes out through a pull request into the main branch.
+2. **Fragment framing:** the letter has arrived; the walk is a memory of Paul's years (section 5).
+3. **Quest shape:** nine fragments, riot after five, harbor epilogue with Eph 3:14–21. Approved.
+4. **Paul:** non-speaking figure, Acts 20:18–21 quoted. Approved.
+5. **Household scene:** approach in section 4 approved.
+6. **Authorship page:** even-handed wording approved.
