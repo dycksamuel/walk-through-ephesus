@@ -1,0 +1,23 @@
+{
+  "harbor": { "name": "The Harbor" },
+  "harborStreet": { "name": "Harbor Street" },
+  "synagogue": { "name": "Synagogue" },
+  "theatre": { "name": "The Great Theatre" },
+  "marbleStreet": { "name": "Theatre Street" },
+  "tyrannus": { "name": "Lecture Hall of Tyrannus" },
+  "agora": { "name": "Commercial Agora (Market Square)" },
+  "silversmiths": { "name": "Silversmiths' Workshops" },
+  "priscilla": { "name": "Priscilla and Aquila's Workshop" },
+  "mazaeusGate": { "name": "Gate of Mazaeus and Mithridates" },
+  "triodos": { "name": "The Triodos (Three Ways)" },
+  "scrollSquare": { "name": "Square of the Burned Scrolls" },
+  "curetes": { "name": "Curetes Street" },
+  "terraceHouse": { "name": "Terrace Houses" },
+  "stateAgora": { "name": "State Agora (Upper Square)" },
+  "basilica": { "name": "Basilica Stoa" },
+  "prytaneion": { "name": "Prytaneion (City Hall)" },
+  "council": { "name": "Council House" },
+  "magnesianGate": { "name": "Magnesian Gate" },
+  "sacredRoad": { "name": "The Sacred Road" },
+  "artemision": { "name": "Temple of Artemis" }
+}

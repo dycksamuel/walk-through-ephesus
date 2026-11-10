@@ -1,0 +1,10 @@
+{
+  "name": "walk-through-ephesus",
+  "private": true,
+  "type": "module",
+  "description": "An explorable 3D recreation of Ephesus in the apostle Paul's day.",
+  "scripts": {
+    "check": "node tools/check-content.mjs",
+    "start": "python3 -m http.server 8000"
+  }
+}
