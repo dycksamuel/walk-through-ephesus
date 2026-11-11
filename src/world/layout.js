@@ -2,7 +2,9 @@
 // Real distances are shrunk roughly 5-8x so the city is walkable in a few minutes.
 // Display names for locations live in content/locations.json, keyed by id.
 
-export const WORLD = { minX: -235, maxX: 420, minZ: -200, maxZ: 300 };
+export const WORLD = { minX: -295, maxX: 485, minZ: -264, maxZ: 356 };   // extent of the drawn ground
+export const WALK = { minX: -188.5, maxX: 425, minZ: -204, maxZ: 292 };    // how far the player may wander
+export const MAPVIEW = { minX: -235, maxX: 420, minZ: -200, maxZ: 300 }; // area shown on the map
 export const SEA_X = -190;          // everything west of this is water
 export const UPPER_Y = 14;          // height of the upper (state agora) terrace
 
@@ -20,15 +22,15 @@ const bump = (x, z, cx, cz, rx, rz, h) => {
 export const PADS = [
   { id: 'quay',        x0: -190, z0: -45, x1: -168, z1: 45,  y: 1,       m: 6,  surface: 'stone' },
   { id: 'theatrePlaza',x0: -46,  z0: -22, x1: -22,  z1: 22,  y: 1,       m: 8,  surface: 'stone' },
-  { id: 'orchestra',   x0: -22,  z0: -40, x1: 2,    z1: 40,  y: 1,       m: 4,  surface: null },
+  { id: 'orchestra',   x0: -22,  z0: -42, x1: -10,  z1: 42,  y: 1,       m: 4,  surface: null },
   { id: 'agora',       x0: -138, z0: 28,  x1: -44,  z1: 122, y: 1,       m: 6,  surface: 'stone' },
   { id: 'triodos',     x0: -72,  z0: 124, x1: -18,  z1: 156, y: 1,       m: 6,  surface: 'stone' },
   { id: 'scrollSquare',x0: -112, z0: 134, x1: -84,  z1: 160, y: 1,       m: 5,  surface: 'stone' },
   { id: 'tyrannus',    x0: -20,  z0: 58,  x1: 8,    z1: 84,  y: 1.5,     m: 5,  surface: null },
   { id: 'stateAgora',  x0: 100,  z0: 136, x1: 204,  z1: 204, y: UPPER_Y, m: 8,  surface: 'stone' },
   { id: 'civic',       x0: 100,  z0: 108, x1: 196,  z1: 136, y: UPPER_Y, m: 6,  surface: 'dirt' },
-  { id: 'terrace1',    x0: 14,   z0: 172, x1: 62,   z1: 186, y: 9,       m: 3,  surface: null },
-  { id: 'terrace2',    x0: 14,   z0: 188, x1: 62,   z1: 202, y: 13,      m: 3,  surface: null },
+  { id: 'terrace1',    x0: 14,   z0: 171, x1: 62,   z1: 184, y: 9,       m: 3,  surface: null },
+  { id: 'terrace2',    x0: 14,   z0: 192, x1: 62,   z1: 204, y: 13,      m: 3,  surface: null },
   { id: 'temple',      x0: 262,  z0: -168, x1: 396, z1: -96, y: 1.5,     m: 14, surface: 'dirt' },
   // raised platforms (the blend margin acts as the steps)
   { id: 'artemisionBase', x0: 281, z0: -156, x1: 379, z1: -108, y: 3.3,  m: 4,  surface: 'marble' },
@@ -51,21 +53,23 @@ function naturalHeight(x, z) {
   return h;
 }
 
+const GRID_STEP = 4;   // spacing of the ground grid, in metres
+
 function padWeight(p, x, z) {
   const dx = Math.max(p.x0 - x, 0, x - p.x1);
   const dz = Math.max(p.z0 - z, 0, z - p.z1);
-  const d = Math.hypot(dx, dz);
+  // stay fully flat for one grid square beyond the edge, so paving never has grass poking into it
+  const d = Math.max(0, Math.hypot(dx, dz) - GRID_STEP * 1.05);
   return 1 - smooth(0, p.m, d);
 }
 
-// The ground surface (what the terrain mesh shows). Under the theatre seating it is a smooth
-// bowl cut into the hill, so the hillside never pokes up through the seats.
+// The exact, smooth ground formula. Under the theatre seating it is a bowl cut into the hill.
 export function groundAt(x, z) {
   let h = naturalHeight(x, z);
   const t = THEATRE, dx = x - t.cx, r = Math.hypot(dx, z - t.cz);
-  const tw = (1 - smooth(t.r1, t.r1 + 16, r)) * smooth(-12, -2, dx);
+  const tw = (1 - smooth(t.r1 + 2, t.r1 + 18, r)) * smooth(0, 4, dx);
   if (tw > 0) {
-    const bowl = t.baseY + Math.max(0, Math.min(r, t.r1) - t.r0) / t.rowDepth * t.rowRise - 0.3;
+    const bowl = r < t.r0 ? t.baseY : t.baseY + (Math.min(r, t.r1) - t.r0) / t.rowDepth * t.rowRise - 0.8;
     h += (bowl - h) * tw;
   }
   for (const p of PADS) {
@@ -75,15 +79,41 @@ export function groundAt(x, z) {
   return h;
 }
 
+// The ground as it is actually drawn: heights on a grid, joined by flat triangles.
+// The player walks on exactly this surface, so feet and picture always agree.
+export const GRID = (() => {
+  const nx = Math.ceil((WORLD.maxX - WORLD.minX) / GRID_STEP), nz = Math.ceil((WORLD.maxZ - WORLD.minZ) / GRID_STEP);
+  const h = new Float32Array((nx + 1) * (nz + 1));
+  for (let j = 0; j <= nz; j++) for (let i = 0; i <= nx; i++) {
+    h[j * (nx + 1) + i] = groundAt(WORLD.minX + i * GRID_STEP, WORLD.minZ + j * GRID_STEP);
+  }
+  return { nx, nz, step: GRID_STEP, h };
+})();
+
+export function terrainAt(x, z) {
+  const g = GRID, n = g.nx + 1;
+  let fx = (x - WORLD.minX) / g.step, fz = (z - WORLD.minZ) / g.step;
+  fx = Math.max(0, Math.min(g.nx - 1e-4, fx)); fz = Math.max(0, Math.min(g.nz - 1e-4, fz));
+  const i = Math.floor(fx), j = Math.floor(fz); fx -= i; fz -= j;
+  const a = g.h[j * n + i], d = g.h[j * n + i + 1], b = g.h[(j + 1) * n + i], c = g.h[(j + 1) * n + i + 1];
+  return fx + fz <= 1 ? a + (d - a) * fx + (b - a) * fz : c + (b - c) * (1 - fx) + (d - c) * (1 - fz);
+}
+
+// Is this spot on the theatre seating?
+export function onSeats(x, z) {
+  const t = THEATRE, dx = x - t.cx, r = Math.hypot(dx, z - t.cz);
+  return dx > 0 && r >= t.r0 && r <= t.r1;
+}
+
 // Height of whatever the player is standing on: the ground, or a row of theatre seats.
 export function heightAt(x, z) {
-  const t = THEATRE, dx = x - t.cx, r = Math.hypot(dx, z - t.cz);
-  if (dx > -2 && r >= t.r0 && r <= t.r1) {
+  if (onSeats(x, z)) {
+    const t = THEATRE, r = Math.hypot(x - t.cx, z - t.cz);
     const rows = Math.round((t.r1 - t.r0) / t.rowDepth);
     const row = Math.min(Math.floor((r - t.r0) / t.rowDepth) + 1, rows);
     return t.baseY + row * t.rowRise;
   }
-  return groundAt(x, z);
+  return terrainAt(x, z);
 }
 
 // Streets: lists of points, drawn as ribbons that follow the ground.
@@ -94,7 +124,7 @@ export const STREETS = [
   { id: 'scrollLane',   w: 5,  surface: 'dirt',  pts: [[-72, 146], [-84, 146]] },
   { id: 'synagogueLane',w: 5,  surface: 'dirt',  pts: [[-104, -6], [-104, -20]] },
   { id: 'tyrannusLane', w: 5,  surface: 'dirt',  pts: [[-30, 70], [-20, 70]] },
-  { id: 'civicLane',    w: 6,  surface: 'dirt',  pts: [[146, 136], [146, 150]] },
+  { id: 'civicLane',    w: 6,  surface: 'dirt',  pts: [[152, 134], [152, 150]] },
   { id: 'gateRoad',     w: 9,  surface: 'stone', pts: [[204, 172], [246, 172]] },
   { id: 'sacredRoad',   w: 8,  surface: 'dirt',  pts: [[246, 172], [282, 150], [304, 100], [310, 30], [306, -40], [286, -84], [262, -110], [252, -132]] },
   { id: 'northRoad',    w: 8,  surface: 'dirt',  pts: [[-40, -22], [-44, -70], [-40, -110]] },
@@ -133,10 +163,10 @@ export const STRUCTURES = [
   { kind: 'monument', id: 'pollio',  x: 96, z: 180, w: 6, d: 4, h: 7 },
 
   // --- terrace houses (south side of Curetes Street) ---
-  { kind: 'house', id: 'terraceHouse', x: 28, z: 179, w: 22, d: 12, h: 6, court: true },
-  { kind: 'house', x: 50, z: 179, w: 18, d: 12, h: 6 },
-  { kind: 'house', x: 26, z: 195, w: 20, d: 12, h: 6 },
-  { kind: 'house', x: 49, z: 195, w: 20, d: 12, h: 6 },
+  { kind: 'house', id: 'terraceHouse', x: 28, z: 178, w: 22, d: 12, h: 6, court: true },
+  { kind: 'house', x: 50, z: 178, w: 18, d: 12, h: 6 },
+  { kind: 'house', x: 26, z: 198, w: 20, d: 12, h: 6 },
+  { kind: 'house', x: 49, z: 198, w: 20, d: 12, h: 6 },
 
   // --- upper civic area ---
   { kind: 'stoa', id: 'basilica', x: 152, z: 143, w: 100, d: 12, h: 9 },
@@ -160,7 +190,7 @@ export const HOUSE_BLOCKS = [
   { x0: -164, z0: -44, x1: -116, z1: -10 },   // north of Harbor Street
   { x0: -90,  z0: -50, x1: -52,  z1: -10 },
   { x0: -164, z0: 8,   x1: -52,  z1: 24 },    // between Harbor Street and the agora
-  { x0: -26,  z0: 28,  x1: -6,   z1: 54 },    // east of the theatre-agora street
+  { x0: -28,  z0: 46,  x1: -10,  z1: 56 },    // east of the theatre-agora street
   { x0: -26,  z0: 90,  x1: -2,   z1: 128 },
   { x0: -164, z0: 126, x1: -134, z1: 160 },   // south-west quarter
   { x0: -70,  z0: 160, x1: 8,    z1: 184 },   // below Bulbuldag
@@ -172,9 +202,9 @@ export const HOUSE_BLOCKS = [
 
 // City wall: a chain of points. Gaps are left where roads pass through.
 export const WALLS = [
-  [[246, 185], [246, 240], [150, 262], [20, 258], [-110, 250], [-175, 200], [-186, 90]],
+  [[246, 185], [246, 240], [150, 262], [20, 258], [-110, 250], [-172, 200], [-182, 90]],
   [[246, 159], [262, 110], [258, 40], [230, -40], [150, -90], [40, -122], [-34, -116]],
-  [[-46, -116], [-120, -100], [-186, -84]],
+  [[-46, -116], [-120, -100], [-182, -84]],
 ];
 
 // Named places: used for the map, the "you are near" banner, plaques and Leader Mode jumps.
@@ -183,7 +213,7 @@ export const PLACES = [
   { id: 'harbor',        x: -176, z: 0,    r: 26, spawn: [-164, 0],   face: 270 },
   { id: 'harborStreet',  x: -105, z: 0,    r: 14, spawn: [-120, 0],   face: 90 },
   { id: 'synagogue',     x: -104, z: -26,  r: 12, spawn: [-104, -14], face: 0,   imagined: true },
-  { id: 'theatre',       x: -8,   z: 0,    r: 34, spawn: [-40, 0],    face: 90 },
+  { id: 'theatre',       x: -8,   z: 0,    r: 34, spawn: [-12, 0],    face: 90 },
   { id: 'marbleStreet',  x: -34,  z: 76,   r: 12, spawn: [-34, 40],   face: 180 },
   { id: 'tyrannus',      x: -6,   z: 70,   r: 12, spawn: [-24, 70],   face: 90,  imagined: true },
   { id: 'agora',         x: -91,  z: 75,   r: 40, spawn: [-60, 75],   face: 270 },
@@ -196,8 +226,8 @@ export const PLACES = [
   { id: 'terraceHouse',  x: 28,   z: 178,  r: 10, spawn: [28, 170],   face: 180 },
   { id: 'stateAgora',    x: 152,  z: 176,  r: 34, spawn: [112, 172],  face: 90 },
   { id: 'basilica',      x: 152,  z: 143,  r: 12, spawn: [152, 154],  face: 0 },
-  { id: 'prytaneion',    x: 114,  z: 122,  r: 12, spawn: [128, 132],  face: 300 },
-  { id: 'council',       x: 178,  z: 122,  r: 12, spawn: [164, 132],  face: 60,  imagined: true },
+  { id: 'prytaneion',    x: 114,  z: 122,  r: 12, spawn: [126, 133],  face: 315 },
+  { id: 'council',       x: 178,  z: 122,  r: 12, spawn: [166, 133],  face: 45,  imagined: true },
   { id: 'magnesianGate', x: 246,  z: 172,  r: 12, spawn: [232, 172],  face: 90 },
   { id: 'sacredRoad',    x: 308,  z: 40,   r: 30, spawn: [300, 110],  face: 0 },
   { id: 'artemision',    x: 300,  z: -132, r: 60, spawn: [250, -112], face: 75 },

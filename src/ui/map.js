@@ -1,6 +1,6 @@
 // The map: a small one in the corner and a big one you open by tapping it.
 // Both are drawn from the same city plan the 3D world is built from, so they always match.
-import { WORLD, SEA_X, PADS, STREETS, STRUCTURES, HOUSE_BLOCKS, WALLS, PLACES, THEATRE } from '../world/layout.js';
+import { MAPVIEW as WORLD, SEA_X, PADS, STREETS, STRUCTURES, HOUSE_BLOCKS, WALLS, PLACES, THEATRE } from '../world/layout.js';
 
 const C = {
   land: '#d9cfa6', sea: '#7fb0c4', street: '#f4eee0', pad: '#ece4cf', block: '#b99f7c',
@@ -58,9 +58,13 @@ export function createMap({ miniCanvas, bigCanvas, names, text }) {
   function layoutMini() {
     const cssW = Math.min(170, Math.max(118, window.innerWidth * 0.3));
     ({ base: miniBase, t: miniT } = prepare(miniCanvas, cssW));
+    // tell the page how big the mini-map is, so the compass and banner can keep clear of it
+    document.documentElement.style.setProperty('--mini-w', cssW + 'px');
+    document.documentElement.style.setProperty('--mini-h', (cssW / ratio) + 'px');
   }
   function layoutBig() {
-    const cssW = Math.min(window.innerWidth - 24, (window.innerHeight - 150) * ratio, 1100);
+    // fit inside the panel (which has padding) and leave room for the title and Close button
+    const cssW = Math.max(200, Math.min(window.innerWidth - 62, (window.innerHeight * 0.62 - 40) * ratio, 1000));
     ({ base: bigBase, t: bigT } = prepare(bigCanvas, cssW));
     // place names, numbered so they stay readable on a phone
     const ctx = bigBase.getContext('2d'), fs = Math.max(9, 11 * dpr * Math.min(1, cssW / 520));

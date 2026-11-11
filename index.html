@@ -21,12 +21,14 @@
   </div>
 
   <div id="mapPanel" class="panel" hidden>
-    <div class="sheet">
-      <h2 id="mapTitle"></h2>
+    <div class="sheet" id="mapSheet">
+      <div class="sheetHead">
+        <h2 id="mapTitle"></h2>
+        <button id="mapClose" type="button" class="primary compact"></button>
+      </div>
       <canvas id="bigMap"></canvas>
       <ol id="mapLegend"></ol>
       <p id="mapNote" class="small"></p>
-      <button id="mapClose" type="button" class="primary"></button>
     </div>
   </div>
 

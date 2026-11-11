@@ -5,7 +5,8 @@ const KEY = 'walk-through-ephesus:v1';
 export function loadSave() {
   try {
     const raw = window.localStorage.getItem(KEY);
-    return raw ? JSON.parse(raw) : {};
+    const data = raw ? JSON.parse(raw) : {};
+    return (data && typeof data === 'object' && !Array.isArray(data)) ? data : {};
   } catch (e) { return {}; }
 }
 

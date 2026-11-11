@@ -3,7 +3,7 @@
 // Laptop: WASD or arrow keys to walk, Shift to jog, click-and-drag to look.
 
 export function createControls(canvas, stickEl) {
-  const state = { moveX: 0, moveY: 0, lookX: 0, lookY: 0, run: false, usedTouch: false, enabled: true };
+  const state = { turn: 0, moveX: 0, moveY: 0, lookX: 0, lookY: 0, run: false, usedTouch: false, enabled: true };
   const keys = new Set();
   const knob = stickEl.querySelector('.knob');
 
@@ -11,7 +11,7 @@ export function createControls(canvas, stickEl) {
   window.addEventListener('keydown', (e) => {
     if (typing(e)) return;
     keys.add(e.code);
-    if (/^Arrow|^Space$/.test(e.code)) e.preventDefault();
+    if (/^Arrow/.test(e.code)) e.preventDefault();
   });
   window.addEventListener('keyup', (e) => keys.delete(e.code));
   window.addEventListener('blur', () => keys.clear());
@@ -21,6 +21,7 @@ export function createControls(canvas, stickEl) {
   canvas.addEventListener('pointerdown', (e) => {
     if (!state.enabled) return;
     if (e.pointerType === 'touch') state.usedTouch = true;
+    if (look.size) return;   // one finger looks; extra fingers are ignored
     look.set(e.pointerId, { x: e.clientX, y: e.clientY });
     try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* older browsers */ }
   });
@@ -70,10 +71,9 @@ export function createControls(canvas, stickEl) {
     if (keys.has('KeyD')) x += 1;
     if (keys.has('KeyA')) x -= 1;
     // left/right arrows turn rather than sidestep: easier for people new to games
-    if (keys.has('ArrowLeft')) state.lookX -= 9;
-    if (keys.has('ArrowRight')) state.lookX += 9;
+    state.turn = (keys.has('ArrowRight') ? 1 : 0) - (keys.has('ArrowLeft') ? 1 : 0);
     const len = Math.hypot(x, y); if (len > 1) { x /= len; y /= len; }
-    if (!state.enabled) { x = y = 0; state.lookX = state.lookY = 0; }
+    if (!state.enabled) { x = y = 0; state.turn = 0; state.lookX = state.lookY = 0; }
     state.moveX = x || stickX; state.moveY = y || stickY;
     state.run = keys.has('ShiftLeft') || keys.has('ShiftRight');
   };

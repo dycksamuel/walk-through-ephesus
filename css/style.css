@@ -58,3 +58,15 @@ button:focus-visible { outline: 3px solid #ffd27a; outline-offset: 2px; }
 #mapPanel .sheet { text-align: center; }
 #mapLegend { text-align: left; }
 @media (min-width: 900px) { #mapLegend { columns: 3 200px; } p { font-size: 17px; } }
+
+/* map panel header: the Close button is always in view */
+.sheetHead { position: sticky; top: -18px; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin: -18px -18px 10px; padding: 12px 18px 8px; background: var(--paper); }
+.sheetHead h2 { margin: 0; text-align: left; }
+button.primary.compact { margin: 0; padding: 8px 18px; min-height: 44px; font-size: 15px; flex: none; }
+
+/* narrow (upright phone) screens: compass sits left of the mini-map, place name below it */
+@media (max-width: 640px) {
+  #compass { left: 10px; transform: none; width: calc(100vw - var(--mini-w, 130px) - 34px); }
+  #place { top: calc(var(--mini-h, 100px) + 24px + var(--safe-t)); max-width: calc(100vw - 24px); width: max-content; }
+}

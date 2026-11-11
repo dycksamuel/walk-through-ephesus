@@ -2,7 +2,7 @@
 // Everything static is merged into a handful of meshes so phones can draw it quickly.
 import * as THREE from '../../vendor/three.module.min.js';
 import {
-  WORLD, SEA_X, PADS, STREETS, STRUCTURES, HOUSE_BLOCKS, WALLS, THEATRE, groundAt, heightAt,
+  WORLD, WALK, SEA_X, GRID, PADS, STREETS, STRUCTURES, HOUSE_BLOCKS, WALLS, THEATRE, groundAt, terrainAt, heightAt,
 } from './layout.js';
 
 export const PALETTE = {
@@ -75,29 +75,41 @@ export function buildWorld(scene) {
 
   // ---------- terrain ----------
   {
-    const step = 4, nx = Math.ceil((WORLD.maxX - WORLD.minX) / step), nz = Math.ceil((WORLD.maxZ - WORLD.minZ) / step);
-    const g = new THREE.PlaneGeometry(nx * step, nz * step, nx, nz);
-    g.rotateX(-Math.PI / 2);
-    g.translate(WORLD.minX + nx * step / 2, 0, WORLD.minZ + nz * step / 2);
-    const p = g.getAttribute('position'), colors = new Float32Array(p.count * 3), c = new THREE.Color(), c2 = new THREE.Color();
-    const rand = rng(7);
-    for (let i = 0; i < p.count; i++) {
-      const x = p.getX(i), z = p.getZ(i), h = groundAt(x, z);
-      p.setY(i, h);
-      const slope = Math.hypot(groundAt(x + 2, z) - groundAt(x - 2, z), groundAt(x, z + 2) - groundAt(x, z - 2)) / 4;
+    const { nx, nz, step, h: H } = GRID, n = nx + 1;
+    const pos = [], col = [], c = new THREE.Color(), c2 = new THREE.Color(), rand = rng(7);
+    const vcol = new Float32Array(n * (nz + 1) * 3);
+    for (let j = 0; j <= nz; j++) for (let i = 0; i <= nx; i++) {
+      const k = j * n + i, h = H[k];
+      const hx = H[j * n + Math.min(nx, i + 1)] - H[j * n + Math.max(0, i - 1)];
+      const hz = H[Math.min(nz, j + 1) * n + i] - H[Math.max(0, j - 1) * n + i];
+      const slope = Math.hypot(hx, hz) / (2 * step);
       c.set(PALETTE.grass);
       if (h > 6) c.lerp(c2.set(PALETTE.scrub), Math.min(1, (h - 6) / 14));
       if (slope > 0.42) c.lerp(c2.set(PALETTE.rock), Math.min(1, (slope - 0.42) * 5));
       if (h < 0.6) c.lerp(c2.set(PALETTE.sand), Math.min(1, (0.6 - h) * 2));
       const v = 0.94 + rand() * 0.12;
-      colors[i * 3] = c.r * v; colors[i * 3 + 1] = c.g * v; colors[i * 3 + 2] = c.b * v;
+      vcol[k * 3] = c.r * v; vcol[k * 3 + 1] = c.g * v; vcol[k * 3 + 2] = c.b * v;
     }
-    g.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    const flat = g.toNonIndexed(); flat.computeVertexNormals();
-    scene.add(new THREE.Mesh(flat, lit));
+    const put = (i, j) => {
+      const k = j * n + i;
+      pos.push(WORLD.minX + i * step, H[k], WORLD.minZ + j * step);
+      col.push(vcol[k * 3], vcol[k * 3 + 1], vcol[k * 3 + 2]);
+    };
+    for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
+      put(i, j); put(i, j + 1); put(i + 1, j);              // these two triangles match terrainAt()
+      put(i, j + 1); put(i + 1, j + 1); put(i + 1, j);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+    g.computeVertexNormals();
+    scene.add(new THREE.Mesh(g, lit));
 
-    const water = new THREE.Mesh(new THREE.PlaneGeometry(900, 1400), new THREE.MeshLambertMaterial({ color: PALETTE.water }));
-    water.rotation.x = -Math.PI / 2; water.position.set(SEA_X - 440, 0, 50);
+    // far beyond the walkable area: sea to the west, hazy land everywhere else
+    const far = new THREE.Mesh(new THREE.PlaneGeometry(5000, 5000), new THREE.MeshLambertMaterial({ color: PALETTE.grass }));
+    far.rotation.x = -Math.PI / 2; far.position.set(0, -1.2, 0); scene.add(far);
+    const water = new THREE.Mesh(new THREE.PlaneGeometry(2500, 5000), new THREE.MeshLambertMaterial({ color: PALETTE.water }));
+    water.rotation.x = -Math.PI / 2; water.position.set(SEA_X + 8 - 1250, 0, 0);
     scene.add(water);
   }
 
@@ -108,16 +120,16 @@ export function buildWorld(scene) {
     const y = p.y + 0.06;
     decal.quad([p.x0, y, p.z1], [p.x1, y, p.z1], [p.x1, y, p.z0], [p.x0, y, p.z0], PALETTE[p.surface]);
   }
-  for (const s of STREETS) {
-    const color = PALETTE[s.surface], hw = s.w / 2;
+  STREETS.forEach((s, si) => {
+    const color = PALETTE[s.surface], hw = s.w / 2, lift = 0.1 + si * 0.012;
     for (let i = 0; i < s.pts.length - 1; i++) {
       const [ax, az] = s.pts[i], [bx, bz] = s.pts[i + 1];
-      const len = Math.hypot(bx - ax, bz - az), n = Math.max(1, Math.ceil(len / 3));
+      const len = Math.hypot(bx - ax, bz - az), n = Math.max(1, Math.ceil(len / 2));
       const ux = (bx - ax) / len, uz = (bz - az) / len, px = -uz * hw, pz = ux * hw;
       const ext = 0.5 * hw;                           // overlap at corners so bends have no gaps
       const at = (t, side) => {
         const d = -ext + (len + 2 * ext) * t, x = ax + ux * d + px * side, z = az + uz * d + pz * side;
-        return [x, groundAt(x, z) + 0.1, z];
+        return [x, terrainAt(x, z) + lift, z];
       };
       for (let k = 0; k < n; k++) {
         const t0 = k / n, t1 = (k + 1) / n;
@@ -125,7 +137,7 @@ export function buildWorld(scene) {
         decal.quad(at(t0, 0), at(t0, 1), at(t1, 1), at(t1, 0), color);
       }
     }
-  }
+  });
   {   // the theatre's round orchestra floor
     const t = THEATRE, y = t.baseY + 0.07, n = 24;
     for (let k = 0; k < n; k++) {
@@ -148,6 +160,7 @@ export function buildWorld(scene) {
   const column = (x, y, z, r, h, color) => {
     b.add('col', x, y, z, r, h, r, 0, color);
     b.box(x, y + h, z, r * 2.5, r * 0.5, r * 2.5, 0, color);
+    solid(x, z, r * 1.7, r * 1.7);
   };
 
   // The theatre seating: stacked half-rings, each a little higher and wider.
@@ -166,15 +179,27 @@ export function buildWorld(scene) {
     }
     // end walls where the seating meets the entrance passages
     const topY = t.baseY + rows * t.rowRise;
-    for (const s of [-1, 1]) {
-      const z = t.cz + s * (t.r0 + t.r1) / 2;
-      b.box(t.cx - 2.6, t.baseY, z, 1.2, topY - t.baseY, t.r1 - t.r0, 0, PALETTE.wall);
-      solid(t.cx - 2.6, z, 1.2, t.r1 - t.r0);
+    for (const s of [-1, 1]) {   // tall end walls beside the two entrance passages
+      const z = t.cz + s * (t.r0 + t.r1 + 1.5) / 2, len = t.r1 - t.r0 + 1.5;
+      b.box(t.cx - 0.7, t.baseY - 1, z, 1.4, topY - t.baseY + 2.2, len, 0, PALETTE.wall);
+      solid(t.cx - 0.7, z, 1.4, len);
+    }
+    // curved wall around the back of the top row
+    const wsegs = 22, wr = t.r1 + 0.7;
+    for (let k = 0; k < wsegs; k++) {
+      const a = -Math.PI / 2 + ((k + 0.5) / wsegs) * Math.PI, x = t.cx + Math.cos(a) * wr, z = t.cz + Math.sin(a) * wr;
+      const len = wr * Math.PI / wsegs + 0.5, lo = Math.min(topY, terrainAt(t.cx + Math.cos(a) * (wr + 3), t.cz + Math.sin(a) * (wr + 3))) - 2;
+      b.box(x, lo, z, 1.4, topY + 1.2 - lo, len, -a, PALETTE.wall);
+      solid(x, z, 1.4, len, -a);
     }
   }
 
   for (const s of STRUCTURES) {
-    const rot = rad(s.rot), y = groundAt(s.x, s.z), { x, z, w, d, h } = s;
+    const rot = rad(s.rot), { x, z, w, d, h } = s;
+    // sit each structure on the highest ground under it, with a stone footing down to the lowest
+    const hs = [[0, 0], [-1, -1], [1, -1], [-1, 1], [1, 1]].map(([i, j]) => terrainAt(x + i * w / 2, z + j * d / 2));
+    const y = s.kind === 'ship' ? 0 : Math.max(...hs), low = Math.min(...hs);
+    if (y - low > 0.15 && s.kind !== 'ship' && s.kind !== 'gate') b.box(x, low - 0.4, z, w + 0.4, y - low + 0.4, d + 0.4, rot, PALETTE.stone);
     switch (s.kind) {
       case 'warehouse':
         b.box(x, y, z, w, h, d, rot, PALETTE.plaster); gableRoof(x, y + h, z, w, d, rot, PALETTE.roofDark); solid(x, z, w, d, rot); break;
@@ -216,7 +241,7 @@ export function buildWorld(scene) {
         for (let i = 0; i < 4; i++) {
           const o = -long / 2 + pier / 2 + i * (long - pier) / 3;
           const px = alongX ? x + o : x, pz = alongX ? z : z + o;
-          b.box(px, y, pz, alongX ? pier : thick, h * 0.7, alongX ? thick : pier, 0, PALETTE.marble);
+          b.box(px, low - 0.4, pz, alongX ? pier : thick, h * 0.7 + y - low + 0.4, alongX ? thick : pier, 0, PALETTE.marble);
           solid(px, pz, alongX ? pier : thick, alongX ? thick : pier);
         }
         b.box(x, y + h * 0.7, z, w + 0.6, h * 0.3, d + 0.6, 0, PALETTE.marble);
@@ -243,6 +268,7 @@ export function buildWorld(scene) {
         const n = Math.round(w / 5);
         for (let i = 0; i <= n; i++) {
           const cx = x - w / 2 + i * w / n;
+          if (Math.abs(cx - x) < gap / 2) continue;      // keep the way through clear
           column(cx, y, z + d / 2 - 0.6, 0.5, h - 0.5, PALETTE.marble);
           column(cx, y, z, 0.45, h - 0.5, PALETTE.marble);
         }
@@ -274,9 +300,9 @@ export function buildWorld(scene) {
           }
         };
         ring(0); if (s.double) ring(1);
-        const inset = s.double ? 2.6 : 1.4, cw = w - (w / (nl - 1)) * inset * 2, cd = d - (d / (ns - 1)) * inset * 2;
-        b.box(x + (s.double ? w * 0.04 : 0), y, z, cw, h, cd, 0, PALETTE.plaster);
-        solid(x + (s.double ? w * 0.04 : 0), z, cw, cd);
+        const cw = w * (s.double ? 0.62 : 0.6), cd = d * (s.double ? 0.42 : 0.5);   // the inner room
+        b.box(x + w * 0.04, y, z, cw, h, cd, 0, PALETTE.plaster);
+        solid(x + w * 0.04, z, cw, cd);
         b.box(x, y + h + r * 0.5, z, w + 3, h * 0.09, d + 3, 0, PALETTE.marble);
         b.add('prism', x, y + h + r * 0.5 + h * 0.09, z, w + 3.6, Math.min(d * 0.16, h * 0.4), d + 3.6, 0, PALETTE.roof);
         break;
@@ -307,8 +333,8 @@ export function buildWorld(scene) {
     const cw = bw / nx, cd = bd / nz;
     for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
       const hx = blk.x0 + (i + 0.5) * cw, hz = blk.z0 + (j + 0.5) * cd;
-      const base = Math.min(groundAt(hx - cw / 2, hz - cd / 2), groundAt(hx + cw / 2, hz + cd / 2), groundAt(hx, hz)) - 0.3;
-      const hh = 3.6 + Math.floor(rand() * 2) * 2.8 + rand() * 0.8 + (groundAt(hx, hz) - base);
+      const base = Math.min(terrainAt(hx - cw / 2, hz - cd / 2), terrainAt(hx + cw / 2, hz + cd / 2), terrainAt(hx, hz)) - 0.3;
+      const hh = 3.6 + Math.floor(rand() * 2) * 2.8 + rand() * 0.8 + (terrainAt(hx, hz) - base);
       b.box(hx, base, hz, cw, hh, cd, 0, HOUSE_COLORS[Math.floor(rand() * HOUSE_COLORS.length)]);
       if (rand() < 0.6) gableRoof(hx, base + hh, hz, cw, cd, 0, rand() < 0.5 ? PALETTE.roof : PALETTE.roofDark);
       else b.box(hx, base + hh, hz, cw * 0.96, 0.5, cd * 0.96, 0, PALETTE.shade);
@@ -323,15 +349,15 @@ export function buildWorld(scene) {
       const len = Math.hypot(bx - ax, bz - az), n = Math.ceil(len / 9), rot = Math.atan2(-(bz - az), bx - ax);
       for (let k = 0; k < n; k++) {
         const t = (k + 0.5) / n, x = ax + (bx - ax) * t, z = az + (bz - az) * t;
-        const lo = Math.min(groundAt(ax + (bx - ax) * (k / n), az + (bz - az) * (k / n)), groundAt(ax + (bx - ax) * ((k + 1) / n), az + (bz - az) * ((k + 1) / n)));
-        const top = groundAt(x, z) + 6;
+        const lo = Math.min(terrainAt(ax + (bx - ax) * (k / n), az + (bz - az) * (k / n)), terrainAt(ax + (bx - ax) * ((k + 1) / n), az + (bz - az) * ((k + 1) / n)));
+        const top = terrainAt(x, z) + 6;
         b.box(x, lo - 0.5, z, len / n + 0.3, top - lo + 0.5, 2.4, rot, PALETTE.wall);
         solid(x, z, len / n + 0.3, 2.4, rot);
       }
-      b.box(ax, groundAt(ax, az) - 1, az, 5, 10, 5, rot, PALETTE.wall); solid(ax, az, 5, 5, rot);
+      b.box(ax, terrainAt(ax, az) - 1, az, 5, 10, 5, rot, PALETTE.wall); solid(ax, az, 5, 5, rot);
     }
     const [ex, ez] = chain[chain.length - 1];
-    b.box(ex, groundAt(ex, ez) - 1, ez, 5, 10, 5, 0, PALETTE.wall); solid(ex, ez, 5, 5);
+    b.box(ex, terrainAt(ex, ez) - 1, ez, 5, 10, 5, 0, PALETTE.wall); solid(ex, ez, 5, 5);
   }
 
   const buildings = b.mesh(lit);
@@ -359,8 +385,8 @@ export function resolveCollisions(colliders, pos, r) {
       pos.x += ox * cs + oz * sn; pos.z += -ox * sn + oz * cs;        // back to world frame
     }
   }
-  pos.x = Math.max(SEA_X + 1.5, Math.min(WORLD.maxX - 8, pos.x));
-  pos.z = Math.max(WORLD.minZ + 8, Math.min(WORLD.maxZ - 8, pos.z));
+  pos.x = Math.max(WALK.minX, Math.min(WALK.maxX, pos.x));
+  pos.z = Math.max(WALK.minZ, Math.min(WALK.maxZ, pos.z));
   return pos;
 }
 

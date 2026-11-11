@@ -1,7 +1,7 @@
 // Starts the game: loads the text files, builds the city, then runs the walk-around loop.
 import * as THREE from '../vendor/three.module.min.js';
 import { buildWorld, resolveCollisions } from './world/build.js';
-import { heightAt, PLACES, START } from './world/layout.js';
+import { heightAt, onSeats, PLACES, START } from './world/layout.js';
 import { createControls } from './controls.js';
 import { createMap } from './ui/map.js';
 import { loadSave, writeSave } from './storage.js';
@@ -70,7 +70,7 @@ async function boot() {
   const save = loadSave();
   const player = { x: START.x, z: START.z, y: 0, face: START.face, pitch: 0 };
   if (save.pos && Number.isFinite(save.pos.x) && Number.isFinite(save.pos.z)) {
-    player.x = save.pos.x; player.z = save.pos.z; player.face = save.pos.face || 0;
+    player.x = save.pos.x; player.z = save.pos.z; player.face = Number.isFinite(save.pos.face) ? save.pos.face : 0;
   }
   resolveCollisions(world.colliders, player, 0.5);
   player.y = heightAt(player.x, player.z);
@@ -98,6 +98,7 @@ async function boot() {
   const openMap = () => {
     map.layoutBig(); $('mapLegend').innerHTML = map.legendHTML(); map.drawBig(player);
     $('mapPanel').hidden = false; panelOpen = true; controls.enabled = false;
+    $('mapPanel').scrollTop = 0; $('mapSheet').scrollTop = 0; $('mapClose').focus();
   };
   const closeMap = () => { $('mapPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); };
   $('mapBtn').addEventListener('click', openMap);
@@ -105,6 +106,7 @@ async function boot() {
   $('mapPanel').addEventListener('click', (e) => { if (e.target === $('mapPanel')) closeMap(); });
   window.addEventListener('keydown', (e) => {
     if ($('startPanel').hidden === false) return;
+    if (e.repeat) return;
     if (e.code === 'KeyM') ($('mapPanel').hidden ? openMap() : closeMap());
     if (e.code === 'Escape' && !$('mapPanel').hidden) closeMap();
   });
@@ -156,7 +158,7 @@ async function boot() {
     controls.update();
     const look = controls.takeLook();
     const sens = controls.usedTouch ? 0.28 : 0.2;
-    player.face = (player.face + look.x * sens + 360) % 360;
+    player.face = (player.face + look.x * sens + controls.turn * 110 * dt + 720) % 360;
     player.pitch = Math.max(-60, Math.min(60, player.pitch - look.y * sens));
 
     if (!panelOpen && (controls.moveX || controls.moveY)) {
@@ -166,9 +168,13 @@ async function boot() {
       const step = speed * dt;
       // move in small steps so fast walkers can't slip through thin walls
       const n = Math.ceil(step / 0.4);
+      let mx = fx * controls.moveY + rx * controls.moveX, mz = fz * controls.moveY + rz * controls.moveX;
+      // too steep to climb? (theatre seats are fine: each row is a normal step)
+      const ml = Math.hypot(mx, mz) || 1, ax = player.x + mx / ml * 1.5, az = player.z + mz / ml * 1.5;
+      if (!onSeats(ax, az) && heightAt(ax, az) - heightAt(player.x, player.z) > 1.7) { mx = 0; mz = 0; }
       for (let i = 0; i < n; i++) {
-        player.x += (fx * controls.moveY + rx * controls.moveX) * step / n;
-        player.z += (fz * controls.moveY + rz * controls.moveX) * step / n;
+        player.x += mx * step / n;
+        player.z += mz * step / n;
         resolveCollisions(world.colliders, player, 0.5);
       }
     }
@@ -192,12 +198,16 @@ async function boot() {
       }
     }
     saveTimer += dt;
-    if (saveTimer > 5 && !panelOpen) {
-      saveTimer = 0;
-      const data = loadSave(); data.pos = { x: +player.x.toFixed(1), z: +player.z.toFixed(1), face: Math.round(player.face) };
-      writeSave(data);
-    }
+    if (saveTimer > 3 && !panelOpen) { saveTimer = 0; savePosition(); }
   }
+  function savePosition() {
+    if (!$('startPanel').hidden) return;
+    const data = loadSave(); data.pos = { x: +player.x.toFixed(1), z: +player.z.toFixed(1), face: Math.round(player.face) };
+    writeSave(data);
+  }
+  // also save when the tab is closed or the phone is locked
+  window.addEventListener('pagehide', savePosition);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) savePosition(); });
   requestAnimationFrame(frame);
 
   // A small handle for testing and (later) Leader Mode jumps.
