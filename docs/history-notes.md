@@ -304,3 +304,144 @@ Found by search during this review:
 - Hogarth, *Excavations at Ephesus* (1908), on the temple's orientation: https://digi.ub.uni-heidelberg.de/diglit/hogarth1908bd1/0021
 
 From memory, not consulted online: Scherrer (ed.), *Ephesus: The New Guide*; Bishop and Coulston, *Roman Military Equipment*; Trebilco, *The Early Christians in Ephesus from Paul to Ignatius*; Arnold, *Ephesians: Power and Magic*; Metzger, *A Textual Commentary on the Greek New Testament*.
+
+---
+
+# Phase 2 review: plaque text
+
+Reviewed 2026-11-11: all 33 entries in `content/locations.json`, plus `intro` and `mapNote` in `content/ui.json`. Same bins (K / R / I) and check labels ([web] / [memory] / [unverified]) as above.
+
+Network note for this pass: web search worked. Opening pages directly failed for `turkisharchaeonews.net`, `inscriptions.packhum.org`, `philipharland.com` and `www.oeaw.ac.at` (outside the session's allowed domains), so every [web] below rests on search summaries, not on the pages themselves. I could not see the wording of any inscription first-hand.
+
+Overall: nothing in the plaques contradicts Acts 18–20, and I found no anachronism in the "known" text. Eleven plaques need a change: five because a "known" sentence is firmer than the evidence, one for wording, and five because the "imagined" line does not match what the scene shows or leaves out a liberty.
+
+## P1. Plaques that need a change
+
+### P1.1 mazaeusGate: the model departs from a known feature, and "imagined" does not say so
+- **Problem.** The real gate has three arched passages (it stands re-erected on site) [web, secondary: "triple gateway"; memory for the arches]. The scene draws four piers under a flat top. "Its painted colours and details are our guess" does not cover that: the arches are K, not a detail.
+- **Fix (text).** Imagined: "The gate is real and stood at this corner of the market. The real one has three arched openings; ours is simplified, and its colours are our guess." Better still, model three arches (a code matter, not mine).
+- **Also (clarity, optional).** Known, second sentence: "Its inscription names their patrons: Augustus and his wife Livia, and Agrippa and his wife Julia, the emperor's daughter." Teens will not know who Julia is. Agrippa had died in 12 BC, so the gate honours him after his death; no need to say so.
+- **Checked and fine.** Date 4/3 BC (Augustus's titles in the Latin text) [web: Livius.org]. "Patrons" is the inscription's own word (Latin *patronis*; Greek text IEph 3006) [web]. South-east corner of the agora: K [web, secondary; memory]. "Paul very likely walked through it": properly hedged, R.
+
+### P1.2 octagon: "about 80 years old" is too exact
+- **Problem.** The building is dated by style only: "late 1st century BC" (Vienna museum description), 50–20 BC in older accounts, and Augustan (27 BC–AD 14) according to others [web, secondary]. The 2025 study's radiocarbon range for the skull is 205–36 BC [web]. So its age in the 50s could be anywhere from roughly 60 to 100 years. My own earlier note (A8) offered "about 80"; this corrects it.
+- **Fix.** Replace the first sentence with: "This eight-sided tomb was built in the later 1st century BC, so it was already old in Paul's day."
+- **Arsinoe and the skull: fine.** "People once guessed Cleopatra's sister Arsinoe, but a 2025 study showed the skull from the tomb belonged to a boy of about 11 to 14" matches Weber and others, *Scientific Reports* 15, 943 [web]. The tone is right: "Who was buried here is not known" comes first and nothing implies the question is settled. Do not add that the boy "was" the tomb's owner in any stronger sense; the study only says the skull is his.
+
+### P1.3 memmius: date needs a hedge
+- **Problem.** "It was built between 50 and 30 BC" is one dating (the site marker and the original publication). Other accounts put it under Augustus [web, conflicting secondary sources].
+- **Fix.** "It was probably built between 50 and 30 BC at the top end of the street."
+- **Fine.** Grandson of Sulla: named so in the monument's inscription [web: Laflı and Buora abstract]. "The Roman general Sulla" is accurate and at the right level (he was also dictator; Ephesians remembered him for punishing the city in 84 BC [memory]). "Top end of the street", on the north side of the later Domitian Square: K [web, secondary]. Honorary, not a tomb: K [memory].
+
+### P1.4 tollOffice: function and location are inferred
+- **Problem.** The Greek is "toll-office of the fishery" (*telonion tes ichthyikes*). What it was for is debated: collecting tolls on fishing or fish sales, or (one scholar) more of a club house and market hall. "A customs house for the fish trade" states one reading as fact. "At the harbor" rests on where the stone was found (harbor area). The donors may not all have been fishermen. [web: Harland, *Associations in the Greco-Roman World*, search summary]
+- **Fix.** Replace the "known" text with: "An inscription from AD 54–59, found in the harbor area, records that the fishermen and fish-sellers of Ephesus built a 'fishery toll-office' with their own money, and it lists the givers one by one. It was probably where tolls on the fish trade were paid. So the building was new, or still going up, around Paul's time."
+- **Bin.** Inscription, date, donors: K. Function: R. Site at the harbor: R.
+
+### P1.5 neronianHall: "the dead emperor Claudius"
+- **Problem.** The inscription calls him the deified Claudius (the word is partly restored) [web: search summary of IEph 3003]. "Dead" loses the point, which is that he had just been declared a god, and that is what dates the text.
+- **Fix.** "Its inscription dedicates it to Artemis, to the emperor Claudius, who had just died and been declared a god, to the new emperor Nero, to his mother Agrippina, and to the people."
+- **Fine.** East side of the agora, along the theatre street: K. AD 54–59 (after Claudius's deification in October 54, before Agrippina's death in March 59): K [web]. "We guess it was still a building site": R, honestly labelled.
+
+### P1.6 magnesianGate: date needs a hedge
+- **Problem.** "Dates from the 3rd century BC" is stated flat. The Austrian research project says only that a Hellenistic date for the first gate "seems probable" (it is set into the Hellenistic wall and has the plan of a Hellenistic courtyard gate with towers) and that "crucial points of its history are not clear" [web: FWF project P19987 summary]. The three-passage rebuilding is put under Vespasian (AD 69–79) by popular sources only [web, weak].
+- **Fix.** "This gate in the south-east wall was probably first built in the 3rd century BC, along with the walls."
+- **Imagined: fine.** "Kept it plain, because the triple-arched version is probably later" is honest and correctly hedged. The 350–400 m figure is still [memory].
+
+### P1.7 curetes: the name is modern (same treatment as Marble Street)
+- **Problem.** The plaque uses "Curetes Street" as if it were the ancient name. It is a modern name; in antiquity the street was most probably called the Embolos, a name found in inscriptions from the street and the agora [web: Turkish Archaeological News summary]. The marbleStreet plaque is careful about this, so this one should be too.
+- **Fix.** Replace the first sentence with: "This sloping street, probably called the Embolos in ancient times, climbs from the Triodos to the upper square in the valley between the two hills. 'Curetes Street' is a modern name."
+
+### P1.8 priscilla: "imagined" does not match the scene
+- **Problem.** "With rooms behind and above" describes rooms the scene does not draw (a single open-fronted workshop, no upper storey).
+- **Fix.** "Nobody knows where they lived or worked. We chose this shop beside the market and show only the workshop, not the home where the church met."
+- **Known text: fine.** Acts 18:2–3, 18:19 and 1 Cor 16:19 are paraphrased accurately.
+
+### P1.9 precinct: "the shrines you see"
+- **Problem.** The scene has one altar block, not shrines.
+- **Fix.** "What stood inside is uncertain, so the altar you see is our guess."
+- **Known text: fine.** Cassius Dio 51.20.6: in 29 BC Augustus gave permission for precincts of Roma and of his father Caesar at Ephesus and Nicaea [web in the earlier review]. "Allowed Ephesus to build" is a fair paraphrase; "probably" and "Not all scholars agree" are the right hedges.
+
+### P1.10 terraceHouse: the rain-water pool
+- **Problem.** A central rain-water pool is the mark of an Italian atrium house. The Ephesian terrace houses are Greek-style houses with a paved, colonnaded courtyard [memory; not re-checked]. "The layout is simplified" does not cover an added feature.
+- **Fix.** "We decorated ours more plainly, in a first-century style. The layout is simplified, and the courtyard pool is our own touch."
+- **Known text: fine.** Built early in the 1st century AD (Terrace House 2, under Tiberius) and "mostly from the next two centuries" for the visible décor both stand [web in the earlier review]. Most of what is on show belongs to the last phase before the houses were destroyed in the later 3rd century [memory].
+
+### P1.11 artemisAltar: one ambiguous clause (minor)
+- **Problem.** "…made here, outside, as was usual at Greek temples" is true of sacrificing outdoors, but coming straight after "on its west side" it can be read as saying the west side was usual. It was not: most Greek temples and altars face east (see A7).
+- **Fix.** "Offerings to Artemis were made here in the open air, not inside the temple. That was normal for Greek worship."
+- **Scene.** The altar's foundations were found west of the temple in the 1960s by A. Bammer: K [web: Kunsthistorisches Museum, Vienna]. A horseshoe-shaped enclosure open to the west is, as I recall, Bammer's own reconstruction and has been disputed [memory; I could not confirm the plan or its open side]. "Size, shape and decoration are our guess" is therefore the right label.
+
+## P2. Answers to the writer's seventeen questions
+
+| # | Plaque and phrase | Verdict | Check |
+|---|---|---|---|
+| 1 | harbor: "several kilometres from the sea" | Fine. The river now reaches the sea about 6 km west of the site; one popular page says 8. "Several" is safe. | [web: Stock and others 2016; Hürriyet Daily News] |
+| 2 | theatre: "built after the riot" | Fine as worded ("Most of…"). The big stage front is dated AD 85 by inscription and the upper seating is later still. Older handbooks put some stage work under Claudius and Nero; "most" allows for that. Do not strengthen it to "all". | [web: Forschungen in Ephesos summary; Whitman and Ancient Theatre Archive for the older view] |
+| 2 | theatre: "seizing two of Paul's travelling companions" | Fine. Acts 19:29: "having seized Gaius and Aristarchus, men of Macedonia, Paul's companions in travel." | K (text) |
+| 3 | marbleStreet: "Today it is known as Marble Street" | Fine. The name is modern and no ancient name turned up. The marble paving is 5th century AD (paid for by one Eutropius). | [web: Livius.org and secondary] |
+| 4 | triodos | Fine. A journal article states that Triodos was probably the official ancient name of the area, on the evidence of an inscription on the agora's south gate. "Is known as" is the right strength; do not write "the Ephesians called it". | [web, secondary: *Antichthon* article; inscription not seen] |
+| 5 | mazaeusGate | Text accurate; see P1.1 for the arches and the optional Julia gloss. | [web] |
+| 6 | scrollSquare: "probably about a day's wage" | Fine. Acts says only "pieces of silver"; drachmas are the usual assumption, and "probably" carries it. | R [memory] |
+| 7 | terraceHouse: "mostly from the next two centuries" | Fine. See P1.10 for the pool. | [web earlier; memory] |
+| 8 | basilica: "about AD 11", Pollio "and his family", "around forty years old" | Fine. The date and donors come from the building's own two-language inscription, so "Historians date… and credit" is, if anything, over-cautious; leave it. Forty-odd years is right. | [memory; this pass's search found only a weak secondary source for the donors and none for the year] |
+| 8 | prytaneion: "probably put up under Augustus" | Fine and correctly hedged. The excavation publication (Steskal 2010) dates the building to Augustus's time; an older hall on the same spot is suspected but unproven. | [web: FWF project summary; Forschungen in Ephesos IX/4 summary] |
+| 8 | pollio: aqueduct "around AD 4–14", stepson, fountain "about AD 92" | Fine. "Historians think his stepson set it up" is cautious enough. | [memory; not confirmed this pass] |
+| 9 | precinct: "allowed Ephesus to build in 29 BC" | Fine. See P1.9 for the "imagined" line. | [web earlier] |
+| 10 | neronianHall: "the dead emperor Claudius" | Change. See P1.5. | [web] |
+| 11 | octagon | Arsinoe and skull sentences fine; change the age. See P1.2. | [web] |
+| 12 | memmius | "Roman general Sulla" and "top end" fine; hedge the date. See P1.3. | [web] |
+| 13 | cityWalls: "who refounded the city on this site" | Fine. Strabo 14.1.21: Lysimachus moved the city to the new site and walled it. "Around 290 BC" is fair for a refoundation between about 294 and 281 BC. | K [memory for Strabo] |
+| 14 | artemisAltar: "as was usual at Greek temples" | True but ambiguous. See P1.11. | [memory] |
+| 15 | tombs: families choosing roadside spots | Fine. Burial outside the walls along the roads, with inscriptions addressed to passers-by, is standard Greek and Roman practice. "Many families" is fair. The particular tombs are rightly labelled invented. | K in general [memory] |
+| 16 | tollOffice: "a customs house for the fish trade" | Change. See P1.4. | [web] |
+| 17 | artemision: "rebuilt after a fire in 356 BC" | Fine. 356 BC is the traditional date (the night Alexander was born, in Plutarch). | K as tradition [memory] |
+
+## P3. Plaques checked and fine as written
+
+harbor, harborStreet, synagogue, theatre, marbleStreet, tyrannus, agora, silversmiths, triodos, scrollSquare, stateAgora, basilica, prytaneion, council, sacredRoad, artemision, librarySite, heroon, pollio, agoraTemple, cityWalls, tombs.
+
+Scripture paraphrases checked against Acts 18:2–3, 18:19, 19:8–10, 19:19, 19:24, 19:29 and 1 Cor 16:19: all accurate. None of the plaques puts words in the mouth of anyone in Acts.
+
+Notes on these, none requiring a change:
+- **harborStreet.** That a street ran here before the Arcadian rebuilding is R, not excavated fact for the 50s; the "imagined" line already says nobody knows how it looked. [memory]
+- **theatre.** "Already large" is R. Still no seat count: good.
+- **agora.** "Tetragonos Agora" is an ancient name, found in inscriptions. [memory]
+- **artemision.** The scene's tiled roof, bronze doors and blue band are all guesses and "painted colours and details" covers them. The double ring of columns is K (Pliny and the excavated plan). Coins show the gable with a door-like opening and two windows [memory, unverified]; worth adding if the model is revisited.
+- **librarySite.** I could not find what stood on the plot in the 50s. "Nobody knows" is safe. [unverified]
+- **sacredRoad.** "Roughly 2 km by road" is still [memory, unverified].
+- **council.** Matches A1.
+
+## P4. ui.json
+
+- **intro.** Consistent with PLAN.md section 5 and decision 2. "Paul's letter" is how the church in the story would speak of it, so it is fine inside the frame, provided the "About this letter" page keeps the even-handed wording of A6. The frame itself is **I**.
+- **mapNote.** Accurate. It matches the five placed locations (synagogue, Hall of Tyrannus, workshop, scroll square, council house).
+
+## P5. Could not verify in this pass
+
+1. The exact wording of the hall dedication (IEph 3003), the gate inscription and the toll-office inscription (IEph 20): summaries only.
+2. Whether the altar enclosure at the Artemision was horseshoe-shaped and which way it opened.
+3. When the Magnesian Gate got three passages, and whether the first gate is 3rd century BC rather than later Hellenistic.
+4. Basilica Stoa AD 11, Pollio aqueduct and monument, fountain AD 92/93: still from memory.
+5. The Triodos inscription itself.
+6. Whether the terrace houses had any open water basin in their courtyards in the 1st century.
+7. What occupied the Library of Celsus plot in the 50s.
+
+To close these, the session would need access to `turkisharchaeonews.net`, `inscriptions.packhum.org`, `philipharland.com` and `www.oeaw.ac.at`, or a human check against Scherrer (ed.), *Ephesus: The New Guide*.
+
+## Sources added in this pass (search results; pages not opened)
+
+- Gate of Mazaeus and Mithridates, inscription photographs and text: https://www.livius.org/pictures/turkey/selcuk-ephesus/ephesus-gate-of-mazaeus-and-mithridates/ephesus-gate-of-mazaeus-and-mithridates-inscription-1/
+- Hall dedication (IEph 3003): https://inscriptions.packhum.org/text/247976
+- Weber and others, "The cranium from the Octagon in Ephesos," *Scientific Reports* 15, 943 (2025): https://doaj.org/article/4a29f7f1469a421f971aa2446cfdc642 ; summary: https://www.sciencedaily.com/releases/2025/01/250110121908.htm
+- Octagon, dating: https://turkisharchaeonews.net/object/octagon-ephesus ; Kunsthistorisches Museum, Vienna: https://khm.at/en/object/573326
+- Memmius Monument: https://www.hmdb.org/m.asp?m=84345 ; Laflı and Buora, "The memory of Sulla in Ephesus": https://www.ceeol.com/search/article-detail?id=1136321
+- Fishery toll-office (IEph 20): https://philipharland.com/greco-roman-associations/162-donations-to-the-fishery-toll-office-by-fishermen-and-fish-dealers/ ; https://ancientassociations.ku.dk/assoc/1599
+- Magnesian Gate research project (FWF P19987): https://www.fwf.ac.at/en/research-radar/10.55776/P19987
+- Prytaneion research project (FWF P19257): https://www.fwf.ac.at/en/research-radar/10.55776/P19257 ; Steskal, *Das Prytaneion in Ephesos*: https://digi.ub.uni-heidelberg.de/diglit/fie_bd9_4/0268
+- Curetes Street and the name Embolos: https://www.turkisharchaeonews.net/object/curetes-street-ephesus
+- Triodos: https://turkisharchaeonews.net/object/triodos-square-and-its-main-monuments-ephesus ; "Out of the Temples and into the Streets," *Antichthon*: https://www.cambridge.org/core/journals/antichthon/article/out-of-the-temples-and-into-the-streets-reassembling-the-christianisation-of-roman-urban-space/54E46A3DD5047A7E9369B5C2641B940E
+- Marble Street: https://www.livius.org/articles/place/ephesus/ephesus-photos/ephesus-marble-street/
+- Theatre phases: https://ancienttheatrearchive.com/theatre/ephesus-modern-selcuk-turkey ; https://www.whitman.edu/theatre/theatretour/ephesus/commentary/ephesus.timeline.htm
+- Harbor and coastline: Stock and others (2016): https://www.ancientportsantiques.com/wp-content/uploads/Documents/PLACES/Turkey/Ephese-Stock2016.pdf ; https://www.hurriyetdailynews.com/ephesus-ancient-city-meets-sea-again-28358
+- Altar of the Artemision: https://www.khm.at/en/artworks/altar-1440326

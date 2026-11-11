@@ -46,8 +46,8 @@
   },
   "mazaeusGate": {
     "name": "Gate of Mazaeus and Mithridates",
-    "known": "This gate into the market was built in 4/3 BC by Mazaeus and Mithridates, two men freed from slavery in the emperor’s family. Its inscription names their patrons: Augustus and his wife Livia, and Agrippa and Julia. Paul very likely walked through it.",
-    "imagined": "The gate is real and stood at this corner of the market. Its painted colours and details are our guess."
+    "known": "This gate into the market was built in 4/3 BC by Mazaeus and Mithridates, two men freed from slavery in the emperor’s family. Its inscription names their patrons: Augustus and his wife Livia, and Agrippa and his wife Julia, the emperor’s daughter. Paul very likely walked through it.",
+    "imagined": "The gate is real and stood at this corner of the market. The real one has three arched openings; ours is simplified, and its colours are our guess."
   },
   "triodos": {
     "name": "The Triodos (Three Ways)",
@@ -61,13 +61,13 @@
   },
   "curetes": {
     "name": "Curetes Street",
-    "known": "This sloping street climbs from the Triodos to the upper square, in the valley between the two hills. By the 50s it was already lined with tombs and monuments.",
+    "known": "This sloping street, probably called the Embolos in ancient times, climbs from the Triodos to the upper square in the valley between the two hills. ‘Curetes Street’ is a modern name. By the 50s it was already lined with tombs and monuments.",
     "imagined": "The street is real, but ours is much shorter, so the monuments stand closer together than they did. The paving is a guess."
   },
   "terraceHouse": {
     "name": "Terrace Houses",
     "known": "Wealthy families lived in these hillside homes, each built around an open courtyard. They went up early in the first century, so they were fairly new when Paul was here. The famous wall paintings and mosaics visitors see today mostly come from the next two centuries.",
-    "imagined": "We decorated ours more plainly, in a first-century style. The layout is simplified."
+    "imagined": "We decorated ours more plainly, in a first-century style. The layout is simplified, and the courtyard pool is our own touch."
   },
   "stateAgora": {
     "name": "State Agora (Upper Square)",
@@ -91,7 +91,7 @@
   },
   "magnesianGate": {
     "name": "Magnesian Gate",
-    "known": "This gate in the south-east wall dates from the 3rd century BC. The road to the Temple of Artemis began here.",
+    "known": "This gate in the south-east wall was probably first built in the 3rd century BC, along with the walls. The road to the Temple of Artemis began here.",
     "imagined": "The real gate stood some 350 to 400 metres beyond the upper square. We moved it close and kept it plain, because the triple-arched version is probably later."
   },
   "sacredRoad": {
@@ -111,12 +111,12 @@
   },
   "neronianHall": {
     "name": "New Hall (Building Site)",
-    "known": "A new hall rose along the east side of the market. Its inscription dedicates it to Artemis, the dead emperor Claudius, the new emperor Nero, his mother Agrippina, and the people. That dates it to AD 54–59, right around the end of Paul’s stay.",
+    "known": "A new hall rose along the east side of the market. Its inscription dedicates it to Artemis, to the emperor Claudius, who had just died and been declared a god, to the new emperor Nero, to his mother Agrippina, and to the people. That dates it to AD 54–59, right around the end of Paul’s stay.",
     "imagined": "We guess it was still a building site while Paul was here. The scaffolding and stacked stone are imagined."
   },
   "octagon": {
     "name": "The Octagon",
-    "known": "This eight-sided tomb was about 80 years old in Paul’s day. Who was buried here is not known. People once guessed Cleopatra’s sister Arsinoe, but a 2025 study showed the skull from the tomb belonged to a boy of about 11 to 14.",
+    "known": "This eight-sided tomb was built in the later 1st century BC, so it was already old in Paul’s day. Who was buried here is not known. People once guessed Cleopatra’s sister Arsinoe, but a 2025 study showed the skull from the tomb belonged to a boy of about 11 to 14.",
     "imagined": "The tomb is real and stood on this side of the street. Its roof and colours are our reconstruction."
   },
   "heroon": {
@@ -126,7 +126,7 @@
   },
   "memmius": {
     "name": "Memmius Monument",
-    "known": "This monument honoured Memmius, a grandson of the Roman general Sulla. It was built between 50 and 30 BC at the top end of the street. Unlike its neighbours down the hill, it is an honorary monument, not a tomb.",
+    "known": "This monument honoured Memmius, a grandson of the Roman general Sulla. It was probably built between 50 and 30 BC at the top end of the street. Unlike its neighbours down the hill, it is an honorary monument, not a tomb.",
     "imagined": "Its exact shape and carved figures are our guess."
   },
   "pollio": {
@@ -142,7 +142,7 @@
   "precinct": {
     "name": "Sacred Precinct",
     "known": "A walled sacred enclosure stood here beside the city hall. It was probably the shrine of the goddess Roma and Julius Caesar, honoured as a god, which Augustus allowed Ephesus to build in 29 BC. Not all scholars agree.",
-    "imagined": "What stood inside is uncertain, so the shrines you see are our guess."
+    "imagined": "What stood inside is uncertain, so the altar you see is our guess."
   },
   "cityWalls": {
     "name": "City Walls",
@@ -151,7 +151,7 @@
   },
   "artemisAltar": {
     "name": "Altar of Artemis",
-    "known": "The great altar stood in the open air in front of the temple, on its west side. Offerings to Artemis were made here, outside, as was usual at Greek temples.",
+    "known": "The great altar stood in the open air in front of the temple, on its west side. Offerings to Artemis were made here in the open air, not inside the temple. That was normal for Greek worship.",
     "imagined": "The altar’s size, shape and decoration are our guess."
   },
   "tombs": {
@@ -161,7 +161,7 @@
   },
   "tollOffice": {
     "name": "Fishery Toll-Office",
-    "known": "An inscription from AD 54–59 records that the fishermen and fish-sellers of Ephesus paid for a toll-office at the harbor, a customs house for the fish trade, and it lists the givers one by one. So the building was new, or still going up, around Paul’s time.",
+    "known": "An inscription from AD 54–59, found in the harbor area, records that the fishermen and fish-sellers of Ephesus built a ‘fishery toll-office’ with their own money, and it lists the givers one by one. It was probably where tolls on the fish trade were paid. So the building was new, or still going up, around Paul’s time.",
     "imagined": "The inscription doesn’t say what it looked like or exactly where it stood. This small building is our guess."
   }
 }
