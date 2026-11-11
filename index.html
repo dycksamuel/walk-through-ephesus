@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="description" content="Walk through Ephesus as it was in the apostle Paul's day. A free, explorable 3D city for studying the book of Ephesians.">
+  <meta name="theme-color" content="#2f2620">
+  <title>Walk Through Ephesus</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232f2620'/%3E%3Cpath d='M5 12 16 5l11 7v2H5zM7 15h3v9H7zm7.5 0h3v9h-3zM22 15h3v9h-3zM5 25h22v3H5z' fill='%23ece6d8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="view" aria-label="3D view of Ephesus"></canvas>
+
+  <div id="hud" hidden>
+    <div id="compass" aria-hidden="true"><div class="tick"></div></div>
+    <div id="place" role="status" aria-live="polite"></div>
+    <button id="mapBtn" type="button"><canvas id="miniMap"></canvas></button>
+    <div id="stick" aria-hidden="true"><div class="knob"></div></div>
+    <div id="fps" hidden></div>
+  </div>
+
+  <div id="mapPanel" class="panel" hidden>
+    <div class="sheet" id="mapSheet">
+      <div class="sheetHead">
+        <h2 id="mapTitle"></h2>
+        <button id="mapClose" type="button" class="primary compact"></button>
+      </div>
+      <canvas id="bigMap"></canvas>
+      <ol id="mapLegend"></ol>
+      <p id="mapNote" class="small"></p>
+    </div>
+  </div>
+
+  <div id="startPanel" class="panel">
+    <div class="sheet center">
+      <h1 id="title">Walk Through Ephesus</h1>
+      <p id="subtitle" class="sub"></p>
+      <p id="intro"></p>
+      <p id="how" class="small"></p>
+      <button id="startBtn" type="button" class="primary" disabled>…</button>
+      <p id="phaseNote" class="small muted"></p>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
