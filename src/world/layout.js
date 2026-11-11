@@ -29,8 +29,8 @@ export const PADS = [
   { id: 'tyrannus',    x0: -20,  z0: 58,  x1: 8,    z1: 84,  y: 1.5,     m: 5,  surface: null },
   { id: 'stateAgora',  x0: 100,  z0: 136, x1: 204,  z1: 204, y: UPPER_Y, m: 8,  surface: 'stone' },
   { id: 'civic',       x0: 100,  z0: 108, x1: 196,  z1: 136, y: UPPER_Y, m: 6,  surface: 'dirt' },
-  { id: 'terrace1',    x0: 14,   z0: 171, x1: 62,   z1: 184, y: 9,       m: 3,  surface: null },
-  { id: 'terrace2',    x0: 14,   z0: 192, x1: 62,   z1: 204, y: 13,      m: 3,  surface: null },
+  { id: 'terrace1',    x0: 14,   z0: 171, x1: 62,   z1: 186, y: 8,       m: 5,  surface: null },
+  { id: 'terrace2',    x0: 14,   z0: 195, x1: 62,   z1: 207, y: 12.5,    m: 3,  surface: null },
   { id: 'temple',      x0: 262,  z0: -168, x1: 396, z1: -96, y: 1.5,     m: 14, surface: 'dirt' },
   // raised platforms (the blend margin acts as the steps)
   { id: 'artemisionBase', x0: 281, z0: -156, x1: 379, z1: -108, y: 3.3,  m: 4,  surface: 'marble' },
@@ -124,6 +124,7 @@ export const STREETS = [
   { id: 'scrollLane',   w: 5,  surface: 'dirt',  pts: [[-72, 146], [-84, 146]] },
   { id: 'synagogueLane',w: 5,  surface: 'dirt',  pts: [[-104, -6], [-104, -20]] },
   { id: 'tyrannusLane', w: 5,  surface: 'dirt',  pts: [[-30, 70], [-20, 70]] },
+  { id: 'terraceSteps', w: 4,  surface: 'stone', pts: [[28, 160], [28, 172.4]] },
   { id: 'civicLane',    w: 6,  surface: 'dirt',  pts: [[152, 134], [152, 150]] },
   { id: 'gateRoad',     w: 9,  surface: 'stone', pts: [[204, 172], [246, 172]] },
   { id: 'sacredRoad',   w: 8,  surface: 'dirt',  pts: [[246, 172], [282, 150], [304, 100], [310, 30], [306, -40], [286, -84], [262, -110], [252, -132]] },
@@ -134,27 +135,28 @@ export const STREETS = [
 // x,z = centre; w = size east-west; d = size north-south; h = height; rot = turn in degrees.
 export const STRUCTURES = [
   // --- harbour ---
-  { kind: 'warehouse', x: -178, z: -62, w: 20, d: 26, h: 7 },
+  { kind: 'warehouse', x: -178, z: -66, w: 20, d: 22, h: 7 },
+  { kind: 'hall', id: 'tollOffice', x: -179, z: -36, w: 9, d: 8, h: 4.5, roof: 'gable', color: 'plaster', door: 'e' },
   { kind: 'warehouse', x: -178, z: 62,  w: 20, d: 26, h: 7 },
   { kind: 'ship', x: -204, z: -18, w: 22, d: 7, h: 3, rot: 80 },
   { kind: 'ship', x: -206, z: 20,  w: 18, d: 6, h: 3, rot: 100 },
   { kind: 'ship', x: -226, z: -70, w: 22, d: 7, h: 3, rot: 30 },
 
   // --- theatre stage building ---
-  { kind: 'hall', id: 'stage', x: -24, z: 0, w: 7, d: 40, h: 9, roof: 'flat', color: 'marble' },
+  { kind: 'stage', id: 'stage', x: -24, z: 0, w: 7, d: 40, h: 8 },
 
   // --- commercial agora: shop rows around the square, gaps are entrances ---
-  { kind: 'shops', x: -91,  z: 32,  w: 86, d: 7, h: 5 },                 // north row
-  { kind: 'shops', x: -134, z: 75,  w: 7,  d: 78, h: 5 },                // west row
-  { kind: 'shops', x: -48,  z: 50,  w: 7,  d: 36, h: 5 },                // east row (north part)
+  { kind: 'shops', x: -91,  z: 32,  w: 86, d: 7, h: 5, front: 's' },              // north row
+  { kind: 'shops', x: -134, z: 75,  w: 7,  d: 78, h: 5, front: 'e' },             // west row
+  { kind: 'shops', x: -48,  z: 50,  w: 7,  d: 36, h: 5, front: 'w' },             // east row (north part)
   { kind: 'site',  x: -48,  z: 96,  w: 7,  d: 40, h: 5 },                // east row (south): hall under construction
-  { kind: 'shops', x: -103, z: 118, w: 62, d: 7, h: 5 },                 // south row (west part)
+  { kind: 'shops', x: -103, z: 118, w: 62, d: 7, h: 5, front: 'n' },              // south row (west part)
   { kind: 'gate',  id: 'mazaeusGate', x: -58, z: 121, w: 22, d: 5, h: 10 },
 
   // --- imagined placements ---
-  { kind: 'hall', id: 'synagogue', x: -104, z: -30, w: 16, d: 13, h: 6, roof: 'gable', color: 'plaster' },
-  { kind: 'hall', id: 'tyrannus',  x: -4,   z: 70,  w: 18, d: 14, h: 7, roof: 'gable', color: 'plaster' },
-  { kind: 'hall', id: 'priscilla', x: -122, z: 137, w: 14, d: 10, h: 6, roof: 'flat',  color: 'ochre', open: 'e' },
+  { kind: 'hall', id: 'synagogue', x: -104, z: -30, w: 16, d: 13, h: 6, roof: 'gable', color: 'plaster', door: 's', bench: true },
+  { kind: 'openHall', id: 'tyrannus',  x: -4,   z: 70,  w: 18, d: 14, h: 6, open: 'w', benches: true },
+  { kind: 'openHall', id: 'priscilla', x: -122, z: 141, w: 12, d: 10, h: 4.5, open: 'e', workshop: true },
 
   // --- Curetes Street monuments (north side) ---
   { kind: 'monument', id: 'heroon',  x: 2,  z: 141, w: 8, d: 5, h: 8 },
@@ -163,21 +165,21 @@ export const STRUCTURES = [
   { kind: 'monument', id: 'pollio',  x: 96, z: 180, w: 6, d: 4, h: 7 },
 
   // --- terrace houses (south side of Curetes Street) ---
-  { kind: 'house', id: 'terraceHouse', x: 28, z: 178, w: 22, d: 12, h: 6, court: true },
-  { kind: 'house', x: 50, z: 178, w: 18, d: 12, h: 6 },
-  { kind: 'house', x: 26, z: 198, w: 20, d: 12, h: 6 },
-  { kind: 'house', x: 49, z: 198, w: 20, d: 12, h: 6 },
+  { kind: 'courtHouse', id: 'terraceHouse', x: 28, z: 179.5, w: 22, d: 14, h: 5.5 },
+  { kind: 'house', x: 52, z: 179, w: 16, d: 12, h: 6 },
+  { kind: 'house', x: 26, z: 201, w: 20, d: 11, h: 6 },
+  { kind: 'house', x: 49, z: 201, w: 20, d: 11, h: 6 },
 
   // --- upper civic area ---
   { kind: 'stoa', id: 'basilica', x: 152, z: 143, w: 100, d: 12, h: 9 },
-  { kind: 'hall', id: 'prytaneion', x: 114, z: 121, w: 20, d: 18, h: 8, roof: 'gable', color: 'marble', porch: 's' },
+  { kind: 'hall', id: 'prytaneion', x: 114, z: 121, w: 20, d: 18, h: 8, roof: 'gable', color: 'marble', porch: 's', door: 's' },
   { kind: 'precinct', id: 'precinct', x: 146, z: 121, w: 26, d: 20, h: 4 },
-  { kind: 'hall', id: 'council', x: 178, z: 121, w: 20, d: 18, h: 7, roof: 'gable', color: 'plaster' },
-  { kind: 'temple', id: 'agoraTemple', x: 152, z: 176, w: 18, d: 10, h: 8, cols: [6, 4] },
+  { kind: 'hall', id: 'council', x: 178, z: 121, w: 20, d: 18, h: 7, roof: 'gable', color: 'plaster', door: 's' },
+  { kind: 'temple', id: 'agoraTemple', x: 152, z: 176, w: 18, d: 10, h: 8, cols: [6, 4], front: 'e' },
   { kind: 'gate', id: 'magnesianGate', x: 246, z: 172, w: 6, d: 26, h: 11, rot: 0, axis: 'x' },
 
   // --- outside the walls ---
-  { kind: 'temple', id: 'artemision', x: 330, z: -132, w: 96, d: 46, h: 17, cols: [21, 8], double: true, steps: 3 },
+  { kind: 'temple', id: 'artemision', x: 330, z: -132, w: 96, d: 46, h: 17, cols: [21, 8], double: true, steps: 3, front: 'w', grand: true },
   { kind: 'altar',  id: 'altar', x: 266, z: -132, w: 10, d: 22, h: 4 },
   { kind: 'tomb', x: 296, z: 112, w: 4, d: 4, h: 4 },
   { kind: 'tomb', x: 318, z: 60,  w: 4, d: 5, h: 5 },
@@ -218,12 +220,12 @@ export const PLACES = [
   { id: 'tyrannus',      x: -6,   z: 70,   r: 12, spawn: [-24, 70],   face: 90,  imagined: true },
   { id: 'agora',         x: -91,  z: 75,   r: 40, spawn: [-60, 75],   face: 270 },
   { id: 'silversmiths',  x: -124, z: 60,   r: 10, spawn: [-116, 60],  face: 270 },
-  { id: 'priscilla',     x: -118, z: 137,  r: 10, spawn: [-108, 140], face: 270, imagined: true },
+  { id: 'priscilla',     x: -118, z: 141,  r: 10, spawn: [-106, 141], face: 270, imagined: true },
   { id: 'mazaeusGate',   x: -58,  z: 122,  r: 8,  spawn: [-58, 132],  face: 0 },
   { id: 'triodos',       x: -42,  z: 142,  r: 14, spawn: [-36, 140],  face: 250 },
   { id: 'scrollSquare',  x: -98,  z: 147,  r: 12, spawn: [-90, 147],  face: 270, imagined: true },
   { id: 'curetes',       x: 40,   z: 160,  r: 20, spawn: [0, 150],    face: 100 },
-  { id: 'terraceHouse',  x: 28,   z: 178,  r: 10, spawn: [28, 170],   face: 180 },
+  { id: 'terraceHouse',  x: 28,   z: 178,  r: 10, spawn: [28, 166],   face: 180 },
   { id: 'stateAgora',    x: 152,  z: 176,  r: 34, spawn: [112, 172],  face: 90 },
   { id: 'basilica',      x: 152,  z: 143,  r: 12, spawn: [152, 154],  face: 0 },
   { id: 'prytaneion',    x: 114,  z: 122,  r: 12, spawn: [126, 133],  face: 315 },
@@ -234,3 +236,28 @@ export const PLACES = [
 ];
 
 export const START = { x: -160, z: 0, face: 90 };   // step off the ship, look up the street
+
+// Info plaques: a glowing marker stands at each of these spots. Text is in content/locations.json.
+export const PLAQUES = [
+  { id: 'harbor', x: -171, z: 8 }, { id: 'tollOffice', x: -171, z: -32 }, { id: 'harborStreet', x: -122, z: 4 },
+  { id: 'synagogue', x: -99, z: -20, imagined: true }, { id: 'theatre', x: -37, z: -10 }, { id: 'marbleStreet', x: -30, z: 40 },
+  { id: 'tyrannus', x: -22, z: 62, imagined: true }, { id: 'agora', x: -72, z: 72 }, { id: 'neronianHall', x: -56, z: 98 },
+  { id: 'silversmiths', x: -124, z: 66 }, { id: 'priscilla', x: -113, z: 147, imagined: true }, { id: 'mazaeusGate', x: -62, z: 128 },
+  { id: 'triodos', x: -38, z: 134 }, { id: 'librarySite', x: -60, z: 142 }, { id: 'scrollSquare', x: -94, z: 153, imagined: true },
+  { id: 'heroon', x: 2, z: 146.5 }, { id: 'octagon', x: 21, z: 154 }, { id: 'curetes', x: 46, z: 158 },
+  { id: 'terraceHouse', x: 36, z: 166 }, { id: 'memmius', x: 76, z: 166 }, { id: 'pollio', x: 97, z: 175 },
+  { id: 'stateAgora', x: 118, z: 184 }, { id: 'agoraTemple', x: 138, z: 189 }, { id: 'basilica', x: 136, z: 152 },
+  { id: 'prytaneion', x: 124, z: 133.5 }, { id: 'precinct', x: 141, z: 133.5 }, { id: 'council', x: 172, z: 133.5, imagined: true },
+  { id: 'magnesianGate', x: 239, z: 164 }, { id: 'cityWalls', x: 241, z: 181 }, { id: 'sacredRoad', x: 284, z: 142 },
+  { id: 'tombs', x: 300, z: 108 }, { id: 'artemisAltar', x: 257, z: -119 }, { id: 'artemision', x: 277, z: -116 },
+];
+
+// Small scenery, placed by hand. Trees elsewhere are scattered automatically.
+export const PROPS = {
+  stalls: [   // market stalls in the commercial agora: [x, z, turn in degrees]
+    [-108, 56, 0], [-96, 56, 0], [-84, 56, 0], [-72, 56, 0], [-108, 92, 180], [-96, 92, 180], [-84, 92, 180], [-72, 92, 180],
+    [-116, 74, 90], [-66, 82, 270],
+  ],
+  statues: [[112, 160], [128, 160], [176, 160], [192, 160], [112, 196], [192, 196], [-40, -16], [-40, 16]],
+  cypress: [[292, 116], [300, 116], [322, 64], [296, 4], [304, -4], [292, -66], [252, -100], [258, -160], [246, -150], [-110, -20], [100, 106], [196, 106], [-66, 152], [8, 138]],
+};
