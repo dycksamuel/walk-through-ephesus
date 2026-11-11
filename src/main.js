@@ -1,13 +1,13 @@
 // Starts the game: loads the text files, builds the city, then runs the walk-around loop.
 import * as THREE from '../vendor/three.module.min.js';
-import { buildWorld, resolveCollisions } from './world/build.js';
-import { heightAt, onSeats, PLACES, START } from './world/layout.js';
+import { buildWorld, resolveCollisions, sightBlocked } from './world/build.js';
+import { heightAt, terrainAt, onSeats, PLACES, PLAQUES, START } from './world/layout.js';
 import { createControls } from './controls.js';
 import { createMap } from './ui/map.js';
 import { loadSave, writeSave } from './storage.js';
 
 const $ = (id) => document.getElementById(id);
-const EYE = 1.65, WALK = 8, JOG = 14, SKY = 0xcfe0ea;
+const EYE = 1.65, WALK = 8, JOG = 14, SKY = 0xd7e3ea;
 const params = new URLSearchParams(location.search);
 
 async function loadJSON(path) {
@@ -33,6 +33,10 @@ async function boot() {
   $('mapNote').textContent = text.mapNote;
   $('mapClose').textContent = text.mapClose;
   $('mapBtn').setAttribute('aria-label', text.mapOpen);
+  $('cardClose').textContent = text.close;
+  $('cardKnownHead').textContent = text.plaqueKnown;
+  $('cardImaginedHead').textContent = text.plaqueImagined;
+  $('cardBadge').textContent = text.imaginedBadge;
 
   // ----- 3D setup -----
   const canvas = $('view');
@@ -95,22 +99,112 @@ async function boot() {
   }
 
   let panelOpen = true;   // the start screen
+  // Buttons that must work even while another finger is holding the joystick.
+  // (Phones only send a "click" for the first finger, so we listen for the finger lifting instead.)
+  function press(el, fn) {
+    let down = false;
+    el.addEventListener('pointerdown', () => { down = true; });
+    el.addEventListener('pointerup', (e) => { if (down) { down = false; e.preventDefault(); fn(); } });
+    el.addEventListener('pointercancel', () => { down = false; });
+    el.addEventListener('click', (e) => { if (e.detail === 0) fn(); });   // keyboard activation
+  }
   const openMap = () => {
     map.layoutBig(); $('mapLegend').innerHTML = map.legendHTML(); map.drawBig(player);
     $('mapPanel').hidden = false; panelOpen = true; controls.enabled = false;
     $('mapPanel').scrollTop = 0; $('mapSheet').scrollTop = 0; $('mapClose').focus();
   };
   const closeMap = () => { $('mapPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); };
-  $('mapBtn').addEventListener('click', openMap);
+  press($('mapBtn'), openMap);
   $('mapClose').addEventListener('click', closeMap);
   $('mapPanel').addEventListener('click', (e) => { if (e.target === $('mapPanel')) closeMap(); });
   window.addEventListener('keydown', (e) => {
     if ($('startPanel').hidden === false) return;
     if (e.repeat) return;
+    if (!$('cardPanel').hidden) { if (e.code === 'Escape' || e.code === 'KeyE') closePlaque(); return; }
+    if ((e.code === 'KeyE' || e.code === 'Enter') && nearPlaque && !panelOpen && (e.target === canvas || e.target === document.body)) { e.preventDefault(); openPlaque(nearPlaque); return; }
     if (e.code === 'KeyM') ($('mapPanel').hidden ? openMap() : closeMap());
     if (e.code === 'Escape' && !$('mapPanel').hidden) closeMap();
   });
   window.addEventListener('resize', () => { map.layoutMini(); if (!$('mapPanel').hidden) { map.layoutBig(); map.drawBig(player); } });
+
+  // ----- info plaques: glowing markers you can tap, or walk up to and press Read -----
+  const readSet = new Set(Array.isArray(save.read) ? save.read : []);
+  const markerGeo = new THREE.OctahedronGeometry(0.42);
+  const markers = new THREE.InstancedMesh(markerGeo, new THREE.MeshBasicMaterial({ color: 0xffffff }), PLAQUES.length);
+  const posts = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.05, 0.09, 1.2, 5), new THREE.MeshBasicMaterial({ color: 0x5a4a3a }), PLAQUES.length);
+  const mtx = new THREE.Matrix4(), UNREAD = new THREE.Color(0xffc531), READ = new THREE.Color(0x4f9fc0);
+  PLAQUES.forEach((p, i) => {
+    p.y = terrainAt(p.x, p.z);
+    posts.setMatrixAt(i, mtx.makeTranslation(p.x, p.y + 0.6, p.z));
+    markers.setColorAt(i, readSet.has(p.id) ? READ : UNREAD);
+  });
+  markers.frustumCulled = false; posts.frustumCulled = false;
+  scene.add(markers, posts);
+  const spin = new THREE.Matrix4();
+  function animateMarkers(t) {
+    PLAQUES.forEach((p, i) => {
+      spin.makeRotationY(t * 1.2 + i);
+      spin.setPosition(p.x, p.y + 1.75 + Math.sin(t * 2 + i) * 0.12, p.z);
+      markers.setMatrixAt(i, spin);
+    });
+    markers.instanceMatrix.needsUpdate = true;
+  }
+
+  let cardOpenedAt = 0;
+  let nearPlaque = null, hintShown = !!save.hinted, hintTimer = 0;
+  function openPlaque(p) {
+    const info = names[p.id] || {};
+    $('cardTitle').textContent = info.name || p.id;
+    $('cardBadge').hidden = !p.imagined;
+    $('cardKnown').textContent = info.known || '';
+    $('cardImagined').textContent = info.imagined || '';
+    cardOpenedAt = performance.now();
+    $('cardPanel').hidden = false; $('cardSheet').scrollTop = 0; $('actionBtn').hidden = true; $('hint').hidden = true;
+    panelOpen = true; controls.enabled = false; $('cardClose').focus();
+    if (!readSet.has(p.id)) {
+      readSet.add(p.id); markers.setColorAt(PLAQUES.indexOf(p), READ); markers.instanceColor.needsUpdate = true;
+      const data = loadSave(); data.read = [...readSet]; writeSave(data);
+    }
+  }
+  function closePlaque() { $('cardPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !nearPlaque; }
+  $('cardClose').addEventListener('click', closePlaque);
+  // (the short delay stops the same tap that opened the card from also closing it)
+  $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel') && performance.now() - cardOpenedAt > 450) closePlaque(); });
+  press($('actionBtn'), () => { if (nearPlaque) openPlaque(nearPlaque); });
+  $('actionBtn').textContent = text.read;
+
+  function updateNearPlaque() {
+    let best = null, bestD = 6.5;
+    for (const p of PLAQUES) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
+    if (best === nearPlaque) return;
+    nearPlaque = best;
+    $('actionBtn').hidden = !best || panelOpen;
+    if (best && !hintShown) {
+      hintShown = true; $('hint').textContent = (!touchDevice && text.plaqueHintKeys) || text.plaqueHint; $('hint').hidden = false;
+      clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, 6000);
+      const data = loadSave(); data.hinted = true; writeSave(data);
+    }
+  }
+
+  // tapping or clicking a marker in the 3D view opens it, from up to 45 metres away
+  const v3 = new THREE.Vector3();
+  controls.onTap = (cx, cy) => {
+    if (panelOpen) return;
+    let best = null, bestPx = Infinity;
+    for (const p of PLAQUES) {
+      if (Math.hypot(player.x - p.x, player.z - p.z) > 45) continue;
+      const dist = Math.hypot(player.x - p.x, player.z - p.z);
+      v3.set(p.x, p.y + 1.75, p.z).project(camera);
+      if (v3.z > 1) continue;                                   // behind you
+      const sx = (v3.x + 1) / 2 * window.innerWidth, sy = (1 - v3.y) / 2 * window.innerHeight;
+      const d = Math.hypot(sx - cx, sy - cy);
+      if (sightBlocked(world.colliders, player.x, player.z, p.x, p.z)) continue;   // hidden behind a building
+      // close markers look large on screen, so they get a larger touch area
+      const reach = Math.max(46, 0.6 / Math.max(dist, 0.5) * window.innerHeight / (2 * Math.tan(camera.fov * Math.PI / 360)));
+      if (d < reach && d < bestPx) { best = p; bestPx = d; }
+    }
+    if (best) openPlaque(best);
+  };
 
   // ----- "you are at..." banner -----
   let currentPlace = null, placeTimer = 0;
@@ -183,9 +277,11 @@ async function boot() {
     camera.position.set(player.x, eyeY, player.z);
     camera.rotation.set(player.pitch * Math.PI / 180, -player.face * Math.PI / 180, 0);
 
+    world.sky.position.set(player.x, 0, player.z);
+    animateMarkers(now / 1000);
     renderer.render(scene, camera);
 
-    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); }
+    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); if (!panelOpen) updateNearPlaque(); }
 
     // frame-rate watch: if the device struggles, quietly lower the picture sharpness
     frames++; fpsTime += dt;
@@ -212,7 +308,7 @@ async function boot() {
 
   // A small handle for testing and (later) Leader Mode jumps.
   window.ephesus = {
-    player, places: PLACES, teleport,
+    player, places: PLACES, plaques: PLAQUES, teleport, openPlaque: (id) => { const p = PLAQUES.find((q) => q.id === id); if (p) openPlaque(p); return !!p; },
     goTo(id) { const p = PLACES.find((q) => q.id === id); if (p) teleport(p.spawn[0], p.spawn[1], p.face); return !!p; },
     stats: () => ({ fps, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, colliders: world.colliders.length, pixelRatio }),
   };

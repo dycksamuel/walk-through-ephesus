@@ -70,3 +70,20 @@ button.primary.compact { margin: 0; padding: 8px 18px; min-height: 44px; font-si
   #compass { left: 10px; transform: none; width: calc(100vw - var(--mini-w, 130px) - 34px); }
   #place { top: calc(var(--mini-h, 100px) + 24px + var(--safe-t)); max-width: calc(100vw - 24px); width: max-content; }
 }
+
+/* action button (Read / Talk / Pick up) and one-time hints */
+#actionBtn { position: absolute; right: 22px; bottom: calc(46px + var(--safe-b)); min-width: 96px; min-height: 96px; padding: 10px; border-radius: 50%;
+  border: 3px solid #fff; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 12px rgba(0, 0, 0, .4); }
+body:not(.touch) #actionBtn { min-width: 0; min-height: 0; border-radius: 26px; padding: 12px 22px; right: 50%; transform: translateX(50%); bottom: 40px; }
+#hint { position: absolute; left: 50%; bottom: calc(180px + var(--safe-b)); transform: translateX(-50%); width: max-content; max-width: 84vw; padding: 8px 14px;
+  border-radius: 12px; background: rgba(47, 38, 32, .8); color: #fff; font-size: 15px; text-align: center; pointer-events: none; }
+body:not(.touch) #hint { bottom: 100px; }
+
+/* plaque card: slides up from the bottom on phones so the place stays in view above it */
+.panel.low { align-items: flex-end; background: rgba(47, 38, 32, .25); }
+.sheet.card { width: min(560px, 100%); max-height: 78%; text-align: left; }
+.sheet.card h3 { margin: 14px 0 0; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.sheet.card h3 + p { margin-top: 4px; }
+.badge { display: inline-block; margin: 0; padding: 3px 10px; border: 1px dashed var(--ink); border-radius: 12px; background: #fff6d8; font-size: 13px; font-weight: 600; }
+@media (min-width: 900px) { .panel.low { align-items: center; } }
+body.bigText .sheet p { font-size: 22px; }

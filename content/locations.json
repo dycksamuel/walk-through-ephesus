@@ -1,23 +1,167 @@
 {
-  "harbor": { "name": "The Harbor" },
-  "harborStreet": { "name": "Harbor Street" },
-  "synagogue": { "name": "Synagogue" },
-  "theatre": { "name": "The Great Theatre" },
-  "marbleStreet": { "name": "Theatre Street" },
-  "tyrannus": { "name": "Lecture Hall of Tyrannus" },
-  "agora": { "name": "Commercial Agora (Market Square)" },
-  "silversmiths": { "name": "Silversmiths' Workshops" },
-  "priscilla": { "name": "Priscilla and Aquila's Workshop" },
-  "mazaeusGate": { "name": "Gate of Mazaeus and Mithridates" },
-  "triodos": { "name": "The Triodos (Three Ways)" },
-  "scrollSquare": { "name": "Square of the Burned Scrolls" },
-  "curetes": { "name": "Curetes Street" },
-  "terraceHouse": { "name": "Terrace Houses" },
-  "stateAgora": { "name": "State Agora (Upper Square)" },
-  "basilica": { "name": "Basilica Stoa" },
-  "prytaneion": { "name": "Prytaneion (City Hall)" },
-  "council": { "name": "Council House" },
-  "magnesianGate": { "name": "Magnesian Gate" },
-  "sacredRoad": { "name": "The Sacred Road" },
-  "artemision": { "name": "Temple of Artemis" }
+  "harbor": {
+    "name": "The Harbor",
+    "known": "Ephesus was the great port of the Roman province of Asia, and ships from all over the Mediterranean tied up here. The harbor was already slowly filling with mud. Today the ruins lie several kilometres from the sea.",
+    "imagined": "The ships, cranes and cargo are our picture of a busy day. The real quay was far bigger."
+  },
+  "harborStreet": {
+    "name": "Harbor Street",
+    "known": "This road ran from the quay up to the theatre. The grand avenue with columns that tourists walk today, the Arcadian Way, is a rebuild from about AD 400, some 350 years after Paul.",
+    "imagined": "Nobody knows how the street looked in the 50s, so ours is plain stone paving. It is also far shorter than the real one."
+  },
+  "synagogue": {
+    "name": "Synagogue",
+    "known": "Acts 19:8 says Paul spoke boldly in the synagogue here for three months, reasoning about the Kingdom of God. The Jewish community of Ephesus is well documented by the ancient writer Josephus. No synagogue building has been found.",
+    "imagined": "Nobody knows where it stood, so we chose this quiet block of houses. The modest hall is our guess too."
+  },
+  "theatre": {
+    "name": "The Great Theatre",
+    "known": "Acts 19:29 says an angry crowd rushed in here, seizing two of Paul’s travelling companions. This was the older Greek theatre, cut into the hillside and already large. Most of the huge ruin tourists visit was built after the riot.",
+    "imagined": "Nobody knows exactly how it looked in the 50s. Our seating and simple stage are a careful guess, with no top tier."
+  },
+  "marbleStreet": {
+    "name": "Theatre Street",
+    "known": "This street linked the theatre to the market square, running along the market’s east side. Today it is known as Marble Street, but the marble paving came long after Paul.",
+    "imagined": "We don’t know its name in the 50s, so ‘Theatre Street’ is ours. The plain stone paving is a guess as well."
+  },
+  "tyrannus": {
+    "name": "Lecture Hall of Tyrannus",
+    "known": "Acts 19:9–10 says Paul left the synagogue and reasoned daily in the school of Tyrannus for two years. Acts doesn’t say who Tyrannus was or whether Paul rented the room. Some old copies add that he taught from the fifth hour to the tenth, about 11 am to 4 pm, but that line was probably added later.",
+    "imagined": "Nobody knows where the hall stood. We chose this side street and made up the building."
+  },
+  "agora": {
+    "name": "Commercial Agora (Market Square)",
+    "known": "This is the Tetragonos Agora, the ‘square market’: a wide open square ringed by rows of shops. Already old in Paul’s day, it had been rebuilt under the emperor Augustus.",
+    "imagined": "The stalls and their goods, from pottery and fish to cloth, spices and bronze, are our picture of a market day. The real square was far bigger."
+  },
+  "silversmiths": {
+    "name": "Silversmiths’ Workshops",
+    "known": "Acts 19:24 names Demetrius, a silversmith who made silver shrines of Artemis and brought the craftsmen plenty of business. Inscriptions from Ephesus mention an association of silversmiths. No silver shrine has ever been found, perhaps because silver gets melted down, but small clay and marble ones have.",
+    "imagined": "Nobody knows which street the workshops were on, so this row is our choice. The tools and benches are a guess."
+  },
+  "priscilla": {
+    "name": "Priscilla and Aquila’s Workshop",
+    "known": "Acts 18 says Priscilla and Aquila were tentmakers, which probably meant leather-working, and that Paul had worked beside them in Corinth. He left them here in Ephesus (Acts 18:19). In 1 Corinthians 16:19 Paul passes on greetings from the church that met in their house.",
+    "imagined": "Nobody knows where they lived or worked. We chose this shop beside the market, with rooms behind and above."
+  },
+  "mazaeusGate": {
+    "name": "Gate of Mazaeus and Mithridates",
+    "known": "This gate into the market was built in 4/3 BC by Mazaeus and Mithridates, two men freed from slavery in the emperor’s family. Its inscription names their patrons: Augustus and his wife Livia, and Agrippa and his wife Julia, the emperor’s daughter. Paul very likely walked through it.",
+    "imagined": "The gate is real and stood at this corner of the market. The real one has three arched openings; ours is simplified, and its colours are our guess."
+  },
+  "triodos": {
+    "name": "The Triodos (Three Ways)",
+    "known": "This junction is known as the Triodos, which means ‘three ways’. The street from the theatre, the market gate and Curetes Street all meet here, in the low ground between the two hills.",
+    "imagined": "The junction is real. Its paving and the plain buildings around it are our guess, and like everything else it is shrunk."
+  },
+  "scrollSquare": {
+    "name": "Square of the Burned Scrolls",
+    "known": "Acts 19:19 says many who had practised magical arts brought their books and burned them in front of everyone. The total value was counted at fifty thousand pieces of silver. Each coin was probably about a day’s wage.",
+    "imagined": "Acts says this happened in public but not where. Nobody knows the spot, so we chose this small square and added the scorched paving."
+  },
+  "curetes": {
+    "name": "Curetes Street",
+    "known": "This sloping street, probably called the Embolos in ancient times, climbs from the Triodos to the upper square in the valley between the two hills. ‘Curetes Street’ is a modern name. By the 50s it was already lined with tombs and monuments.",
+    "imagined": "The street is real, but ours is much shorter, so the monuments stand closer together than they did. The paving is a guess."
+  },
+  "terraceHouse": {
+    "name": "Terrace Houses",
+    "known": "Wealthy families lived in these hillside homes, each built around an open courtyard. They went up early in the first century, so they were fairly new when Paul was here. The famous wall paintings and mosaics visitors see today mostly come from the next two centuries.",
+    "imagined": "We decorated ours more plainly, in a first-century style. The layout is simplified, and the courtyard pool is our own touch."
+  },
+  "stateAgora": {
+    "name": "State Agora (Upper Square)",
+    "known": "This upper square was the city’s civic centre, a place for government more than shopping. It had been rebuilt on a grand scale under Augustus.",
+    "imagined": "The layout follows the excavations, but the square is shrunk. Its colours and details are our guess."
+  },
+  "basilica": {
+    "name": "Basilica Stoa",
+    "known": "This long hall with three aisles ran along the north side of the upper square. Historians date it to about AD 11 and credit it to a rich citizen, Sextilius Pollio, and his family. It was around forty years old in Paul’s day.",
+    "imagined": "Ours is much shorter than the real hall. The roof and painted details are a guess."
+  },
+  "prytaneion": {
+    "name": "Prytaneion (City Hall)",
+    "known": "This was the city hall, home of the sacred hearth of the goddess Hestia. Its fire was never allowed to go out. The building Paul knew was probably put up under Augustus.",
+    "imagined": "How the hall and its hearth looked inside is our guess."
+  },
+  "council": {
+    "name": "Council House",
+    "known": "Ephesus certainly had a city council in the 50s, but where it met is unknown. The council house tourists visit today was built around AD 100, about fifty years later. Nothing older was found beneath it.",
+    "imagined": "This plain hall is imagined. Nobody knows where the council met, and we chose this spot beside the precinct."
+  },
+  "magnesianGate": {
+    "name": "Magnesian Gate",
+    "known": "This gate in the south-east wall was probably first built in the 3rd century BC, along with the walls. The road to the Temple of Artemis began here.",
+    "imagined": "The real gate stood some 350 to 400 metres beyond the upper square. We moved it close and kept it plain, because the triple-arched version is probably later."
+  },
+  "sacredRoad": {
+    "name": "The Sacred Road",
+    "known": "This road ran outside the walls, around the foot of Panayırdağ, to the Temple of Artemis. It was roughly 2 km by road from the gate. Tombs stood along the roadside.",
+    "imagined": "Here the walk takes about a minute. The fields and trees along the way are our guess."
+  },
+  "artemision": {
+    "name": "Temple of Artemis",
+    "known": "This was one of the Seven Wonders of the ancient world, rebuilt after a fire in 356 BC. The Roman writer Pliny counted 127 columns, though the true number is uncertain. It covered about three times the floor area of the Parthenon in Athens and, unusually, faced west.",
+    "imagined": "The real temple stood about 2 km from the city, not a minute’s walk. Its painted colours and details are our guess."
+  },
+  "librarySite": {
+    "name": "Future Library Site",
+    "known": "This lot is empty on purpose. The Library of Celsus, the best-known ruin in Ephesus, was built here around AD 110–117, about sixty years after Paul. The Temple of Hadrian and the Fountain of Trajan had not been built yet either.",
+    "imagined": "Nobody knows what stood on this spot in the 50s, so the open lot is our guess."
+  },
+  "neronianHall": {
+    "name": "New Hall (Building Site)",
+    "known": "A new hall rose along the east side of the market. Its inscription dedicates it to Artemis, to the emperor Claudius, who had just died and been declared a god, to the new emperor Nero, to his mother Agrippina, and to the people. That dates it to AD 54–59, right around the end of Paul’s stay.",
+    "imagined": "We guess it was still a building site while Paul was here. The scaffolding and stacked stone are imagined."
+  },
+  "octagon": {
+    "name": "The Octagon",
+    "known": "This eight-sided tomb was built in the later 1st century BC, so it was already old in Paul’s day. Who was buried here is not known. People once guessed Cleopatra’s sister Arsinoe, but a 2025 study showed the skull from the tomb belonged to a boy of about 11 to 14.",
+    "imagined": "The tomb is real and stood on this side of the street. Its roof and colours are our reconstruction."
+  },
+  "heroon": {
+    "name": "Heroon of Androklos",
+    "known": "A heroon is a shrine built to honour a hero. This one was already old in Paul’s day, probably from the 2nd century BC. Linking it to Androklos, the legendary founder of Ephesus, is a modern scholar’s suggestion.",
+    "imagined": "Its upper parts and decoration are our guess."
+  },
+  "memmius": {
+    "name": "Memmius Monument",
+    "known": "This monument honoured Memmius, a grandson of the Roman general Sulla. It was probably built between 50 and 30 BC at the top end of the street. Unlike its neighbours down the hill, it is an honorary monument, not a tomb.",
+    "imagined": "Its exact shape and carved figures are our guess."
+  },
+  "pollio": {
+    "name": "Pollio Monument",
+    "known": "This monument honoured Sextilius Pollio, who is credited with building an aqueduct for the city around AD 4–14. Historians think his stepson set it up. The fountain attached to it was added about AD 92, so in Paul’s day there was none.",
+    "imagined": "Its shape is our guess. We left the fountain off on purpose."
+  },
+  "agoraTemple": {
+    "name": "Temple in the Upper Square",
+    "known": "A small temple stood in the middle of the upper square. Nobody knows for certain which god or ruler it honoured. Scholars have suggested the Egyptian goddess Isis, Julius Caesar with the goddess Roma, or the emperor Augustus.",
+    "imagined": "Its columns, roof and colours are our guess."
+  },
+  "precinct": {
+    "name": "Sacred Precinct",
+    "known": "A walled sacred enclosure stood here beside the city hall. It was probably the shrine of the goddess Roma and Julius Caesar, honoured as a god, which Augustus allowed Ephesus to build in 29 BC. Not all scholars agree.",
+    "imagined": "What stood inside is uncertain, so the altar you see is our guess."
+  },
+  "cityWalls": {
+    "name": "City Walls",
+    "known": "These walls were built around 290 BC under King Lysimachus, who refounded the city on this site. They ride the ridges of two hills, Panayırdağ and Bülbüldağ. Scholars still argue about which ancient name belongs to which hill.",
+    "imagined": "Their height and towers are our guess, and the real circuit was far longer. They also mark the edge of our map."
+  },
+  "artemisAltar": {
+    "name": "Altar of Artemis",
+    "known": "The great altar stood in the open air in front of the temple, on its west side. Offerings to Artemis were made here in the open air, not inside the temple. That was normal for Greek worship.",
+    "imagined": "The altar’s size, shape and decoration are our guess."
+  },
+  "tombs": {
+    "name": "Roadside Tombs",
+    "known": "Tombs lined the roads outside the city walls. Many families chose a spot beside a busy road, where passers-by would see the names of their dead. Travellers walking to the temple passed them.",
+    "imagined": "These tombs are invented examples, not copies of real ones."
+  },
+  "tollOffice": {
+    "name": "Fishery Toll-Office",
+    "known": "An inscription from AD 54–59, found in the harbor area, records that the fishermen and fish-sellers of Ephesus built a ‘fishery toll-office’ with their own money, and it lists the givers one by one. It was probably where tolls on the fish trade were paid. So the building was new, or still going up, around Paul’s time.",
+    "imagined": "The inscription doesn’t say what it looked like or exactly where it stood. This small building is our guess."
+  }
 }

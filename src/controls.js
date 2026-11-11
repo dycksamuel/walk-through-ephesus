@@ -22,7 +22,7 @@ export function createControls(canvas, stickEl) {
     if (!state.enabled) return;
     if (e.pointerType === 'touch') state.usedTouch = true;
     if (look.size) return;   // one finger looks; extra fingers are ignored
-    look.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    look.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t0: performance.now() });
     try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* older browsers */ }
   });
   canvas.addEventListener('pointermove', (e) => {
@@ -32,7 +32,12 @@ export function createControls(canvas, stickEl) {
     p.x = e.clientX; p.y = e.clientY;
   });
   const endLook = (e) => look.delete(e.pointerId);
-  canvas.addEventListener('pointerup', endLook);
+  canvas.addEventListener('pointerup', (e) => {
+    const p = look.get(e.pointerId);
+    // a quick press without dragging counts as a tap on whatever is under the finger
+    if (p && state.onTap && Math.hypot(e.clientX - p.x0, e.clientY - p.y0) < 10 && performance.now() - p.t0 < 500) state.onTap(e.clientX, e.clientY);
+    endLook(e);
+  });
   canvas.addEventListener('pointercancel', endLook);
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 
