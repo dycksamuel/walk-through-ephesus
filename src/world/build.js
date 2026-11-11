@@ -160,12 +160,13 @@ export function buildWorld(scene) {
       const ext = 0.5 * hw;                           // overlap at corners so bends have no gaps
       const at = (t, side) => {
         const d = -ext + (len + 2 * ext) * t, x = ax + ux * d + px * side, z = az + uz * d + pz * side;
-        return [x, terrainAt(x, z) + lift, z];
+        // take the highest ground close by, so the hillside never pokes up through the paving
+        const y = Math.max(terrainAt(x, z), terrainAt(x + 1.2, z), terrainAt(x - 1.2, z), terrainAt(x, z + 1.2), terrainAt(x, z - 1.2));
+        return [x, y + lift, z];
       };
       for (let k = 0; k < n; k++) {
         const t0 = k / n, t1 = (k + 1) / n;
-        decal.quad(at(t0, -1), at(t0, 0), at(t1, 0), at(t1, -1), color);
-        decal.quad(at(t0, 0), at(t0, 1), at(t1, 1), at(t1, 0), color);
+        for (const sd of [-1, -0.5, 0, 0.5]) decal.quad(at(t0, sd), at(t0, sd + 0.5), at(t1, sd + 0.5), at(t1, sd), color);
       }
     }
   });
@@ -240,7 +241,7 @@ export function buildWorld(scene) {
         const P = (rr, a, yy) => [t.cx + Math.cos(a) * rr, yy, t.cz + Math.sin(a) * rr];
         const col = aisle ? PALETTE.stone : ((k % 5 === 0) ? PALETTE.stone : PALETTE.seat);
         b.quad(P(rin, a1, y), P(rout, a1, y), P(rout, a0, y), P(rin, a0, y), col);                       // tread
-        b.quad(P(rin, a1, y - t.rowRise), P(rin, a1, y), P(rin, a0, y), P(rin, a0, y - t.rowRise), PALETTE.shade); // riser
+        b.quad(P(rin, a1, y - t.rowRise), P(rin, a1, y), P(rin, a0, y), P(rin, a0, y - t.rowRise), (r % 2) ? 0xb3a892 : 0xa69b86); // riser
       }
     }
     const topY = t.baseY + rows * t.rowRise;
@@ -310,7 +311,8 @@ export function buildWorld(scene) {
         if (s.workshop) {  // tent-makers' shop: work table, rolls of cloth and leather, an awning out front
           b.box(x - ox * 1.5, y, z - 2, 3.2, 0.85, 1.3, 0, PALETTE.wood); solid(x - ox * 1.5, z - 2, 3.2, 1.3);
           b.box(x - ox * 1.5, y + 0.85, z - 2, 2.6, 0.08, 1.1, 0, PALETTE.cloth1);
-          for (let i = 0; i < 4; i++) b.add('cyl', x - ox * (w / 2 - 1.2), y + 0.3 + i * 0.5, z + 2.5, 0.25, 2.6, 0.25, 0, i % 2 ? PALETTE.cloth1 : PALETTE.cloth2);
+          for (let i = 0; i < 4; i++) b.box(x - ox * (w / 2 - 1.3), y + i * 0.42, z + 2.6, 1.1 - i * 0.12, 0.4, 2.6, 0, i % 2 ? PALETTE.cloth1 : PALETTE.cloth2);   // a stack of folded cloth and hides
+          solid(x - ox * (w / 2 - 1.3), z + 2.6, 1.1, 2.6);
           b.box(x - ox * (w / 2 - 1), y + 1.4, z - d / 2 + 0.7, 2.6, 2.2, 0.12, 0, PALETTE.cloth2);      // a finished panel hung on the wall
           b.box(x + ox * (w / 2 + 1.4), y + h - 0.9, z, 3, 0.12, d - 1, 0, PALETTE.awning);
           b.box(x - ox * w / 4, y + h + 0.5, z, w / 2, 2.8, d, 0, PALETTE.plaster);                      // living rooms above the back of the shop
@@ -338,7 +340,7 @@ export function buildWorld(scene) {
         b.box(x, y, z - 0.5, 3, 0.18, 3, 0, PALETTE.basin);                                                               // rain-water pool
         b.box(x, y, z - 0.5, 3.5, 0.12, 3.5, 0, PALETTE.marble);
         for (const sx of [-1, 1]) for (const sz of [-1, 1]) column(x + sx * 2.9, y, z - 0.5 + sz * 2.9, 0.26, 3.4, PALETTE.marble);
-        jar(x - 3.6, y, z + 2.6); jar(x - 3.1, y, z + 3);
+        jar(x - 4.4, y, z + 1.2); jar(x - 4.4, y, z + 1.9);
         break;
       }
       case 'stage': {  // the theatre's stage building
@@ -437,7 +439,7 @@ export function buildWorld(scene) {
         const steps = s.steps || 2, fx = SIDE[s.front || 'w'][0];
         for (let i = 0; i < steps; i++) {
           const g = (steps - 1 - i) * 1.4;
-          b.box(x, y - (steps - i) * 0.55 + 0.05, z, w + 4 + g * 2, 0.55, d + 4 + g * 2, 0, PALETTE.marble);
+          b.box(x, y - (steps - i) * 0.55 + 0.05, z, w + 7 + g * 2, 0.55, d + 7 + g * 2, 0, PALETTE.marble);
         }
         const ring = (inset) => {
           const cl = nl - inset * 2, cs = ns - inset * 2, sx = w / (nl - 1), sz = d / (ns - 1);
@@ -555,9 +557,10 @@ export function buildWorld(scene) {
   // harbour: mooring posts, cargo, a wooden crane
   for (let z = -40; z <= 40; z += 10) b.add('cyl', -188.4, 1, z, 0.3, 0.8, 0.3, 0, PALETTE.darkWood);
   for (const [x, z] of [[-183, -12], [-182, -10.6], [-183.6, -10.4], [-181, 26], [-180, 27.2], [-173, -20], [-172, 22]]) {
-    b.box(x, 1, z, 1.1, 1, 1.1, x, PALETTE.wood);
+    b.box(x, 1, z, 1.1, 1, 1.1, x, PALETTE.wood); solid(x, z, 1.1, 1.1, x);
   }
   for (const [x, z] of [[-184, 10], [-183.3, 10.5], [-184.1, 11.1], [-183.4, 11.6], [-174, -8], [-173.4, -8.5]]) jar(x, 1, z, 1.2);
+  solid(-183.7, 10.8, 1.6, 2.2); solid(-173.7, -8.25, 1.4, 1);
   b.add('cyl', -186, 1, 30, 0.22, 7, 0.22, 0, PALETTE.darkWood); b.box(-188, 7.6, 30, 6, 0.25, 0.25, 0, PALETTE.darkWood); solid(-186, 30, 0.8, 0.8);
   // the empty lot beside the Triodos: weeds and a few stray blocks
   for (const [x, z, s] of [[-64, 147, 1], [-57, 150, 0.7], [-61, 153, 1.2], [-66, 151, 0.6]]) b.box(x, 1, z, 1.4 * s, 0.6 * s, 1 * s, x, PALETTE.stone);
@@ -622,3 +625,19 @@ export function resolveCollisions(colliders, pos, r) {
 }
 
 export { heightAt };
+
+// Can you see from a to b, or is a building in the way? (Small things like posts and stalls don't count.)
+export function sightBlocked(colliders, ax, az, bx, bz) {
+  const len = Math.hypot(bx - ax, bz - az), n = Math.ceil(len / 0.5);
+  for (let i = 2; i < n - 1; i++) {
+    const x = ax + (bx - ax) * i / n, z = az + (bz - az) * i / n;
+    for (const c of colliders) {
+      if (c.hw < 1.2 && c.hd < 1.2) continue;
+      const dx = x - c.x, dz = z - c.z;
+      if (Math.abs(dx) > c.hw + c.hd || Math.abs(dz) > c.hw + c.hd) continue;
+      const cs = Math.cos(c.rot), sn = Math.sin(c.rot);
+      if (Math.abs(dx * cs - dz * sn) < c.hw && Math.abs(dx * sn + dz * cs) < c.hd) return true;
+    }
+  }
+  return false;
+}

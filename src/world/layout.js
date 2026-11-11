@@ -33,8 +33,8 @@ export const PADS = [
   { id: 'terrace2',    x0: 14,   z0: 195, x1: 62,   z1: 207, y: 12.5,    m: 3,  surface: null },
   { id: 'temple',      x0: 262,  z0: -168, x1: 396, z1: -96, y: 1.5,     m: 14, surface: 'dirt' },
   // raised platforms (the blend margin acts as the steps)
-  { id: 'artemisionBase', x0: 281, z0: -156, x1: 379, z1: -108, y: 3.3,  m: 4,  surface: 'marble' },
-  { id: 'agoraTempleBase', x0: 142, z0: 170, x1: 162, z1: 182, y: UPPER_Y + 1.2, m: 2, surface: 'marble' },
+  { id: 'artemisionBase', x0: 286, z0: -151, x1: 374, z1: -113, y: 3.3,  m: 4,  surface: 'marble' },
+  { id: 'agoraTempleBase', x0: 146, z0: 174, x1: 158, z1: 178, y: UPPER_Y + 1.2, m: 2, surface: 'marble' },
 ];
 
 // The Great Theatre: semicircular seating facing west, cut into the hill.
@@ -220,7 +220,7 @@ export const PLACES = [
   { id: 'tyrannus',      x: -6,   z: 70,   r: 12, spawn: [-24, 70],   face: 90,  imagined: true },
   { id: 'agora',         x: -91,  z: 75,   r: 40, spawn: [-60, 75],   face: 270 },
   { id: 'silversmiths',  x: -124, z: 60,   r: 10, spawn: [-116, 60],  face: 270 },
-  { id: 'priscilla',     x: -118, z: 141,  r: 10, spawn: [-106, 141], face: 270, imagined: true },
+  { id: 'priscilla',     x: -118, z: 141,  r: 10, spawn: [-106, 143.5], face: 270, imagined: true },
   { id: 'mazaeusGate',   x: -58,  z: 122,  r: 8,  spawn: [-58, 132],  face: 0 },
   { id: 'triodos',       x: -42,  z: 142,  r: 14, spawn: [-36, 140],  face: 250 },
   { id: 'scrollSquare',  x: -98,  z: 147,  r: 12, spawn: [-90, 147],  face: 270, imagined: true },
@@ -231,7 +231,7 @@ export const PLACES = [
   { id: 'prytaneion',    x: 114,  z: 122,  r: 12, spawn: [126, 133],  face: 315 },
   { id: 'council',       x: 178,  z: 122,  r: 12, spawn: [166, 133],  face: 45,  imagined: true },
   { id: 'magnesianGate', x: 246,  z: 172,  r: 12, spawn: [232, 172],  face: 90 },
-  { id: 'sacredRoad',    x: 308,  z: 40,   r: 30, spawn: [300, 110],  face: 0 },
+  { id: 'sacredRoad',    x: 308,  z: 40,   r: 30, spawn: [299, 122],  face: 5 },
   { id: 'artemision',    x: 300,  z: -132, r: 60, spawn: [250, -112], face: 75 },
 ];
 
@@ -249,7 +249,7 @@ export const PLAQUES = [
   { id: 'stateAgora', x: 118, z: 184 }, { id: 'agoraTemple', x: 138, z: 189 }, { id: 'basilica', x: 136, z: 152 },
   { id: 'prytaneion', x: 124, z: 133.5 }, { id: 'precinct', x: 141, z: 133.5 }, { id: 'council', x: 172, z: 133.5, imagined: true },
   { id: 'magnesianGate', x: 239, z: 164 }, { id: 'cityWalls', x: 241, z: 181 }, { id: 'sacredRoad', x: 284, z: 142 },
-  { id: 'tombs', x: 300, z: 108 }, { id: 'artemisAltar', x: 257, z: -119 }, { id: 'artemision', x: 277, z: -116 },
+  { id: 'tombs', x: 292.5, z: 110 }, { id: 'artemisAltar', x: 257, z: -119 }, { id: 'artemision', x: 277, z: -116 },
 ];
 
 // Small scenery, placed by hand. Trees elsewhere are scattered automatically.

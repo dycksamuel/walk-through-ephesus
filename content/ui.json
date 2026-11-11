@@ -13,12 +13,22 @@
   "mapOpen": "Open map",
   "imaginedTag": "(location imagined)",
   "mapNote": "Dashed circles mark places whose real location is unknown. We have placed them where they plausibly could have been.",
-  "compass": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
+  "compass": [
+    "N",
+    "NE",
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW"
+  ],
   "errorNoWebGL": "Sorry, this device or browser can't show 3D graphics. Try a newer browser such as Chrome, Safari, Firefox or Edge.",
   "plaqueKnown": "What we know",
   "plaqueImagined": "What’s imagined here",
   "read": "Read",
   "close": "Close",
   "imaginedBadge": "Location imagined",
-  "plaqueHint": "Tap the glowing marker, or press Read, to learn about this place."
+  "plaqueHint": "Tap the glowing marker, or press Read, to learn about this place.",
+  "plaqueHintKeys": "Click the glowing marker, or press E, to learn about this place."
 }

@@ -1,6 +1,6 @@
 // Starts the game: loads the text files, builds the city, then runs the walk-around loop.
 import * as THREE from '../vendor/three.module.min.js';
-import { buildWorld, resolveCollisions } from './world/build.js';
+import { buildWorld, resolveCollisions, sightBlocked } from './world/build.js';
 import { heightAt, terrainAt, onSeats, PLACES, PLAQUES, START } from './world/layout.js';
 import { createControls } from './controls.js';
 import { createMap } from './ui/map.js';
@@ -99,20 +99,29 @@ async function boot() {
   }
 
   let panelOpen = true;   // the start screen
+  // Buttons that must work even while another finger is holding the joystick.
+  // (Phones only send a "click" for the first finger, so we listen for the finger lifting instead.)
+  function press(el, fn) {
+    let down = false;
+    el.addEventListener('pointerdown', () => { down = true; });
+    el.addEventListener('pointerup', (e) => { if (down) { down = false; e.preventDefault(); fn(); } });
+    el.addEventListener('pointercancel', () => { down = false; });
+    el.addEventListener('click', (e) => { if (e.detail === 0) fn(); });   // keyboard activation
+  }
   const openMap = () => {
     map.layoutBig(); $('mapLegend').innerHTML = map.legendHTML(); map.drawBig(player);
     $('mapPanel').hidden = false; panelOpen = true; controls.enabled = false;
     $('mapPanel').scrollTop = 0; $('mapSheet').scrollTop = 0; $('mapClose').focus();
   };
   const closeMap = () => { $('mapPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); };
-  $('mapBtn').addEventListener('click', openMap);
+  press($('mapBtn'), openMap);
   $('mapClose').addEventListener('click', closeMap);
   $('mapPanel').addEventListener('click', (e) => { if (e.target === $('mapPanel')) closeMap(); });
   window.addEventListener('keydown', (e) => {
     if ($('startPanel').hidden === false) return;
     if (e.repeat) return;
     if (!$('cardPanel').hidden) { if (e.code === 'Escape' || e.code === 'KeyE') closePlaque(); return; }
-    if ((e.code === 'KeyE' || e.code === 'Enter') && nearPlaque && !panelOpen && (e.target === canvas || e.target === document.body)) { openPlaque(nearPlaque); return; }
+    if ((e.code === 'KeyE' || e.code === 'Enter') && nearPlaque && !panelOpen && (e.target === canvas || e.target === document.body)) { e.preventDefault(); openPlaque(nearPlaque); return; }
     if (e.code === 'KeyM') ($('mapPanel').hidden ? openMap() : closeMap());
     if (e.code === 'Escape' && !$('mapPanel').hidden) closeMap();
   });
@@ -123,7 +132,7 @@ async function boot() {
   const markerGeo = new THREE.OctahedronGeometry(0.42);
   const markers = new THREE.InstancedMesh(markerGeo, new THREE.MeshBasicMaterial({ color: 0xffffff }), PLAQUES.length);
   const posts = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.05, 0.09, 1.2, 5), new THREE.MeshBasicMaterial({ color: 0x5a4a3a }), PLAQUES.length);
-  const mtx = new THREE.Matrix4(), UNREAD = new THREE.Color(0xffc531), READ = new THREE.Color(0xbfd4dd);
+  const mtx = new THREE.Matrix4(), UNREAD = new THREE.Color(0xffc531), READ = new THREE.Color(0x4f9fc0);
   PLAQUES.forEach((p, i) => {
     p.y = terrainAt(p.x, p.z);
     posts.setMatrixAt(i, mtx.makeTranslation(p.x, p.y + 0.6, p.z));
@@ -161,7 +170,7 @@ async function boot() {
   $('cardClose').addEventListener('click', closePlaque);
   // (the short delay stops the same tap that opened the card from also closing it)
   $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel') && performance.now() - cardOpenedAt > 450) closePlaque(); });
-  $('actionBtn').addEventListener('click', () => { if (nearPlaque) openPlaque(nearPlaque); });
+  press($('actionBtn'), () => { if (nearPlaque) openPlaque(nearPlaque); });
   $('actionBtn').textContent = text.read;
 
   function updateNearPlaque() {
@@ -171,7 +180,7 @@ async function boot() {
     nearPlaque = best;
     $('actionBtn').hidden = !best || panelOpen;
     if (best && !hintShown) {
-      hintShown = true; $('hint').textContent = text.plaqueHint; $('hint').hidden = false;
+      hintShown = true; $('hint').textContent = (!touchDevice && text.plaqueHintKeys) || text.plaqueHint; $('hint').hidden = false;
       clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, 6000);
       const data = loadSave(); data.hinted = true; writeSave(data);
     }
@@ -181,14 +190,18 @@ async function boot() {
   const v3 = new THREE.Vector3();
   controls.onTap = (cx, cy) => {
     if (panelOpen) return;
-    let best = null, bestPx = 46;
+    let best = null, bestPx = Infinity;
     for (const p of PLAQUES) {
       if (Math.hypot(player.x - p.x, player.z - p.z) > 45) continue;
-      v3.set(p.x, p.y + 1.6, p.z).project(camera);
+      const dist = Math.hypot(player.x - p.x, player.z - p.z);
+      v3.set(p.x, p.y + 1.75, p.z).project(camera);
       if (v3.z > 1) continue;                                   // behind you
       const sx = (v3.x + 1) / 2 * window.innerWidth, sy = (1 - v3.y) / 2 * window.innerHeight;
       const d = Math.hypot(sx - cx, sy - cy);
-      if (d < bestPx) { best = p; bestPx = d; }
+      if (sightBlocked(world.colliders, player.x, player.z, p.x, p.z)) continue;   // hidden behind a building
+      // close markers look large on screen, so they get a larger touch area
+      const reach = Math.max(46, 0.6 / Math.max(dist, 0.5) * window.innerHeight / (2 * Math.tan(camera.fov * Math.PI / 360)));
+      if (d < reach && d < bestPx) { best = p; bestPx = d; }
     }
     if (best) openPlaque(best);
   };
