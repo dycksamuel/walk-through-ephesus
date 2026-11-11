@@ -261,3 +261,20 @@ export const PROPS = {
   statues: [[112, 160], [128, 160], [176, 160], [192, 160], [112, 196], [192, 196], [-40, -16], [-40, 16]],
   cypress: [[292, 116], [300, 116], [322, 64], [296, 4], [304, -4], [292, -66], [252, -100], [258, -160], [246, -150], [-110, -20], [100, 106], [196, 106], [-66, 152], [8, 138]],
 };
+
+// The people you can talk to. talk = which conversation in content/characters.json they open.
+// face = compass direction they look when no one is near. look = how they are dressed.
+export const PEOPLE = [
+  { id: 'demetrius', talk: 'demetrius', x: -127.3, z: 62.8, face: 90, look: { tunic: 0x8c5a3c, hair: 0x3a2e26, beard: true, apron: 0x5a4636 } },
+  { id: 'priscilla', talk: 'priscillaAquila', x: -120.4, z: 143.2, face: 90, look: { woman: true, tunic: 0x6f8f8a, cloak: 0xd9c9a0, hair: 0x4a3524 } },
+  { id: 'aquila', talk: 'priscillaAquila', x: -120.8, z: 139.2, face: 90, look: { tunic: 0xb89b6a, hair: 0x2e2620, beard: true, apron: 0x6b523a } },
+  { id: 'theodotus', talk: 'theodotus', x: -102, z: -22.3, face: 180, look: { tunic: 0xe9dcc0, cloak: 0x5a6f8c, hair: 0xb8b0a4, beard: true } },
+  { id: 'metrodorus', talk: 'metrodorus', x: -11.4, z: 74.6, face: 90, look: { tunic: 0xd9c9a0, hair: 0x5a4028, small: 0.94 } },
+  { id: 'paul', talk: 'paul', x: 3, z: 70, face: 270, look: { tunic: 0xcdbd9a, cloak: 0x7a5a48, hair: 0x4a4038, beard: true, bald: true } },
+  { id: 'ammia', talk: 'ammia', x: 266, z: -106, face: 100, look: { woman: true, tunic: 0xc97f5a, cloak: 0xe9dcc0, hair: 0x2e2620 } },
+  { id: 'zosimus', talk: 'zosimus', x: -95.5, z: 148.6, face: 300, look: { tunic: 0x6a5a6f, cloak: 0x4a4038, hair: 0x2e2620, beard: true } },
+  { id: 'valens', talk: 'valens', x: 160.6, z: 152.2, face: 180, look: { tunic: 0xd8cfb8, cloak: 0x6b5a48, hair: 0x4a3524, soldier: true } },
+  { id: 'menander', talk: 'menander', x: 26.4, z: 174.8, face: 0, look: { tunic: 0xece6d8, cloak: 0x8a3d3d, hair: 0x5a5048, beard: true } },
+  { id: 'charite', talk: 'charite', x: 30.4, z: 175, face: 0, look: { woman: true, tunic: 0xd9b24a, hair: 0x3a2e26, small: 0.9 } },
+  { id: 'eirene', talk: 'eirene', x: 31.8, z: 180, face: 300, look: { woman: true, tunic: 0x9a8f7a, hair: 0x2e2620 } },
+];

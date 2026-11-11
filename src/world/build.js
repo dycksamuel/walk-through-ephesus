@@ -41,7 +41,7 @@ const UNIT = {
   ]),
 };
 
-class Builder {
+export class Builder {
   constructor() { this.pos = []; this.col = []; this.c = new THREE.Color(); }
   // Add a unit shape scaled to (sx,sy,sz), turned by rot (radians), with its base centre at (x,y,z).
   add(shape, x, y, z, sx, sy, sz, rot, color) {
@@ -566,6 +566,18 @@ export function buildWorld(scene) {
   for (const [x, z, s] of [[-64, 147, 1], [-57, 150, 0.7], [-61, 153, 1.2], [-66, 151, 0.6]]) b.box(x, 1, z, 1.4 * s, 0.6 * s, 1 * s, x, PALETTE.stone);
   // ashes where the scrolls were burned
   b.add('cone8', -98, 1.05, 146, 1.2, 0.5, 1.2, 0, PALETTE.scorch);
+  // the soldier's kit, stacked while he is off duty: shield, spear, helmet on a folded mail shirt
+  {
+    const kx = 162.4, kz = 152.4, ky = terrainAt(kx, kz);
+    b.box(kx, ky, kz, 0.9, 0.5, 0.7, 0.3, PALETTE.wood);
+    b.box(kx, ky + 0.5, kz, 0.6, 0.14, 0.5, 0.3, 0x8f959c);                 // mail shirt, folded
+    b.add('blob', kx, ky + 0.62, kz, 0.17, 0.16, 0.19, 0, PALETTE.bronze);  // helmet
+    b.box(kx + 0.75, ky, kz - 0.1, 0.16, 1.15, 0.75, 0.2, 0x7a3b32);        // large shield leaning on the crate
+    b.box(kx + 0.84, ky + 0.5, kz - 0.1, 0.05, 0.22, 0.22, 0.2, PALETTE.bronze);
+    b.add('cyl', kx - 0.7, ky, kz + 0.2, 0.03, 2.1, 0.03, 0, PALETTE.wood);  // spear
+    b.add('cone4', kx - 0.7, ky + 2.1, kz + 0.2, 0.05, 0.28, 0.05, 0, 0x8f959c);
+    solid(kx, kz, 1.9, 1);
+  }
   // painted statues on plinths
   PROPS.statues.forEach(([x, z], i) => statue(x, z, TUNICS[i % TUNICS.length]));
   // trees: a few placed by hand, the rest scattered on open ground away from streets and squares

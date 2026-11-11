@@ -5,6 +5,7 @@ import { heightAt, terrainAt, onSeats, PLACES, PLAQUES, START } from './world/la
 import { createControls } from './controls.js';
 import { createMap } from './ui/map.js';
 import { loadSave, writeSave } from './storage.js';
+import { createPeople } from './people.js';
 
 const $ = (id) => document.getElementById(id);
 const EYE = 1.65, WALK = 8, JOG = 14, SKY = 0xd7e3ea;
@@ -17,7 +18,7 @@ async function loadJSON(path) {
 }
 
 async function boot() {
-  const [text, names] = await Promise.all([loadJSON('content/ui.json'), loadJSON('content/locations.json')]);
+  const [text, names, talks] = await Promise.all([loadJSON('content/ui.json'), loadJSON('content/locations.json'), loadJSON('content/characters.json')]);
   const touchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
   if (touchDevice) document.body.classList.add('touch');
 
@@ -121,7 +122,13 @@ async function boot() {
     if ($('startPanel').hidden === false) return;
     if (e.repeat) return;
     if (!$('cardPanel').hidden) { if (e.code === 'Escape' || e.code === 'KeyE') closePlaque(); return; }
-    if ((e.code === 'KeyE' || e.code === 'Enter') && nearPlaque && !panelOpen && (e.target === canvas || e.target === document.body)) { e.preventDefault(); openPlaque(nearPlaque); return; }
+    if (!$('talkPanel').hidden) {
+      if (e.code === 'Escape') closeTalk();
+      const n = /^(Digit|Numpad)([1-4])$/.exec(e.code);            // number keys pick a reply
+      if (n) { const btn = $('talkChoices').children[+n[2] - 1]; if (btn) btn.click(); }
+      return;
+    }
+    if ((e.code === 'KeyE' || e.code === 'Enter') && near && !panelOpen && (e.target === canvas || e.target === document.body)) { e.preventDefault(); openNear(); return; }
     if (e.code === 'KeyM') ($('mapPanel').hidden ? openMap() : closeMap());
     if (e.code === 'Escape' && !$('mapPanel').hidden) closeMap();
   });
@@ -151,7 +158,8 @@ async function boot() {
   }
 
   let cardOpenedAt = 0;
-  let nearPlaque = null, hintShown = !!save.hinted, hintTimer = 0;
+  let near = null;   // the plaque or person close enough to use: { kind, obj }
+  let hintShown = !!save.hinted, talkHintShown = !!save.hintedTalk, hintTimer = 0;
   function openPlaque(p) {
     const info = names[p.id] || {};
     $('cardTitle').textContent = info.name || p.id;
@@ -166,23 +174,80 @@ async function boot() {
       const data = loadSave(); data.read = [...readSet]; writeSave(data);
     }
   }
-  function closePlaque() { $('cardPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !nearPlaque; }
+  function closePlaque() { $('cardPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !near; }
   $('cardClose').addEventListener('click', closePlaque);
   // (the short delay stops the same tap that opened the card from also closing it)
   $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel') && performance.now() - cardOpenedAt > 450) closePlaque(); });
-  press($('actionBtn'), () => { if (nearPlaque) openPlaque(nearPlaque); });
-  $('actionBtn').textContent = text.read;
+  const openNear = () => { if (!near) return; if (near.kind === 'person') openTalk(near.obj); else openPlaque(near.obj); };
+  press($('actionBtn'), openNear);
 
-  function updateNearPlaque() {
-    let best = null, bestD = 6.5;
-    for (const p of PLAQUES) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
-    if (best === nearPlaque) return;
-    nearPlaque = best;
+  // ----- people and conversations -----
+  const folk = createPeople(scene, world.colliders);
+  const talkedSet = new Set(Array.isArray(save.talked) ? save.talked : []);
+  folk.setTalked(talkedSet);
+  $('talkClose').textContent = text.close;
+  $('talkNoteHead').textContent = text.scriptureNoteHead || '';
+  let talking = null;
+  function showNode(id) {
+    const c = talking, node = c.nodes[id];
+    $('talkName').textContent = node.speaker || c.name;
+    $('talkText').textContent = node.text;
+    const box = $('talkChoices'); box.textContent = '';
+    const add = (label, fn, end) => {
+      const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = label; if (end) btn.className = 'end';
+      btn.addEventListener('click', fn); box.appendChild(btn);
+    };
+    if (node.end || !node.choices) add(text.goodbye || text.close, closeTalk, true);
+    else node.choices.forEach((ch) => add(ch.label, () => showNode(ch.to)));
+    $('talkSheet').scrollTop = 0;
+    if (box.firstChild) box.firstChild.focus({ preventScroll: true });
+  }
+  function openTalk(person) {
+    const c = talks[person.talk];
+    if (!c) return;
+    talking = c; cardOpenedAt = performance.now();
+    $('talkName').textContent = c.name; $('talkRole').textContent = c.role || ''; $('talkAbout').textContent = c.about || '';
+    const quote = !!c.scripture;
+    $('talkText').classList.toggle('scripture', quote);
+    $('talkRef').hidden = !quote; $('talkNoteHead').hidden = !quote; $('talkNote').hidden = !quote;
+    if (quote) {     // Paul: his own words from Scripture, nothing invented
+      $('talkText').textContent = '\u201C' + c.scripture.text + '\u201D';
+      $('talkRef').textContent = c.scripture.ref + ' (WEB)'; $('talkNote').textContent = c.note || '';
+      const box = $('talkChoices'); box.textContent = '';
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'end'; btn.textContent = text.close;
+      btn.addEventListener('click', closeTalk); box.appendChild(btn);
+    } else showNode(c.start);
+    $('talkPanel').hidden = false; $('actionBtn').hidden = true; $('hint').hidden = true;
+    panelOpen = true; controls.enabled = false;
+    if (!talkedSet.has(person.talk)) {
+      talkedSet.add(person.talk); folk.setTalked(talkedSet);
+      const data = loadSave(); data.talked = [...talkedSet]; writeSave(data);
+    }
+  }
+  function closeTalk() { $('talkPanel').hidden = true; talking = null; panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !near; }
+  $('talkClose').addEventListener('click', closeTalk);
+  $('talkPanel').addEventListener('click', (e) => { if (e.target === $('talkPanel') && performance.now() - cardOpenedAt > 450) closeTalk(); });
+
+  function showHint(msg) {
+    $('hint').textContent = msg; $('hint').hidden = false;
+    clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, 6000);
+  }
+  function updateNear() {
+    // a person within 4.5 m takes priority over a plaque within 6.5 m
+    let best = null, bestD = 4.5, kind = 'person';
+    for (const p of folk.people) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
+    if (!best) { bestD = 6.5; kind = 'plaque'; for (const p of PLAQUES) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } } }
+    if ((near && near.obj) === best) return;
+    near = best ? { kind, obj: best } : null;
     $('actionBtn').hidden = !best || panelOpen;
-    if (best && !hintShown) {
-      hintShown = true; $('hint').textContent = (!touchDevice && text.plaqueHintKeys) || text.plaqueHint; $('hint').hidden = false;
-      clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, 6000);
+    if (!best) return;
+    $('actionBtn').textContent = kind === 'person' ? text.talk : text.read;
+    if (kind === 'plaque' && !hintShown) {
+      hintShown = true; showHint((!touchDevice && text.plaqueHintKeys) || text.plaqueHint);
       const data = loadSave(); data.hinted = true; writeSave(data);
+    } else if (kind === 'person' && !talkHintShown && text.talkHint) {
+      talkHintShown = true; showHint(text.talkHint);
+      const data = loadSave(); data.hintedTalk = true; writeSave(data);
     }
   }
 
@@ -191,19 +256,23 @@ async function boot() {
   controls.onTap = (cx, cy) => {
     if (panelOpen) return;
     let best = null, bestPx = Infinity;
-    for (const p of PLAQUES) {
-      if (Math.hypot(player.x - p.x, player.z - p.z) > 45) continue;
-      const dist = Math.hypot(player.x - p.x, player.z - p.z);
-      v3.set(p.x, p.y + 1.75, p.z).project(camera);
-      if (v3.z > 1) continue;                                   // behind you
+    const consider = (kind, obj, yOff, range, size) => {
+      const dist = Math.hypot(player.x - obj.x, player.z - obj.z);
+      if (dist > range) return;
+      v3.set(obj.x, obj.y + yOff, obj.z).project(camera);
+      if (v3.z > 1) return;                                     // behind you
       const sx = (v3.x + 1) / 2 * window.innerWidth, sy = (1 - v3.y) / 2 * window.innerHeight;
       const d = Math.hypot(sx - cx, sy - cy);
-      if (sightBlocked(world.colliders, player.x, player.z, p.x, p.z)) continue;   // hidden behind a building
-      // close markers look large on screen, so they get a larger touch area
-      const reach = Math.max(46, 0.6 / Math.max(dist, 0.5) * window.innerHeight / (2 * Math.tan(camera.fov * Math.PI / 360)));
-      if (d < reach && d < bestPx) { best = p; bestPx = d; }
-    }
-    if (best) openPlaque(best);
+      // close things look large on screen, so they get a larger touch area
+      const reach = Math.max(46, size / Math.max(dist, 0.5) * window.innerHeight / (2 * Math.tan(camera.fov * Math.PI / 360)));
+      if (d >= reach || d >= bestPx) return;
+      if (sightBlocked(world.colliders, player.x, player.z, obj.x, obj.z)) return;   // hidden behind a building
+      best = { kind, obj }; bestPx = d;
+    };
+    for (const p of PLAQUES) consider('plaque', p, 1.75, 45, 0.6);
+    for (const p of folk.people) consider('person', p, 1.0, 25, 0.9);
+    if (!best) return;
+    if (best.kind === 'person') openTalk(best.obj); else openPlaque(best.obj);
   };
 
   // ----- "you are at..." banner -----
@@ -279,9 +348,10 @@ async function boot() {
 
     world.sky.position.set(player.x, 0, player.z);
     animateMarkers(now / 1000);
+    folk.update(player, now / 1000, dt);
     renderer.render(scene, camera);
 
-    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); if (!panelOpen) updateNearPlaque(); }
+    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); if (!panelOpen) updateNear(); }
 
     // frame-rate watch: if the device struggles, quietly lower the picture sharpness
     frames++; fpsTime += dt;
@@ -308,7 +378,8 @@ async function boot() {
 
   // A small handle for testing and (later) Leader Mode jumps.
   window.ephesus = {
-    player, places: PLACES, plaques: PLAQUES, teleport, openPlaque: (id) => { const p = PLAQUES.find((q) => q.id === id); if (p) openPlaque(p); return !!p; },
+    player, places: PLACES, plaques: PLAQUES, people: folk.people, teleport,
+    talkTo: (id) => { const q = folk.people.find((x) => x.id === id); if (q) openTalk(q); return !!q; }, openPlaque: (id) => { const p = PLAQUES.find((q) => q.id === id); if (p) openPlaque(p); return !!p; },
     goTo(id) { const p = PLACES.find((q) => q.id === id); if (p) teleport(p.spawn[0], p.spawn[1], p.face); return !!p; },
     stats: () => ({ fps, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, colliders: world.colliders.length, pixelRatio }),
   };

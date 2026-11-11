@@ -48,6 +48,24 @@
     </div>
   </div>
 
+  <div id="talkPanel" class="panel low" hidden>
+    <div class="sheet card" id="talkSheet" role="dialog" aria-labelledby="talkName">
+      <div class="sheetHead">
+        <div>
+          <h2 id="talkName"></h2>
+          <p id="talkRole" class="role"></p>
+        </div>
+        <button id="talkClose" type="button" class="primary compact"></button>
+      </div>
+      <p id="talkAbout" class="small muted"></p>
+      <p id="talkText" class="speech" aria-live="polite"></p>
+      <p id="talkRef" class="ref" hidden></p>
+      <h3 id="talkNoteHead" hidden></h3>
+      <p id="talkNote" hidden></p>
+      <div id="talkChoices"></div>
+    </div>
+  </div>
+
   <div id="startPanel" class="panel">
     <div class="sheet center">
       <h1 id="title">Walk Through Ephesus</h1>
