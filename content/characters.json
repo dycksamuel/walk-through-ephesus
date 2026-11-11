@@ -1,0 +1,1026 @@
+{
+  "demetrius": {
+    "name": "Demetrius",
+    "role": "Silversmith",
+    "about": "Demetrius is named in Acts 19:24; everything he says here, before the riot, is imagined.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Mind the bench, the silver’s still warm. I’m Demetrius, maker of shrines of Artemis, and if you’ve come to buy, you’re the first today.",
+        "choices": [
+          { "label": "What exactly is a silver shrine?", "to": "craft" },
+          { "label": "Why is business so slow?", "to": "business" },
+          { "label": "Do you actually believe in Artemis, or is it just business?", "to": "believe" }
+        ]
+      },
+      "craft": {
+        "text": "It’s a little temple you can hold in one hand, with the goddess standing in the doorway. Pilgrims take them home or leave them as gifts for her, and mine are the best in the row.",
+        "choices": [
+          { "label": "How long does one take to make?", "to": "craft2" },
+          { "label": "So why is nobody buying?", "to": "business" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "craft2": {
+        "text": "Days. You hammer the sheet thin, raise the columns from behind, then pick out every fold of her robe with a point finer than a fish bone. My father taught me, and I’ve taught eleven men since.",
+        "choices": [
+          { "label": "Eleven men depend on this workshop?", "to": "wages" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "wages": {
+        "text": "Eleven men, with wives and children, plus the lads who haul charcoal. When the shrines don’t sell, I’m the one who has to look them in the eye.",
+        "choices": [
+          { "label": "What are you going to do about it?", "to": "trades" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "business": {
+        "text": "Because of a tentmaker called Paul. He tells anyone who’ll listen that gods made by hands are not gods at all, and then people walk straight past my stall.",
+        "choices": [
+          { "label": "But what if he’s right?", "to": "paulTalk" },
+          { "label": "Is it really that bad?", "to": "business2" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "business2": {
+        "text": "I keep my tallies on wax, so I know. Last year I hired two extra boys to pack orders before the festival, and this year I’m melting down what I couldn’t sell.",
+        "choices": [
+          { "label": "What happens to your workers?", "to": "wages" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "believe": {
+        "text": "You’ve a bold tongue. It’s both, and I don’t see why that should shame me: a baker thanks the gods for the harvest and still sells his bread.",
+        "choices": [
+          { "label": "But what does she mean to you?", "to": "believe2" },
+          { "label": "And what if Paul is right?", "to": "paulTalk" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "believe2": {
+        "text": "My mother prayed to her the night I was born. All Asia comes to her temple, and the world knows Ephesus because of her; take her away and we’re a harbor filling up with mud.",
+        "choices": [
+          { "label": "What if Paul is right about her?", "to": "paulTalk" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "paulTalk": {
+        "text": "Then every smith, mason and pilgrim since before my grandfather’s grandfather has been a fool, and I don’t believe that. I’ll grant the man works with his hands, but his talk costs other people their bread.",
+        "choices": [
+          { "label": "What are you going to do about it?", "to": "trades" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "trades": {
+        "text": "I’m thinking of calling the trades together: smiths, shrine-makers, everyone whose living hangs on the temple. No trouble, mind, just honest men saying out loud what this is costing us and the goddess.",
+        "choices": [
+          { "label": "What if it gets out of hand?", "to": "trades2" },
+          { "label": "Can I ask you something else?", "to": "hub" }
+        ]
+      },
+      "trades2": {
+        "text": "It won’t. These are craftsmen, not a mob, though I’ll grant you that once a crowd starts shouting, nobody is holding the reins.",
+        "choices": [
+          { "label": "Can I ask you something else?", "to": "hub" },
+          { "label": "I should let you work.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Ask, then. The silver isn’t going anywhere today, more’s the pity.",
+        "choices": [
+          { "label": "Tell me about your craft.", "to": "craft" },
+          { "label": "Why is business slow?", "to": "business" },
+          { "label": "Do you really believe in Artemis?", "to": "believe" },
+          { "label": "I’ll let you get back to work.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Go well. If you meet any pilgrims, send them to my bench and tell them Demetrius doesn’t skimp on the silver.",
+        "end": true
+      }
+    }
+  },
+  "priscillaAquila": {
+    "name": "Priscilla and Aquila",
+    "role": "Tentmakers",
+    "about": "Priscilla and Aquila are named in Acts 18; their words here are imagined, built on what Acts says about them.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "speaker": "Priscilla",
+        "text": "Come in, and mind the hides. I’m Priscilla, and the man with the needle in his teeth is my husband Aquila; he’ll talk once that seam is done.",
+        "choices": [
+          { "label": "Are you from Ephesus?", "to": "rome" },
+          { "label": "What are you making?", "to": "work" },
+          { "label": "I heard people meet at your house.", "to": "church" }
+        ]
+      },
+      "rome": {
+        "speaker": "Aquila",
+        "text": "No. I was born in Pontus and we had a good shop in Rome, until Claudius ordered every Jew out of the city. We left with what we could carry.",
+        "choices": [
+          { "label": "That sounds hard. What did you do next?", "to": "rome2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "rome2": {
+        "speaker": "Priscilla",
+        "text": "It was hard. We started again in Corinth, where a traveller named Paul walked in looking for work in our trade, and later we sailed here with him. I’ve stopped calling any of it bad luck.",
+        "choices": [
+          { "label": "What is Paul like to work with?", "to": "paulWork" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "work": {
+        "speaker": "Aquila",
+        "text": "Tents, awnings, straps, anything that wants a strong seam, mostly in leather and goat-hair cloth. Feel that edge: if rain gets through it, the shame is mine.",
+        "choices": [
+          { "label": "Does Paul really work here too?", "to": "paulWork" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "paulWork": {
+        "speaker": "Priscilla",
+        "text": "He stitches at that bench and talks the whole time, and somehow his seams stay straight. He earns his own bread so nobody can say he teaches for money.",
+        "choices": [
+          { "label": "Where does he do his teaching?", "to": "paulNow" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "paulNow": {
+        "speaker": "Aquila",
+        "text": "Most days, at the hall of Tyrannus. Go and listen, then come back and tell us whether you followed all of it; some days I don’t.",
+        "choices": [
+          { "label": "Tell me about the meetings here.", "to": "church" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "church": {
+        "speaker": "Priscilla",
+        "text": "When the believers gather, we push the benches back and they crowd in. We pray, sing, break bread and hear the Scriptures read, harbor porters beside merchants’ wives.",
+        "choices": [
+          { "label": "Who is allowed to come?", "to": "church2" },
+          { "label": "Do you two teach as well?", "to": "apollos" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "church2": {
+        "speaker": "Aquila",
+        "text": "Anyone: Jews, Greeks, enslaved people, shipowners. Some of them had never shared a meal in their lives, and now they do it in a room that smells of leather.",
+        "choices": [
+          { "label": "Do you ever teach, too?", "to": "apollos" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "apollos": {
+        "speaker": "Aquila",
+        "text": "We did once teach a teacher. Apollos, a Jew from Alexandria, was the finest speaker I ever heard; he knew the Scriptures deeply and taught about Jesus with real fire.",
+        "choices": [
+          { "label": "So what was the problem?", "to": "apollos2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "apollos2": {
+        "speaker": "Priscilla",
+        "text": "No problem, just a gap. He knew only the baptism of John, so there was more he had not heard; we asked him home and explained the Way of God more fully.",
+        "choices": [
+          { "label": "Did he mind being corrected?", "to": "apollos3" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "apollos3": {
+        "speaker": "Aquila",
+        "text": "If he did, he hid it well. He listened, asked sharp questions, and later sailed for Achaia with a letter from the believers here; we hear he has been a great help there.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "Thanks. I should go.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "speaker": "Priscilla",
+        "text": "Ask anything. We can talk and stitch at the same time; we’ve had years of practice.",
+        "choices": [
+          { "label": "Why did you leave Rome?", "to": "rome" },
+          { "label": "What do you make here?", "to": "work" },
+          { "label": "Tell me about the meetings in your home.", "to": "church" },
+          { "label": "Thank you. I should keep walking.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "speaker": "Priscilla",
+        "text": "Go well. Come back when the believers gather; there is always room for one more on the bench, and Aquila makes too much lentil stew.",
+        "end": true
+      }
+    }
+  },
+  "theodotus": {
+    "name": "Theodotus",
+    "role": "Elder of the synagogue",
+    "about": "Theodotus is an invented character; Acts 19:8–9 says Paul spoke in the synagogue here for three months.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Peace to you. I am Theodotus, one of the elders here, and you look like someone carrying a question.",
+        "choices": [
+          { "label": "What happens in a synagogue?", "to": "place" },
+          { "label": "Did Paul really speak here?", "to": "paul" },
+          { "label": "What are your people hoping for?", "to": "hope" }
+        ]
+      },
+      "place": {
+        "text": "Every Sabbath we gather to pray and to hear the Law and the Prophets read aloud, in Greek, since that is what our children speak. Then we discuss what we heard, sometimes loudly.",
+        "choices": [
+          { "label": "Is it hard being so far from Jerusalem?", "to": "place2" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "place2": {
+        "text": "Jerusalem is weeks away, and most of us will see the Temple once in a lifetime, if that. So this room is where we remember who we are, and keep faith with the one God in a city full of gods.",
+        "choices": [
+          { "label": "Do your neighbours give you trouble for that?", "to": "place3" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "place3": {
+        "text": "Some think us odd for keeping the Sabbath and staying away from the processions. But Rome has upheld our right to live by our fathers’ customs, and many neighbours are friends; a few even come to listen.",
+        "choices": [
+          { "label": "Did Paul come here too?", "to": "paul" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "paul": {
+        "text": "For three months. He reasoned from the Scriptures about the Kingdom of God, and argued that Jesus of Nazareth is the Messiah. He knows the Scriptures deeply, and nobody here could call him a fool.",
+        "choices": [
+          { "label": "Why were some people persuaded?", "to": "persuaded" },
+          { "label": "Why weren’t others?", "to": "notPersuaded" },
+          { "label": "What do you think yourself?", "to": "you" }
+        ]
+      },
+      "persuaded": {
+        "text": "He read the Prophets, and they heard their own hope in the words. He says God raised this Jesus from the dead and that the age we pray for has begun; for some, that was like a lamp being lit.",
+        "choices": [
+          { "label": "Then why wasn’t everyone convinced?", "to": "notPersuaded" },
+          { "label": "What do you think yourself?", "to": "you" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "notPersuaded": {
+        "text": "Paul’s Messiah died on a Roman cross. And look around: the nations still bow to idols and the world is not yet mended, so people who love God and know the Scriptures could not see how this fits the promise.",
+        "choices": [
+          { "label": "What do you think yourself?", "to": "you" },
+          { "label": "How did it end?", "to": "parting" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "you": {
+        "text": "I am an old man who has not finished thinking. I have unrolled the Isaiah scroll more often this year than in the ten before it, because an honest question deserves more than a quick answer.",
+        "choices": [
+          { "label": "Why did Paul stop coming here?", "to": "parting" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "parting": {
+        "text": "The arguing grew bitter, and some spoke harshly against his teaching in front of everyone, so he took his disciples to a lecture hall instead. I was sorry; people who love the same Scriptures should be able to keep talking.",
+        "choices": [
+          { "label": "May I ask something else?", "to": "hub" },
+          { "label": "Thank you for being honest with me.", "to": "bye" }
+        ]
+      },
+      "hope": {
+        "text": "That the God who made everything will set everything right. That he will send his Anointed One, the Messiah, to bring justice and peace and to gather his scattered people.",
+        "choices": [
+          { "label": "Is that hope only for Israel?", "to": "hope2" },
+          { "label": "Is that what Paul talked about?", "to": "paul" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "hope2": {
+        "text": "The Prophets say that one day all nations will turn to the God of Israel and learn his ways. Paul says that day has come, and that is exactly where he and I begin to argue.",
+        "choices": [
+          { "label": "What happened when Paul was here?", "to": "paul" },
+          { "label": "May I ask something else?", "to": "hub" }
+        ]
+      },
+      "hub": {
+        "text": "Ask on. Questions are welcome in this house; we have been asking them for a very long time.",
+        "choices": [
+          { "label": "What does the synagogue mean to you?", "to": "place" },
+          { "label": "Tell me about Paul’s three months here.", "to": "paul" },
+          { "label": "What is Israel’s hope?", "to": "hope" },
+          { "label": "Thank you. I should go.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Go in peace. And if you find a good answer before I do, come back and tell an old man.",
+        "end": true
+      }
+    }
+  },
+  "metrodorus": {
+    "name": "Metrodorus",
+    "role": "Student",
+    "about": "Metrodorus is an invented character; Acts 19:9–10 says Paul reasoned daily in this hall for two years.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Shh, he’s nearly finished. No, he isn’t; he never is. I’m Metrodorus from Smyrna, and I came for a week four months ago.",
+        "choices": [
+          { "label": "What goes on in here every day?", "to": "daily" },
+          { "label": "Why did you come all the way from Smyrna?", "to": "asia" },
+          { "label": "Do you understand everything he says?", "to": "questions" }
+        ]
+      },
+      "daily": {
+        "text": "Paul reasons, and anyone can push back. Someone objects, he answers from the Jewish Scriptures, someone objects to that, and suddenly the day is gone.",
+        "choices": [
+          { "label": "Is anyone allowed in?", "to": "daily2" },
+          { "label": "Do you have questions of your own?", "to": "questions" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "daily2": {
+        "text": "Anyone who can find a seat: dyers with blue hands, merchants, women with wax tablets, people who followed him from the synagogue. Tyrannus’s usual students would not know what to make of us.",
+        "choices": [
+          { "label": "Where do they all come from?", "to": "asia2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "asia": {
+        "text": "A wool trader at home told me about a teacher in Ephesus who says a man rose from the dead. I thought, that I have to hear, and Smyrna is only a couple of days up the coast.",
+        "choices": [
+          { "label": "Are there others from far away?", "to": "asia2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "asia2": {
+        "text": "From everywhere. People come to Ephesus to trade, go to court or see the temple, and they carry what they hear back home; I’ve met listeners from Laodicea, Hierapolis and Sardis.",
+        "choices": [
+          { "label": "What idea does he keep coming back to?", "to": "mystery" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "mystery": {
+        "text": "He keeps using the word ‘mystery’. To a Greek that means secret rites, where you are sworn to silence and never tell outsiders what you saw, so I kept waiting for the secret part.",
+        "choices": [
+          { "label": "And was there a secret part?", "to": "mystery2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "mystery2": {
+        "text": "No, and that is the strange thing. He means a plan God kept hidden for ages and has now made known, and he tells it to anyone who walks in. He says the idea comes from the Jewish prophets, like Daniel.",
+        "choices": [
+          { "label": "So what is the plan?", "to": "mystery3" },
+          { "label": "Do you believe it?", "to": "questions" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "mystery3": {
+        "text": "As far as I follow it, that through this Jesus, God is gathering Jews and Greeks and everyone else into one people. No fee, no rank, no oath of silence; I keep looking for the catch.",
+        "choices": [
+          { "label": "What are you still unsure about?", "to": "questions" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "questions": {
+        "text": "My list of questions is longer than my arm. Why would the maker of the world care about a student from Smyrna, and why would a rescuer die on a Roman cross?",
+        "choices": [
+          { "label": "Have you asked him?", "to": "questions2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "questions2": {
+        "text": "Yesterday. He answered for so long that the man beside me fell asleep, and I understood about half. I’m coming back tomorrow for the other half.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "Good luck with the other half.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Quick, while he’s drawing breath. What else?",
+        "choices": [
+          { "label": "What happens here each day?", "to": "daily" },
+          { "label": "Who comes to listen?", "to": "asia2" },
+          { "label": "What does he mean by ‘mystery’?", "to": "mystery" },
+          { "label": "I’ll let you listen.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Go well. If you see him start waving his arms, slip in at the back; that is usually when it gets good.",
+        "end": true
+      }
+    }
+  },
+  "ammia": {
+    "name": "Ammia",
+    "role": "Pilgrim from Sardis",
+    "about": "Ammia is an invented character, a worshipper of Artemis walking to the temple to keep a promise.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Is that the temple roof, there beyond the trees? I’m Ammia, four days on the road from Sardis, and my feet are very ready to arrive.",
+        "choices": [
+          { "label": "Why have you come all this way?", "to": "why" },
+          { "label": "What is Artemis like, to you?", "to": "city" },
+          { "label": "Have you heard of the people called the Way?", "to": "way" }
+        ]
+      },
+      "why": {
+        "text": "To say thank you. My daughter had a hard time bringing her first child into the world, and I promised Artemis a gift if they both lived. They did.",
+        "choices": [
+          { "label": "What is the gift?", "to": "why2" },
+          { "label": "Has your family always worshipped her?", "to": "family" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "why2": {
+        "text": "A little clay shrine with the goddess standing inside, since silver is beyond my purse. But I chose it carefully and carried it in my own hands every step, and I think she will know that.",
+        "choices": [
+          { "label": "Has your family always worshipped her?", "to": "family" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "family": {
+        "text": "My grandmother walked this road, and my mother brought me when I was small. When I pray to Artemis I am standing in a long line of women, and that is not a small thing to me.",
+        "choices": [
+          { "label": "What is she like, to you?", "to": "city" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "city": {
+        "text": "She watches over women, children and wild things, and she listens. People call her the Great One and Saviour, and when I was frightened for my daughter, hers was the name I called.",
+        "choices": [
+          { "label": "How do you know she hears you?", "to": "hears" },
+          { "label": "And what does she mean to Ephesus?", "to": "city2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "hears": {
+        "text": "How does anyone know? I asked, and my daughter lived; a grandchild asleep on my lap is proof enough for me.",
+        "choices": [
+          { "label": "What does she mean to Ephesus?", "to": "city2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "city2": {
+        "text": "Everything. Her temple is a wonder of the world, people in trouble run to it for shelter, and they say her image fell from the sky. Ephesus without Artemis would be just another port.",
+        "choices": [
+          { "label": "Not everyone here worships her, though.", "to": "way" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "way": {
+        "text": "A little. A sandal-maker by the gate said they follow a Jewish teacher and claim that gods made by hands are no gods at all. I didn’t know whether to laugh or be offended.",
+        "choices": [
+          { "label": "What puzzles you about them?", "to": "way2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "way2": {
+        "text": "They have no statue, no temple, no altar and no procession. Where do you bring your gift, and where do you look when you pray? I cannot picture loving a god I could not find.",
+        "choices": [
+          { "label": "Would you ever go and listen to them?", "to": "way3" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "way3": {
+        "text": "Perhaps, out of curiosity; I have nothing against other people’s gods. But I made my promise to Artemis and she kept her side, so today I keep mine.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "I hope the rest of your walk is easy.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Walk with me a little; talking makes the road shorter. What else would you ask?",
+        "choices": [
+          { "label": "Why did you make this journey?", "to": "why" },
+          { "label": "What does Artemis mean to you?", "to": "city" },
+          { "label": "What do you make of the Way people?", "to": "way" },
+          { "label": "I’ll let you walk on. Goodbye.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Thank you, child. May your road be easy and your feet less sore than mine.",
+        "end": true
+      }
+    }
+  },
+  "zosimus": {
+    "name": "Zosimus",
+    "role": "Former magician",
+    "about": "Zosimus is an invented character; Acts 19:18–20 tells how many who practised magic burned their scrolls in public.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "See that black patch on the paving? Some of that was mine. I’m Zosimus, and I used to sell charms and curses three streets from here.",
+        "choices": [
+          { "label": "What was in the scrolls?", "to": "scrolls" },
+          { "label": "Why would you burn your own scrolls?", "to": "sceva" },
+          { "label": "Did the magic actually work?", "to": "fear" }
+        ]
+      },
+      "scrolls": {
+        "text": "Spells. Words of power to scratch on a strip of lead or wear around your neck: charms for love, for luck in business, for making a rival fall ill. Ephesus is famous for them.",
+        "choices": [
+          { "label": "People really paid for that?", "to": "scrolls2" },
+          { "label": "Did any of it work?", "to": "fear" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "scrolls2": {
+        "text": "Gladly: a sailor before a voyage, a mother with a sick child, a shopkeeper who hated his neighbour. Everyone has heard of the charm words called the Ephesian letters, so a scroll from this city fetches a high price.",
+        "choices": [
+          { "label": "And did they get what they paid for?", "to": "fear" },
+          { "label": "So what were your scrolls worth?", "to": "cost" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "fear": {
+        "text": "I’ll tell you what worked: fear. People came to me afraid of spirits, bad luck or an enemy’s curse, and I never made anyone less afraid, because a frightened customer comes back.",
+        "choices": [
+          { "label": "Were you afraid too?", "to": "fear2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "fear2": {
+        "text": "More than any of them. I thought real powers stood behind those words, and that I was only safe while I knew the right names; that is no way to sleep at night.",
+        "choices": [
+          { "label": "So what made you stop?", "to": "sceva" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "sceva": {
+        "text": "It began with the sons of Sceva; the whole city heard. Seven of them tried to drive out an evil spirit by using the name of Jesus, the one Paul talks about, like one more charm word.",
+        "choices": [
+          { "label": "What happened to them?", "to": "sceva2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "sceva2": {
+        "text": "The man with the spirit said he knew Jesus and knew Paul, but who were they? Then he drove all seven out of the house, bruised and without their clothes, and nobody in my trade laughed.",
+        "choices": [
+          { "label": "Why did that change things for you?", "to": "changed" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "changed": {
+        "text": "I saw that this name was not a tool I could own and sell. Many of us came and admitted out loud what we had been doing, and then we carried our scrolls here.",
+        "choices": [
+          { "label": "What did that cost you?", "to": "cost" },
+          { "label": "Do you still get scared?", "to": "changed2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "cost": {
+        "text": "When everything on the fire was added up, it came to fifty thousand pieces of silver, and that was all of us together. My share was my whole trade: every scroll I owned, and my father’s before me.",
+        "choices": [
+          { "label": "Do you ever regret it?", "to": "cost2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "cost2": {
+        "text": "On rent day, a little; I haul sacks at the harbor now and my back complains. But if I had sold those scrolls, someone else would be frightening people with them.",
+        "choices": [
+          { "label": "Are you still afraid of spirits?", "to": "changed2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "changed2": {
+        "text": "Less each month. The believers tell me Jesus is stronger than every power I used to bargain with, and I am learning to trust that. I sleep now, and you have no idea what that is worth.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "I’m glad you can sleep. Goodbye.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Go on, ask. I spent years keeping secrets for money, so talking for free is a pleasant change.",
+        "choices": [
+          { "label": "What were the scrolls for?", "to": "scrolls" },
+          { "label": "What made you give them up?", "to": "sceva" },
+          { "label": "What did it cost you?", "to": "cost" },
+          { "label": "Thanks for telling me. I should go.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Go well. And if anyone in the market offers you a lucky charm, keep your coins.",
+        "end": true
+      }
+    }
+  },
+  "valens": {
+    "name": "Valens",
+    "role": "Roman soldier",
+    "about": "Valens is an invented character, a soldier on loan to the governor’s staff; the province of Asia had no legion.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Halt. No, I’m joking; walk where you like. I’m Valens, soldier, currently guarding this patch of shade for the governor.",
+        "choices": [
+          { "label": "What’s all this gear for?", "to": "kit" },
+          { "label": "What is your job here?", "to": "duty" },
+          { "label": "Where are you from?", "to": "home" }
+        ]
+      },
+      "kit": {
+        "text": "Full kit, stacked and waiting to be polished again. Pick a piece and I’ll tell you what it’s for, but don’t touch the spear.",
+        "choices": [
+          { "label": "The belt you’re wearing.", "to": "belt" },
+          { "label": "The mail shirt and the helmet.", "to": "mail" },
+          { "label": "The boots and the shield.", "to": "boots" },
+          { "label": "Enough about kit.", "to": "hub" }
+        ]
+      },
+      "belt": {
+        "text": "The belt is what marks me as a soldier, even in a plain tunic. It carries my sword and dagger and holds everything else in place; take a man’s belt away and you have shamed him.",
+        "choices": [
+          { "label": "And the sword?", "to": "sword" },
+          { "label": "Show me another piece.", "to": "kit" }
+        ]
+      },
+      "sword": {
+        "text": "Short, so there’s room to use it in a tight line. Here it mostly stays in the scabbard; the most dangerous thing I’ve faced in Ephesus is the fish sauce.",
+        "choices": [
+          { "label": "Show me another piece.", "to": "kit" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "mail": {
+        "text": "Thousands of iron rings, linked by hand, covering chest and back. It will turn a blade, it weighs like a wet sheep, and it rusts if you so much as look at the sea.",
+        "choices": [
+          { "label": "And the helmet?", "to": "helmet" },
+          { "label": "Show me another piece.", "to": "kit" }
+        ]
+      },
+      "helmet": {
+        "text": "Iron bowl, cheek pieces, a guard for the neck. It’s hot as an oven and I hear half of what’s said to me, but nobody who needed one ever complained.",
+        "choices": [
+          { "label": "Show me another piece.", "to": "kit" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "boots": {
+        "text": "Thick soles with iron nails underneath. They grip on mud and grass so you can stand your ground when someone shoves; on smooth paving they slide, and the whole street hears me coming.",
+        "choices": [
+          { "label": "And the shield?", "to": "shield" },
+          { "label": "Show me another piece.", "to": "kit" }
+        ]
+      },
+      "shield": {
+        "text": "Wood covered in hide, with an iron boss in the middle, big enough to get your whole body behind. Locked beside the next man’s it makes a wall; alone it is a heavy door.",
+        "choices": [
+          { "label": "Show me another piece.", "to": "kit" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "duty": {
+        "text": "The governor’s doors, mostly. I’m on loan to his staff, so I carry messages, stand escort and look stern. This province has no legion, which means a handful of us do the standing about.",
+        "choices": [
+          { "label": "Is it boring?", "to": "duty2" },
+          { "label": "Do you keep order in the city?", "to": "order" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "duty2": {
+        "text": "Painfully. I have counted the columns of that hall four times and got four different answers. But a soldier stays where he’s put, awake, until he’s told otherwise, and that is most of the job.",
+        "choices": [
+          { "label": "So do you keep order in the city?", "to": "order" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "order": {
+        "text": "Not my business. The city has its own officials for that, and they are touchy about it. But Rome is watching, and if Ephesus can’t keep itself quiet, the governor will want to know why.",
+        "choices": [
+          { "label": "Do you miss home?", "to": "home" },
+          { "label": "Can I ask about something else?", "to": "hub" }
+        ]
+      },
+      "home": {
+        "text": "Far inland, and my unit is a long march the other way. I miss the bread, and people knowing my name without reading it off a list. My mother thinks I guard a wild frontier; I guard a door.",
+        "choices": [
+          { "label": "Can I ask about something else?", "to": "hub" },
+          { "label": "I hope you get home someday. Goodbye.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Well? I’ve nowhere to be until the watch changes.",
+        "choices": [
+          { "label": "Tell me about your kit.", "to": "kit" },
+          { "label": "What’s your job here?", "to": "duty" },
+          { "label": "Where is home?", "to": "home" },
+          { "label": "I’ll leave you to your shade.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "On your way, then. Stay out of trouble; I would hate to have to stand up.",
+        "end": true
+      }
+    }
+  },
+  "menander": {
+    "name": "Menander",
+    "role": "Householder",
+    "about": "Menander is an invented character, the head of a well-off Ephesian household of the kind that lived in these houses.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Welcome! I’m Menander, and this is my house, from the courtyard pool to the roof tiles. You’ve come at a good moment: nothing is on fire and nobody is asking me for money.",
+        "choices": [
+          { "label": "How do you run a house this big?", "to": "order" },
+          { "label": "Who else lives here?", "to": "who" },
+          { "label": "Who’s in charge when you’re out?", "to": "wife" }
+        ]
+      },
+      "order": {
+        "text": "Simply. I answer to the city and the gods, and everyone under this roof answers to me: wife, children, steward, slaves. A house with two heads is a monster.",
+        "choices": [
+          { "label": "Does anyone ever disagree with you?", "to": "order2" },
+          { "label": "What does your wife do?", "to": "wife" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "order2": {
+        "text": "My wife advises, and I listen more often than I admit. But the decision is mine, and so is the blame when it goes wrong; nobody thanks you for that.",
+        "choices": [
+          { "label": "Is that fair to everyone else?", "to": "fair" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "who": {
+        "text": "My wife Stratonice, our daughter Charite, a son who is away learning the wool trade, and nine slaves. That is modest for this hillside; my neighbour has thirty and can’t name half of them.",
+        "choices": [
+          { "label": "What do the enslaved people do here?", "to": "slaves" },
+          { "label": "Tell me about your daughter.", "to": "daughter" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "wife": {
+        "text": "Stratonice holds the storeroom keys, orders the food, oversees the weaving and knows where every drachma goes. I chose well, or my father did; I forget which of us takes the credit.",
+        "choices": [
+          { "label": "Does she get a say in big decisions?", "to": "order2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "slaves": {
+        "text": "They cook, clean, carry water, weave, keep accounts and mind the door. I feed and clothe them and I am not a harsh man; a well-run house is good for everyone in it.",
+        "choices": [
+          { "label": "Did any of them choose this?", "to": "slaves2" },
+          { "label": "Have you asked them if it’s good?", "to": "fair" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "slaves2": {
+        "text": "Choose? Some were born in this house and some I bought at the market. That is how the world is arranged, and I didn’t arrange it; you might as well ask whether the oxen chose the plough.",
+        "choices": [
+          { "label": "Have you ever asked what they think?", "to": "fair" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "fair": {
+        "text": "Nobody has ever asked me that. I suppose I never wondered; a house needs a head as a ship needs a captain, and the rowers don’t vote.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "I should let you get on.", "to": "bye" }
+        ]
+      },
+      "daughter": {
+        "text": "Charite is fifteen, clever, and too fond of asking why. I’m arranging a good marriage for her, to a family with ships, and one day she will thank me for it.",
+        "choices": [
+          { "label": "Does she get a say in who she marries?", "to": "daughter2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "daughter2": {
+        "text": "She will be told in good time, and I’m no tyrant. But a girl of fifteen doesn’t know what a family needs; her mother didn’t choose either, and look how well that turned out.",
+        "choices": [
+          { "label": "Is that fair to her?", "to": "fair" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "hub": {
+        "text": "What else? I’m always happy to explain how things are properly done.",
+        "choices": [
+          { "label": "How is the household run?", "to": "order" },
+          { "label": "Who lives here?", "to": "who" },
+          { "label": "Tell me about your daughter.", "to": "daughter" },
+          { "label": "Thank you for showing me your home.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Come again. And mind the step by the door; the mason has been promising to fix it since the last festival.",
+        "end": true
+      }
+    }
+  },
+  "charite": {
+    "name": "Charite",
+    "role": "Menander’s daughter",
+    "about": "Charite is an invented character, about fifteen, the daughter of the household.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "Oh, a visitor who isn’t one of Father’s wool merchants! I’m Charite. If anyone asks, I’m spinning: see, spindle, very busy.",
+        "choices": [
+          { "label": "What’s a normal day like for you?", "to": "day" },
+          { "label": "Is it true you’re getting married?", "to": "expected" },
+          { "label": "You look like you want to ask me something.", "to": "tent" }
+        ]
+      },
+      "day": {
+        "text": "Spinning, weaving, and learning the storeroom tallies from Mother. I go out for festivals or to the market with one of the women, never alone. My brother goes wherever he likes; I have noticed.",
+        "choices": [
+          { "label": "Can you read and write?", "to": "day2" },
+          { "label": "What’s expected of you?", "to": "expected" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "day2": {
+        "text": "A little. Mother taught me letters for the accounts, and I practise on a wax tablet when I should be spinning. I’d love to read a whole scroll of something that isn’t a list of oil jars.",
+        "choices": [
+          { "label": "What happens when you’re older?", "to": "expected" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "expected": {
+        "text": "Father is choosing a husband for me, from a family with ships. I have seen him once, across a courtyard. He has ears like jug handles, but they say he is kind to his dogs.",
+        "choices": [
+          { "label": "Do you get any say in it?", "to": "expected2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "expected2": {
+        "text": "I can say what I think, and Father will pat my hand. That is how it was for Mother, and for her mother. I’m not miserable; I’d just like to be asked something and have my answer matter.",
+        "choices": [
+          { "label": "What would you choose, if you could?", "to": "expected3" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "expected3": {
+        "text": "Nobody has asked me that before. To see the harbor at dawn, to hear the teachers in the lecture halls, to know what people argue about when it isn’t wool.",
+        "choices": [
+          { "label": "Is there somewhere you’re curious about?", "to": "tent" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "tent": {
+        "text": "The tent-makers’ house by the market. All kinds of people crowd in there, and you can hear singing from the street. Do you know what happens inside?",
+        "choices": [
+          { "label": "What have you heard about it?", "to": "tent2" },
+          { "label": "Why does it interest you so much?", "to": "tent3" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "tent2": {
+        "text": "That they follow a Jewish teacher called Paul and have no statue of any god. And that the tent-maker’s wife teaches, and men listen! I’d give my best earrings to see that.",
+        "choices": [
+          { "label": "Why do you care so much?", "to": "tent3" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "tent3": {
+        "text": "Because Eirene, who works in our house, heard that slave and free eat at the same table there, like one family. In this house we don’t even eat in the same room, and I can’t stop thinking about it.",
+        "choices": [
+          { "label": "Would your father let you go?", "to": "tent4" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "tent4": {
+        "text": "He would say it is no place for his daughter and then ask who told me. So I haven’t asked, yet. If you go, come back and tell me everything.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "I will. Goodbye, Charite.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Ask me something else, please. The spindle and I have run out of things to say to each other.",
+        "choices": [
+          { "label": "What’s your life like?", "to": "day" },
+          { "label": "What’s expected of you?", "to": "expected" },
+          { "label": "What are you curious about?", "to": "tent" },
+          { "label": "I should go before you get in trouble.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "Go on, then. And if Father asks, I spun the whole time and you admired the wool.",
+        "end": true
+      }
+    }
+  },
+  "eirene": {
+    "name": "Eirene",
+    "role": "Enslaved in Menander’s household",
+    "about": "Eirene is an invented character, an enslaved woman; people like her made up a large part of every wealthy household.",
+    "start": "hello",
+    "nodes": {
+      "hello": {
+        "text": "You want to talk to me? Then walk with me, because this water won’t carry itself. I’m called Eirene here.",
+        "choices": [
+          { "label": "What do you mean, ‘called Eirene here’?", "to": "name" },
+          { "label": "What is your day like?", "to": "days" },
+          { "label": "Are you a slave in this house?", "to": "status" }
+        ]
+      },
+      "status": {
+        "text": "Yes. Menander bought me when I was about your age; I did not choose it and I am not free. People in this house would say it more softly than that, and I won’t.",
+        "choices": [
+          { "label": "Can’t you just leave?", "to": "leave" },
+          { "label": "Where were you before?", "to": "family" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "name": {
+        "text": "Eirene means ‘peace’, and the man who sold me chose it because it sounds pleasant across a courtyard. My mother gave me another name. I keep that one to myself.",
+        "choices": [
+          { "label": "Where is your mother now?", "to": "family" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "days": {
+        "text": "I’m up before the lamps are lit: water, fires, grinding, wool, tables, whatever I’m told. I sleep when the last person in the family has stopped needing something.",
+        "choices": [
+          { "label": "Do you ever get time to yourself?", "to": "days2" },
+          { "label": "Are they kind to you?", "to": "kind" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "days2": {
+        "text": "Moments. The walk to the fountain is the best of them, because nobody can call me from there. But my days are not mine and neither is tomorrow; that is what it means.",
+        "choices": [
+          { "label": "Is the family kind to you?", "to": "kind" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "kind": {
+        "text": "Nobody here strikes me, if that is what you are asking. But a kind master can still sell me in the morning; kindness is his to give or keep, and it is not the same as being free.",
+        "choices": [
+          { "label": "Can’t you just leave?", "to": "leave" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "leave": {
+        "text": "And go where? A runaway is hunted, and the law belongs to the owner, not to me. I have no money, no family in this city, and every door I know opens for someone who knows whose I am.",
+        "choices": [
+          { "label": "Could you ever be set free?", "to": "leave2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "leave2": {
+        "text": "Some are. A master may free a slave, or let her save coins for years to buy her freedom. But it is his to decide, and I have learned not to live on maybe.",
+        "choices": [
+          { "label": "Do you have family somewhere?", "to": "family" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "family": {
+        "text": "I was born in the hills of Phrygia. My mother, my brother and I were brought to the market here and sold to three different buyers. I was told my brother went away on a ship.",
+        "choices": [
+          { "label": "Do you know where they are now?", "to": "family2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "family2": {
+        "text": "No. When I’m sent to the harbor I look at faces, though he would be a grown man now and I might not know him. I say their names every night, so that someone does.",
+        "choices": [
+          { "label": "Is there anywhere in this city you’d feel welcome?", "to": "way" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "way": {
+        "text": "Only a rumour so far. They say that at the tent-makers’ house by the market, among the people of the Way, slave and free eat at one table and call each other brother and sister.",
+        "choices": [
+          { "label": "Do you think it’s true?", "to": "way2" },
+          { "label": "Can I ask something else?", "to": "hub" }
+        ]
+      },
+      "way2": {
+        "text": "I have heard fine words before, mostly from people who owned me, so I am careful. If I’m sent to the market at the right time, I’ll stand in their doorway and watch who sits where. That will tell me more.",
+        "choices": [
+          { "label": "Can I ask something else?", "to": "hub" },
+          { "label": "I hope you find out. Goodbye, Eirene.", "to": "bye" }
+        ]
+      },
+      "hub": {
+        "text": "Ask. Most visitors look straight through me, so this is at least different.",
+        "choices": [
+          { "label": "What are your days like?", "to": "days" },
+          { "label": "Can’t you just leave?", "to": "leave" },
+          { "label": "What have you heard about the Way people?", "to": "way" },
+          { "label": "Thank you for talking to me.", "to": "bye" }
+        ]
+      },
+      "bye": {
+        "text": "I have to get this water inside. You asked, and you listened, and not many do.",
+        "end": true
+      }
+    }
+  },
+  "paul": {
+    "name": "Paul",
+    "role": "Teaching in the Hall of Tyrannus",
+    "about": "Paul is teaching here, as Acts 19:9–10 describes, and this game gives him no invented words.",
+    "scripture": {
+      "ref": "Acts 20:20–21",
+      "text": "I didn’t shrink from declaring to you anything that was profitable, teaching you publicly and from house to house, testifying both to Jews and to Greeks repentance toward God, and faith toward our Lord Jesus."
+    },
+    "note": "Paul spoke these words later, at Miletus, to the elders of the church in Ephesus. He was looking back on the years you are walking through."
+  }
+}
