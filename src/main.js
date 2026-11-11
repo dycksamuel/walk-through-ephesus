@@ -141,6 +141,7 @@ async function boot() {
     markers.instanceMatrix.needsUpdate = true;
   }
 
+  let cardOpenedAt = 0;
   let nearPlaque = null, hintShown = !!save.hinted, hintTimer = 0;
   function openPlaque(p) {
     const info = names[p.id] || {};
@@ -148,6 +149,7 @@ async function boot() {
     $('cardBadge').hidden = !p.imagined;
     $('cardKnown').textContent = info.known || '';
     $('cardImagined').textContent = info.imagined || '';
+    cardOpenedAt = performance.now();
     $('cardPanel').hidden = false; $('cardSheet').scrollTop = 0; $('actionBtn').hidden = true; $('hint').hidden = true;
     panelOpen = true; controls.enabled = false; $('cardClose').focus();
     if (!readSet.has(p.id)) {
@@ -157,7 +159,8 @@ async function boot() {
   }
   function closePlaque() { $('cardPanel').hidden = true; panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !nearPlaque; }
   $('cardClose').addEventListener('click', closePlaque);
-  $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel')) closePlaque(); });
+  // (the short delay stops the same tap that opened the card from also closing it)
+  $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel') && performance.now() - cardOpenedAt > 450) closePlaque(); });
   $('actionBtn').addEventListener('click', () => { if (nearPlaque) openPlaque(nearPlaque); });
   $('actionBtn').textContent = text.read;
 
