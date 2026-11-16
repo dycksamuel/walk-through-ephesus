@@ -6,6 +6,9 @@ import { createControls } from './controls.js';
 import { createMap } from './ui/map.js';
 import { loadSave, writeSave } from './storage.js';
 import { createPeople } from './people.js';
+import { createStory } from './story.js';
+import { createAudio } from './audio.js';
+import { createAmbient } from './crowd.js';
 
 const $ = (id) => document.getElementById(id);
 const EYE = 1.65, WALK = 8, JOG = 14, SKY = 0xd7e3ea;
@@ -18,7 +21,7 @@ async function loadJSON(path) {
 }
 
 async function boot() {
-  const [text, names, talks] = await Promise.all([loadJSON('content/ui.json'), loadJSON('content/locations.json'), loadJSON('content/characters.json')]);
+  const [text, names, talks, fragments, riot, about] = await Promise.all(['ui', 'locations', 'characters', 'fragments', 'riot', 'about'].map((n) => loadJSON(`content/${n}.json`)));
   const touchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
   if (touchDevice) document.body.classList.add('touch');
 
@@ -121,6 +124,7 @@ async function boot() {
   window.addEventListener('keydown', (e) => {
     if ($('startPanel').hidden === false) return;
     if (e.repeat) return;
+    if (game.keyHook && game.keyHook(e)) return;
     if (!$('cardPanel').hidden) { if (e.code === 'Escape' || e.code === 'KeyE') closePlaque(); return; }
     if (!$('talkPanel').hidden) {
       if (e.code === 'Escape') closeTalk();
@@ -178,7 +182,7 @@ async function boot() {
   $('cardClose').addEventListener('click', closePlaque);
   // (the short delay stops the same tap that opened the card from also closing it)
   $('cardPanel').addEventListener('click', (e) => { if (e.target === $('cardPanel') && performance.now() - cardOpenedAt > 450) closePlaque(); });
-  const openNear = () => { if (!near) return; if (near.kind === 'person') openTalk(near.obj); else openPlaque(near.obj); };
+  const openNear = () => { if (!near) return; if (near.kind === 'extra') near.obj.open(); else if (near.kind === 'person') openTalk(near.obj); else openPlaque(near.obj); };
   press($('actionBtn'), openNear);
 
   // ----- people and conversations -----
@@ -228,20 +232,22 @@ async function boot() {
   $('talkClose').addEventListener('click', closeTalk);
   $('talkPanel').addEventListener('click', (e) => { if (e.target === $('talkPanel') && performance.now() - cardOpenedAt > 450) closeTalk(); });
 
-  function showHint(msg) {
+  function showHint(msg, ms = 6000) {
     $('hint').textContent = msg; $('hint').hidden = false;
-    clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, 6000);
+    clearTimeout(hintTimer); hintTimer = setTimeout(() => { $('hint').hidden = true; }, ms);
   }
   function updateNear() {
-    // a person within 4.5 m takes priority over a plaque within 6.5 m
-    let best = null, bestD = 4.5, kind = 'person';
-    for (const p of folk.people) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
+    // a letter fragment comes first, then a person within 4.5 m, then a plaque within 6.5 m
+    let best = null, bestD = 3.6, kind = 'extra';
+    for (const p of game.extraTargets) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
+    if (!best) { bestD = 4.5; kind = 'person'; }
+    if (!best) for (const p of folk.people) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } }
     if (!best) { bestD = 6.5; kind = 'plaque'; for (const p of PLAQUES) { const d = Math.hypot(player.x - p.x, player.z - p.z); if (d < bestD) { best = p; bestD = d; } } }
     if ((near && near.obj) === best) return;
     near = best ? { kind, obj: best } : null;
     $('actionBtn').hidden = !best || panelOpen;
     if (!best) return;
-    $('actionBtn').textContent = kind === 'person' ? text.talk : text.read;
+    $('actionBtn').textContent = kind === 'extra' ? best.label : (kind === 'person' ? text.talk : text.read);
     if (kind === 'plaque' && !hintShown) {
       hintShown = true; showHint((!touchDevice && text.plaqueHintKeys) || text.plaqueHint);
       const data = loadSave(); data.hinted = true; writeSave(data);
@@ -254,7 +260,7 @@ async function boot() {
   // tapping or clicking a marker in the 3D view opens it, from up to 45 metres away
   const v3 = new THREE.Vector3();
   controls.onTap = (cx, cy) => {
-    if (panelOpen) return;
+    if (panelOpen || game.sceneOn) return;
     let best = null, bestPx = Infinity;
     const consider = (kind, obj, yOff, range, size) => {
       const dist = Math.hypot(player.x - obj.x, player.z - obj.z);
@@ -271,9 +277,26 @@ async function boot() {
     };
     for (const p of PLAQUES) consider('plaque', p, 1.75, 45, 0.6);
     for (const p of folk.people) consider('person', p, 1.0, 25, 0.9);
+    for (const p of game.extraTargets) consider('extra', p, 1.15, 30, 0.7);
     if (!best) return;
-    if (best.kind === 'person') openTalk(best.obj); else openPlaque(best.obj);
+    if (best.kind === 'extra') best.obj.open(); else if (best.kind === 'person') openTalk(best.obj); else openPlaque(best.obj);
   };
+
+  // ----- sound, background life, and the story (fragments, journal, menu, riot) -----
+  const audio = createAudio(), ambient = createAmbient(scene);
+  const game = {
+    $, text, names, scene, camera, player, controls, canvas, world, folk, audio, ambient, touchDevice, press, params, loadSave, writeSave, showHint,
+    extraTargets: [], frameHooks: [], startHooks: [], keyHook: null, sceneOn: false, riotLevel: 0,
+    teleport: (x, z, face) => teleport(x, z, face),
+    lock() { panelOpen = true; controls.enabled = false; $('actionBtn').hidden = true; $('hint').hidden = true; },
+    unlock() { panelOpen = false; controls.enabled = true; canvas.focus(); $('actionBtn').hidden = !near || game.sceneOn; },
+    isLocked: () => panelOpen || game.sceneOn,
+    refreshNear() { near = null; $('actionBtn').hidden = true; },
+    // a scripted scene: you can look around but not walk or use things
+    setScene(on) { game.sceneOn = on; near = null; $('actionBtn').hidden = true; markers.visible = posts.visible = !on; folk.showTips(!on); },
+  };
+  const story = createStory(game, { fragments, riot, about });
+  game.story = story;
 
   // ----- "you are at..." banner -----
   let currentPlace = null, placeTimer = 0;
@@ -301,6 +324,8 @@ async function boot() {
     $('startPanel').hidden = true; $('hud').hidden = false;
     panelOpen = false; controls.enabled = true; canvas.tabIndex = 0; canvas.focus();
     map.layoutMini();
+    audio.start();
+    for (const fn of game.startHooks) fn();
   });
 
   // ----- main loop -----
@@ -324,7 +349,7 @@ async function boot() {
     player.face = (player.face + look.x * sens + controls.turn * 110 * dt + 720) % 360;
     player.pitch = Math.max(-60, Math.min(60, player.pitch - look.y * sens));
 
-    if (!panelOpen && (controls.moveX || controls.moveY)) {
+    if (!panelOpen && !game.sceneOn && (controls.moveX || controls.moveY)) {
       const a = player.face * Math.PI / 180, speed = controls.run ? JOG : WALK;
       const fx = Math.sin(a), fz = -Math.cos(a);                // forward
       const rx = Math.cos(a), rz = Math.sin(a);                 // right
@@ -349,9 +374,12 @@ async function boot() {
     world.sky.position.set(player.x, 0, player.z);
     animateMarkers(now / 1000);
     folk.update(player, now / 1000, dt);
+    ambient.update(now / 1000, dt);
+    for (const fn of game.frameHooks) fn(now / 1000, dt);
+    audio.update(player, now / 1000, game.riotLevel);
     renderer.render(scene, camera);
 
-    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); if (!panelOpen) updateNear(); }
+    if (!$('hud').hidden) { drawCompass(); map.drawMini(player); updatePlace(); if (!panelOpen && !game.sceneOn) updateNear(); }
 
     // frame-rate watch: if the device struggles, quietly lower the picture sharpness
     frames++; fpsTime += dt;
@@ -364,10 +392,10 @@ async function boot() {
       }
     }
     saveTimer += dt;
-    if (saveTimer > 3 && !panelOpen) { saveTimer = 0; savePosition(); }
+    if (saveTimer > 3 && !panelOpen && !game.sceneOn) { saveTimer = 0; savePosition(); }
   }
   function savePosition() {
-    if (!$('startPanel').hidden) return;
+    if (!$('startPanel').hidden || game.sceneOn) return;
     const data = loadSave(); data.pos = { x: +player.x.toFixed(1), z: +player.z.toFixed(1), face: Math.round(player.face) };
     writeSave(data);
   }
@@ -378,7 +406,7 @@ async function boot() {
 
   // A small handle for testing and (later) Leader Mode jumps.
   window.ephesus = {
-    player, places: PLACES, plaques: PLAQUES, people: folk.people, teleport,
+    player, places: PLACES, plaques: PLAQUES, people: folk.people, teleport, story,
     talkTo: (id) => { const q = folk.people.find((x) => x.id === id); if (q) openTalk(q); return !!q; }, openPlaque: (id) => { const p = PLAQUES.find((q) => q.id === id); if (p) openPlaque(p); return !!p; },
     goTo(id) { const p = PLACES.find((q) => q.id === id); if (p) teleport(p.spawn[0], p.spawn[1], p.face); return !!p; },
     stats: () => ({ fps, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, colliders: world.colliders.length, pixelRatio }),

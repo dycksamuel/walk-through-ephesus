@@ -278,3 +278,34 @@ export const PEOPLE = [
   { id: 'charite', talk: 'charite', x: 30.4, z: 175, face: 0, look: { woman: true, tunic: 0xd9b24a, hair: 0x3a2e26, small: 0.9 } },
   { id: 'eirene', talk: 'eirene', x: 31.8, z: 180, face: 300, look: { woman: true, tunic: 0x9a8f7a, hair: 0x2e2620 } },
 ];
+
+// The Letter Fragments: glowing scrolls to find. Text is in content/fragments.json (matched by id).
+export const FRAGMENTS = [
+  { id: 'seal', x: -108, z: 58.8 }, { id: 'wall', x: -108.5, z: -21.6 }, { id: 'citizens', x: 116, z: 134.4 },
+  { id: 'mystery', x: 1.6, z: 65.2 }, { id: 'body', x: 26, z: -10 }, { id: 'light', x: -100.6, z: 144.4 },
+  { id: 'household', x: 28, z: 182 }, { id: 'armor', x: 158.4, z: 152.6 }, { id: 'power', x: 279.4, z: -126 },
+];
+export const EPILOGUE = { id: 'epilogue', x: -183, z: -3 };
+export const RIOT_NEEDS = 5;      // fragments needed before the riot scene unlocks
+
+// Background townspeople walk back and forth along these routes (lists of points).
+export const ROUTES = [
+  [[-166, 2], [-50, 2]], [[-160, -3], [-48, -3]], [[-36, 22], [-36, 122]], [[-32, 30], [-32, 118]],
+  [[-20, 144], [10, 154], [50, 166], [98, 172]], [[-18, 141], [12, 150], [52, 162], [100, 168]],
+  [[-126, 44], [-60, 44], [-60, 106], [-126, 106], [-126, 44]], [[-118, 64], [-66, 64], [-66, 98], [-118, 98], [-118, 64]],
+  [[108, 158], [196, 158], [196, 198], [108, 198], [108, 158]], [[206, 172], [244, 172]],
+  [[250, 170], [282, 150], [304, 100], [310, 30], [306, -40], [286, -84], [264, -108]],
+  [[-182, -40], [-182, 40]], [[-70, 140], [-24, 140]], [[-42, -24], [-44, -70]],
+];
+// People standing about: [x, z, facing]
+export const STANDERS = [
+  [-108, 54, 180], [-96.5, 54.2, 180], [-84, 58, 0], [-72.6, 58, 0], [-96, 94, 0], [-84.4, 90, 180], [-71, 94, 0], [-114, 74, 270], [-64, 82, 90],
+  [-178, 12, 250], [-176.5, 13, 110], [-180, -16, 300], [-41, 10, 60], [-39.6, 11, 250], [130, 162, 20], [131.4, 163, 200], [176, 190, 320],
+  [-56, 132, 180], [270, -120, 80], [272, -138, 100], [20, 157, 30], [-100, 2.5, 90],
+];
+// Animals standing about: [kind, x, z, facing]
+export const ANIMALS = [
+  ['donkey', -170, 16, 80], ['donkey', -52, 118, 10], ['donkey', 300, 90, 5], ['goat', 288, 60, 200], ['goat', 290, 63, 140], ['goat', 286, 64, 250],
+  ['goat', 322, 20, 90], ['dog', -78, 70, 120], ['dog', 6, 148, 300], ['dog', 224, 176, 200],
+  ['hen', -150, 6, 0], ['hen', -151, 7.2, 120], ['hen', -149, 7.5, 250], ['hen', -76, 157, 40], ['hen', -77.4, 158, 200], ['hen', 70, 176, 90],
+];

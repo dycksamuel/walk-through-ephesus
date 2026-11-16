@@ -589,3 +589,30 @@ Everything in this table is fine as written unless a D4 or D5 number is given.
 - Slave market (IEph 3025): https://philipharland.com/greco-roman-associations/honors-by-merchants-in-the-slave-market-for-the-proconsul-sallustius-42-43-ce/ ; https://ancientassociations.ku.dk/assoc/1607
 - Asylum: Hogarth on Tacitus, *Annals* 3.61: https://digi.ub.uni-heidelberg.de/diglit/hogarth1908bd1/0013 ; Plutarch on debtors: https://sententiaeantiquae.com/tag/borrowing/
 - Legionary kit (secondary): https://www.erminestreetguard.co.uk/the-roman-army4 ; https://romancoins.info/MilitaryEquipment-Shield.html
+
+---
+
+# Phase 4–5 review: quest, riot and About text
+
+Reviewed 2026-11-16: `content/fragments.json`, `content/riot.json`, `content/about.json`, against Acts 18–20, the Ephesians passages named and the notes above. (The historian could not append to this file in that session, so this summary was added from its report.)
+
+Overall: no anachronism; the riot steps follow the order of Acts 19:23–41 and each scene matches its verses. All of the following changes were applied.
+
+| # | Where | Problem | Fix applied |
+|---|---|---|---|
+| 1 | riot, "outside" step | Acts 19:30–31: the disciples stopped Paul; the Asiarchs, his friends, sent word begging him. | Narration now says exactly that. |
+| 2 | fragments, citizens "why" | Made the readers literal non-citizens; in Eph 2:11–19 they are Gentiles and the civic words are a picture. | Reworded: "Paul borrows those words for Gentile believers…" |
+| 3 | about, authorship | "A decade or more later" had no anchor; those who hold this view usually date the letter about AD 80–90. | "after Paul’s death, perhaps around AD 80–90", plus a sentence that notes saying "Paul writes" follow the letter’s own words. |
+| 4 | fragments, armor "why" | The text names a sword (6:17) and feet, not boots. | Now quotes "the sword of the Spirit, which is the word of God". |
+| 5 | riot, first step | Acts 19:24–25 says craftsmen and workmen of like occupation, not everyone living off the temple. | Narrowed. |
+| 6 | riot, town clerk | "Chief official" is a modern summary, not a rank. | "one of the city’s most powerful officials". |
+| 7 | riot, journal "why" | "Anyone in Ephesus…" too sweeping. | "many in Ephesus…" |
+| 8 | fragments, mystery "why" | The word also meant an ordinary secret; only the Artemis and Demeter mysteries are well supported for the 50s. | Softened. |
+| 9 | fragments, light "why" | Ancient magic also covered healing and protection. | "Much of that magic…" |
+| 10 | about, date | AD 60–62 assumes the Roman imprisonment; Caesarea (about 57–59) is the other candidate. | "most likely… when Paul was held in Rome". |
+
+Judged fine as written: the Alexander step (states Acts 19:34 plainly, invents no motive); "Rome is watching" (an inference from 19:38–40); the seal, wall, body, household and power notes; the epilogue (Acts 20:1 names no place of departure; scene labelled imagined); both About pages apart from the edits above. In the household note, direct address to wives, children and slaves is the firmest of the "unusual in its setting" points; duties for masters and husbands also appear in Seneca and Plutarch, so that point should not be strengthened.
+
+Not verified in that pass: Sherwin-White on the town clerk; the exact positions of Kearsley and Friesen on the Asiarchs. Quotations inside the notes are checked mechanically against the WEB reference by `tools/check-content.mjs`.
+
+Sources added: Witetschek, "Artemis and Asiarchs," *Biblica* 90 (2009); Harland, *Associations in the Greco-Roman World* nos. 163 (IEph 213) and IEph 1600; Keener on the household codes; Lincoln, *Ephesians* (WBC) and Brown, *Introduction to the New Testament* on authorship (from memory).

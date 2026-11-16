@@ -79,5 +79,5 @@ export function createPeople(scene, colliders) {
     });
     tips.instanceMatrix.needsUpdate = true;
   }
-  return { people, update, setTalked };
+  return { people, update, setTalked, showTips(on) { tips.visible = on; } };
 }

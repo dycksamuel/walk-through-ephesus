@@ -2,7 +2,7 @@
 // Run with:  node tools/check-content.mjs
 // It makes sure every file is valid JSON and that every place in the city plan has a name.
 import { readFileSync, readdirSync } from 'node:fs';
-import { PLACES, PLAQUES, PEOPLE } from '../src/world/layout.js';
+import { PLACES, PLAQUES, PEOPLE, FRAGMENTS } from '../src/world/layout.js';
 
 let problems = 0;
 const fail = (msg) => { console.error('  ✗ ' + msg); problems++; };
@@ -27,7 +27,7 @@ for (const p of PLAQUES) {
   for (const key of ['name', 'known', 'imagined']) if (!t[key] || !String(t[key]).trim()) fail(`locations.json: "${p.id}" is missing "${key}"`);
 }
 const ui = data['ui.json'] || {};
-for (const key of ['title', 'subtitle', 'intro', 'start', 'continue', 'loading', 'howTouch', 'howKeys', 'mapTitle', 'mapClose', 'mapOpen', 'imaginedTag', 'mapNote', 'compass', 'errorNoWebGL', 'talk', 'goodbye', 'talkHint', 'scriptureNoteHead', 'plaqueKnown', 'plaqueImagined', 'read', 'close', 'imaginedBadge', 'plaqueHint']) {
+for (const key of ['title', 'subtitle', 'intro', 'start', 'continue', 'loading', 'howTouch', 'howKeys', 'mapTitle', 'mapClose', 'mapOpen', 'imaginedTag', 'mapNote', 'compass', 'errorNoWebGL', 'talk', 'goodbye', 'talkHint', 'scriptureNoteHead', 'journal', 'journalEmpty', 'passage', 'whyHere', 'questionsHead', 'foundHead', 'pickUp', 'fragmentCount', 'openJournal', 'keepWalking', 'fragmentHint', 'questIntro', 'notFoundYet', 'printJournal', 'menu', 'sound', 'largeText', 'leaderMode', 'leaderNote', 'jumpTo', 'startRiot', 'resetProgress', 'resetConfirm', 'resetYes', 'resetNo', 'about', 'next', 'skip', 'riotLocked', 'epilogueInvite', 'webNotice', 'on', 'off', 'plaqueKnown', 'plaqueImagined', 'read', 'close', 'imaginedBadge', 'plaqueHint']) {
   if (!(key in ui)) fail(`ui.json is missing "${key}"`);
 }
 if (ui.compass && ui.compass.length !== 8) fail('ui.json "compass" needs exactly 8 entries (N, NE, E, SE, S, SW, W, NW)');
@@ -92,6 +92,50 @@ for (const [id, c] of Object.entries(chars)) {
   const canEnd = new Set(Object.keys(c.nodes).filter((nid) => c.nodes[nid].end));
   for (let changed = true; changed;) { changed = false; for (const nid of Object.keys(c.nodes)) if (!canEnd.has(nid) && next(nid).some((t) => canEnd.has(t))) { canEnd.add(nid); changed = true; } }
   for (const nid of Object.keys(c.nodes)) if (!canEnd.has(nid)) fail(`${at}: from node "${nid}" the conversation can never end`);
+}
+
+// ---------- letter fragments, riot scene, About pages ----------
+const allWeb = squash(Object.values(web).map((b) => Object.values(b).join(' ')).join(' '));
+// a passage filled in by tools/fill-scripture.mjs must still match the reference, verse by verse
+function checkVerses(where, item) {
+  const full = versesFor(item.ref || '');
+  if (!full) { fail(`${where}: I can't find "${item.ref}" in the reference text`); return; }
+  const got = squash((item.verses || []).map((v) => v[1]).join(' '));
+  if (got !== full) fail(`${where}: the verses for ${item.ref} don't match the World English Bible. Run: node tools/fill-scripture.mjs`);
+}
+// short phrases quoted inside “ ” in our own notes must be real WEB wording
+function checkQuotes(where, str) {
+  for (const m of String(str || '').matchAll(/“([^”]+)”/g)) {
+    const phrase = squash(m[1]).replace(/[.,;:]$/, '');
+    if (!allWeb.includes(phrase)) fail(`${where}: the quoted words “${m[1]}” are not in the World English Bible text of Ephesians or Acts 18–20`);
+  }
+}
+const fr = data['fragments.json'] || { fragments: [] };
+const SCENES = ['workshop', 'rush', 'outside', 'confusion', 'alexander', 'chant', 'clerk'];
+for (const f of FRAGMENTS) if (!fr.fragments.some((x) => x.id === f.id)) fail(`fragments.json has no fragment "${f.id}"`);
+for (const f of [...fr.fragments, fr.epilogue].filter(Boolean)) {
+  const at = `fragments.json "${f.id}"`;
+  for (const key of ['ref', 'title', 'place', 'found', 'why']) if (!f[key]) fail(`${at} is missing "${key}"`);
+  if (!Array.isArray(f.questions) || f.questions.length < 2 || f.questions.length > 3) fail(`${at} needs 2 or 3 discussion questions`);
+  checkVerses(at, f);
+  for (const t of [f.found, f.why, ...(f.questions || [])]) checkQuotes(at, t);
+}
+if (!fr.epilogue) fail('fragments.json is missing the "epilogue"');
+const riotData = data['riot.json'] || {};
+for (const key of ['title', 'invite', 'inviteButton', 'chant', 'steps', 'closing', 'journal']) if (!riotData[key]) fail(`riot.json is missing "${key}"`);
+if (riotData.chant) checkScripture('riot.json "chant"', riotData.chant, false);
+(riotData.steps || []).forEach((st, i) => {
+  const at = `riot.json step ${i + 1}`;
+  if (!SCENES.includes(st.scene)) fail(`${at}: "scene" must be one of ${SCENES.join(', ')}`);
+  if (!st.narration && !st.ref) fail(`${at} has neither narration nor a verse reference`);
+  if (st.ref) checkVerses(at, st);
+  checkQuotes(at, st.narration);
+});
+if (riotData.journal) { checkVerses('riot.json "journal"', riotData.journal); for (const t of [riotData.journal.why, ...(riotData.journal.questions || [])]) checkQuotes('riot.json "journal"', t); }
+const aboutData = data['about.json'] || {};
+for (const key of ['letter', 'game']) {
+  if (!aboutData[key] || !aboutData[key].title || !Array.isArray(aboutData[key].paragraphs)) fail(`about.json needs "${key}" with a title and paragraphs`);
+  else aboutData[key].paragraphs.forEach((t) => checkQuotes(`about.json "${key}"`, t));
 }
 
 if (problems) { console.error(`\n${problems} problem(s) found. Nothing was published.`); process.exit(1); }

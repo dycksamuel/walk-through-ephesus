@@ -101,3 +101,67 @@ body.bigText .sheet p { font-size: 22px; }
 #talkChoices button.end { background: var(--accent); color: #fff; text-align: center; font-weight: 700; }
 body.bigText .speech { font-size: 26px; }
 body.bigText #talkChoices button { font-size: 21px; }
+
+/* ---- Phase 4-5: journal, menu, fragments, riot ---- */
+#topBtns { position: absolute; left: 10px; top: calc(10px + var(--safe-t)); display: flex; gap: 8px; }
+.pill { min-height: 40px; padding: 6px 14px; border: 2px solid var(--paper); border-radius: 20px; background: rgba(47, 38, 32, .78); color: #fff;
+  font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
+#fps { top: auto; bottom: 6px; }
+@media (max-width: 640px) { #topBtns { top: calc(50px + var(--safe-t)); } }
+body.riot #topBtns, body.riot #mapBtn, body.riot #stick, body.riot #actionBtn, body.riot #place, body.riot #hint { display: none !important; }
+.btnRow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.btnRow button { flex: 1 1 140px; margin: 0; }
+button.secondary { padding: 12px 20px; min-height: 48px; border: 2px solid var(--accent); border-radius: 26px; background: #fff; color: var(--accent);
+  font-size: 16px; font-weight: 700; cursor: pointer; }
+button.secondary.compact { padding: 8px 16px; min-height: 44px; }
+.headBtns { display: flex; gap: 8px; flex: none; }
+.sheet.wide { width: min(760px, 100%); max-height: 100%; text-align: left; }
+.sheet.wide.narrow { width: min(520px, 100%); }
+.entryList { list-style: none; margin: 0; padding: 0; }
+.entryList li { margin: 0 0 8px; }
+.entryList button { display: block; width: 100%; padding: 12px 14px; min-height: 56px; border: 1px solid var(--line); border-radius: 12px; background: #fff;
+  text-align: left; font-size: 16px; cursor: pointer; color: var(--ink); }
+.entryList button strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 18px; }
+.entryList button span { font-size: 13px; opacity: .75; }
+.entryList button:disabled { background: transparent; border-style: dashed; opacity: .6; cursor: default; }
+.entry h3 { margin: 18px 0 4px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.entry .placeLine { margin: 0; font-size: 14px; opacity: .8; }
+.verses { font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.55; }
+.verses sup { font: 700 11px system-ui, sans-serif; color: var(--accent); margin-right: 3px; }
+.entry ol { margin: 6px 0 0; padding-left: 22px; }
+.entry ol li { margin-bottom: 8px; line-height: 1.45; font-size: 17px; }
+.menuRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+.menuRow button { margin: 0; flex: none; }
+.switch { min-width: 92px; min-height: 44px; padding: 8px 14px; border: 2px solid var(--accent); border-radius: 22px; background: #fff; color: var(--accent); font-weight: 700; font-size: 15px; cursor: pointer; }
+.switch[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.jumpList { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 8px 0 4px; }
+.jumpList button { min-height: 44px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 14px; text-align: left; cursor: pointer; color: var(--ink); }
+#menuBody h3 { margin: 16px 0 2px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+#menuBody .stack { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+#menuBody .stack button { margin: 0; }
+#riotBar { position: fixed; left: 0; right: 0; bottom: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+#riotSheet { pointer-events: auto; width: min(720px, 100%); max-height: 46vh; overflow: auto; padding: 14px 16px calc(14px + var(--safe-b)); text-align: left; background: rgba(246, 239, 224, .96); }
+#riotSheet p { margin: 6px 0; }
+#riotSheet .verses { font-size: 17px; margin: 8px 0 2px; padding-left: 10px; border-left: 3px solid var(--accent); }
+#riotChant { margin-bottom: 4vh; padding: 0 12px; font: 700 clamp(24px, 6.5vw, 54px) Georgia, "Times New Roman", serif; color: #fff; text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .8); animation: chant .68s ease-in-out infinite alternate; }
+@keyframes chant { from { transform: scale(.94); opacity: .75; } to { transform: scale(1.06); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #riotChant { animation: none; } }
+body.bigText .verses { font-size: 26px; }
+body.bigText .entry ol li, body.bigText .menuRow, body.bigText #riotSheet p { font-size: 24px; }
+body.bigText .sheet h2 { font-size: 30px; }
+body.bigText #riotSheet { max-height: 60vh; width: min(1100px, 100%); }
+body.bigText .sheet.wide { width: min(1100px, 100%); }
+
+/* printing the journal: only the journal pages, in plain black on white */
+#printArea { display: none; }
+@media print {
+  html, body { height: auto; overflow: visible; background: #fff; }
+  body > *:not(#printArea) { display: none !important; }
+  #printArea { display: block; color: #000; padding: 0 6mm; }
+  #printArea .entry { page-break-after: always; }
+  #printArea .entry:last-child { page-break-after: auto; }
+  #printArea h2 { font-size: 20pt; margin: 0 0 2pt; }
+  #printArea .verses { font-size: 11.5pt; }
+  #printArea .entry ol li, #printArea p { font-size: 11.5pt; }
+}
