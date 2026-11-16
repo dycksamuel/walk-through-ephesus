@@ -1,0 +1,250 @@
+{
+  "title": "The Riot in the Theatre",
+  "invite": "Something is stirring in the city. A crowd is gathering and the shouting is coming from the theatre; make your way there when you are ready.",
+  "inviteButton": "Go to the theatre",
+  "chant": {
+    "ref": "Acts 19:28",
+    "text": "Great is Artemis of the Ephesians!"
+  },
+  "steps": [
+    {
+      "scene": "workshop",
+      "narration": "It began here, among the workbenches. Demetrius the silversmith called together the craftsmen and others who worked in trades like his.",
+      "ref": "Acts 19:23–25",
+      "verses": [
+        [
+          "19:23",
+          "About that time there arose no small disturbance concerning the Way."
+        ],
+        [
+          "24",
+          "For a certain man named Demetrius, a silversmith who made silver shrines of Artemis, brought no little business to the craftsmen,"
+        ],
+        [
+          "25",
+          "whom he gathered together, with the workmen of like occupation, and said, “Sirs, you know that by this business we have our wealth."
+        ]
+      ]
+    },
+    {
+      "scene": "workshop",
+      "narration": "He speaks first of lost trade, and then of the honour of the goddess.",
+      "ref": "Acts 19:26–27",
+      "verses": [
+        [
+          "19:26",
+          "You see and hear that not at Ephesus alone, but almost throughout all Asia, this Paul has persuaded and turned away many people, saying that they are no gods that are made with hands."
+        ],
+        [
+          "27",
+          "Not only is there danger that this our trade come into disrepute, but also that the temple of the great goddess Artemis will be counted as nothing and her majesty destroyed, whom all Asia and the world worships.”"
+        ]
+      ]
+    },
+    {
+      "scene": "workshop",
+      "narration": "The anger catches like dry straw, and a chant goes up that the whole city knows.",
+      "ref": "Acts 19:28",
+      "verses": [
+        [
+          "19:28",
+          "When they heard this they were filled with anger, and cried out, saying, “Great is Artemis of the Ephesians!”"
+        ]
+      ]
+    },
+    {
+      "scene": "rush",
+      "narration": "The shout spills into the streets and the crowd pours toward the theatre, pulling two of Paul’s travelling companions along by the arms. No one is hurt in what you see here, though nobody in that crowd could know how it would end.",
+      "ref": "Acts 19:29",
+      "verses": [
+        [
+          "19:29",
+          "The whole city was filled with confusion, and they rushed with one accord into the theater, having seized Gaius and Aristarchus, men of Macedonia, Paul’s companions in travel."
+        ]
+      ]
+    },
+    {
+      "scene": "outside",
+      "narration": "Outside, Paul wants to go in and face the crowd. The disciples will not let him, and some of the Asiarchs, who are his friends, send word begging him to stay away. They were leading men of the province, though exactly what the title involved is debated.",
+      "ref": "Acts 19:30–31",
+      "verses": [
+        [
+          "19:30",
+          "When Paul wanted to enter in to the people, the disciples didn’t allow him."
+        ],
+        [
+          "31",
+          "Certain also of the Asiarchs, being his friends, sent to him and begged him not to venture into the theater."
+        ]
+      ]
+    },
+    {
+      "scene": "confusion",
+      "narration": "Inside the theatre, everyone is shouting and almost no one is listening.",
+      "ref": "Acts 19:32",
+      "verses": [
+        [
+          "19:32",
+          "Some therefore cried one thing, and some another, for the assembly was in confusion. Most of them didn’t know why they had come together."
+        ]
+      ]
+    },
+    {
+      "scene": "alexander",
+      "narration": "A man named Alexander is put forward and raises his hand for quiet. The crowd shouts him down when it sees that he is a Jew: its anger is aimed at a whole people, not only at Paul.",
+      "ref": "Acts 19:33–34",
+      "verses": [
+        [
+          "19:33",
+          "They brought Alexander out of the multitude, the Jews putting him forward. Alexander beckoned with his hand, and would have made a defense to the people."
+        ],
+        [
+          "34",
+          "But when they perceived that he was a Jew, all with one voice for a time of about two hours cried out, “Great is Artemis of the Ephesians!”"
+        ]
+      ]
+    },
+    {
+      "scene": "chant",
+      "narration": "Acts says the shouting went on for about two hours. Here it lasts only a few moments."
+    },
+    {
+      "scene": "clerk",
+      "narration": "At last one man gets the crowd to listen: the town clerk, one of the city’s most powerful officials.",
+      "ref": "Acts 19:35–36",
+      "verses": [
+        [
+          "19:35",
+          "When the town clerk had quieted the multitude, he said, “You men of Ephesus, what man is there who doesn’t know that the city of the Ephesians is temple keeper of the great goddess Artemis, and of the image which fell down from Zeus?"
+        ],
+        [
+          "36",
+          "Seeing then that these things can’t be denied, you ought to be quiet and to do nothing rash."
+        ]
+      ]
+    },
+    {
+      "scene": "clerk",
+      "narration": "Listen to what he argues. He is not defending Paul’s message so much as the city’s good order: there are courts and a lawful assembly for complaints like this.",
+      "ref": "Acts 19:37–39",
+      "verses": [
+        [
+          "19:37",
+          "For you have brought these men here, who are neither robbers of temples nor blasphemers of your goddess."
+        ],
+        [
+          "38",
+          "If therefore Demetrius and the craftsmen who are with him have a matter against anyone, the courts are open, and there are proconsuls. Let them press charges against one another."
+        ],
+        [
+          "39",
+          "But if you seek anything about other matters, it will be settled in the regular assembly."
+        ]
+      ]
+    },
+    {
+      "scene": "clerk",
+      "narration": "Then he names his real worry. Rome is watching, and a city that riots for no reason may have to answer for it.",
+      "ref": "Acts 19:40–41",
+      "verses": [
+        [
+          "19:40",
+          "For indeed we are in danger of being accused concerning today’s riot, there being no cause. Concerning it, we wouldn’t be able to give an account of this commotion.”"
+        ],
+        [
+          "41",
+          "When he had thus spoken, he dismissed the assembly."
+        ]
+      ]
+    }
+  ],
+  "closing": "The theatre empties and the city goes back to its business. You are free to keep walking, and any pieces of the letter you have not found are still waiting for you. A new page about this day has been added to your journal.",
+  "journal": {
+    "title": "The Day of the Riot",
+    "ref": "Acts 19:23–41",
+    "why": "The letter never mentions the riot. But many in Ephesus who heard it read had lived through that day, or grown up on the story. They knew what a crowd held together by a shout looks like, how money, city pride and worship can pull together into one great force, and how fast anger can turn on a whole people. Words about one body, about powers, and about peace for the far and the near would have landed differently here.",
+    "questions": [
+      "Read the scene again slowly. Whose fears do you understand best: Demetrius, the craftsmen, the disciples, the town clerk? What makes you say that?",
+      "The theatre crowd was joined by a chant; Ephesians 4 describes a body joined in a different way. What do you think is the difference between the two kinds of togetherness?",
+      "When have you been swept along by a group without really knowing why? What did it feel like, and what helped you step back?"
+    ],
+    "verses": [
+      [
+        "19:23",
+        "About that time there arose no small disturbance concerning the Way."
+      ],
+      [
+        "24",
+        "For a certain man named Demetrius, a silversmith who made silver shrines of Artemis, brought no little business to the craftsmen,"
+      ],
+      [
+        "25",
+        "whom he gathered together, with the workmen of like occupation, and said, “Sirs, you know that by this business we have our wealth."
+      ],
+      [
+        "26",
+        "You see and hear that not at Ephesus alone, but almost throughout all Asia, this Paul has persuaded and turned away many people, saying that they are no gods that are made with hands."
+      ],
+      [
+        "27",
+        "Not only is there danger that this our trade come into disrepute, but also that the temple of the great goddess Artemis will be counted as nothing and her majesty destroyed, whom all Asia and the world worships.”"
+      ],
+      [
+        "28",
+        "When they heard this they were filled with anger, and cried out, saying, “Great is Artemis of the Ephesians!”"
+      ],
+      [
+        "29",
+        "The whole city was filled with confusion, and they rushed with one accord into the theater, having seized Gaius and Aristarchus, men of Macedonia, Paul’s companions in travel."
+      ],
+      [
+        "30",
+        "When Paul wanted to enter in to the people, the disciples didn’t allow him."
+      ],
+      [
+        "31",
+        "Certain also of the Asiarchs, being his friends, sent to him and begged him not to venture into the theater."
+      ],
+      [
+        "32",
+        "Some therefore cried one thing, and some another, for the assembly was in confusion. Most of them didn’t know why they had come together."
+      ],
+      [
+        "33",
+        "They brought Alexander out of the multitude, the Jews putting him forward. Alexander beckoned with his hand, and would have made a defense to the people."
+      ],
+      [
+        "34",
+        "But when they perceived that he was a Jew, all with one voice for a time of about two hours cried out, “Great is Artemis of the Ephesians!”"
+      ],
+      [
+        "35",
+        "When the town clerk had quieted the multitude, he said, “You men of Ephesus, what man is there who doesn’t know that the city of the Ephesians is temple keeper of the great goddess Artemis, and of the image which fell down from Zeus?"
+      ],
+      [
+        "36",
+        "Seeing then that these things can’t be denied, you ought to be quiet and to do nothing rash."
+      ],
+      [
+        "37",
+        "For you have brought these men here, who are neither robbers of temples nor blasphemers of your goddess."
+      ],
+      [
+        "38",
+        "If therefore Demetrius and the craftsmen who are with him have a matter against anyone, the courts are open, and there are proconsuls. Let them press charges against one another."
+      ],
+      [
+        "39",
+        "But if you seek anything about other matters, it will be settled in the regular assembly."
+      ],
+      [
+        "40",
+        "For indeed we are in danger of being accused concerning today’s riot, there being no cause. Concerning it, we wouldn’t be able to give an account of this commotion.”"
+      ],
+      [
+        "41",
+        "When he had thus spoken, he dismissed the assembly."
+      ]
+    ]
+  }
+}

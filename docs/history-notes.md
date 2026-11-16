@@ -445,3 +445,174 @@ To close these, the session would need access to `turkisharchaeonews.net`, `insc
 - Theatre phases: https://ancienttheatrearchive.com/theatre/ephesus-modern-selcuk-turkey ; https://www.whitman.edu/theatre/theatretour/ephesus/commentary/ephesus.timeline.htm
 - Harbor and coastline: Stock and others (2016): https://www.ancientportsantiques.com/wp-content/uploads/Documents/PLACES/Turkey/Ephese-Stock2016.pdf ; https://www.hurriyetdailynews.com/ephesus-ancient-city-meets-sea-again-28358
 - Altar of the Artemision: https://www.khm.at/en/artworks/altar-1440326
+
+---
+
+# Phase 3 review: character dialogue
+
+Reviewed 2026-11-11: every node and every player choice label in `content/characters.json` (ten conversations plus `paul`), against Acts 18–20, PLAN.md section 4 and the notes above. Same bins (K / R / I) and check labels ([web] / [memory] / [unverified]).
+
+Network note for this pass: web search worked; I did not open any page, so every [web] below rests on search summaries. Points marked [memory] were not re-checked.
+
+Overall: no anachronistic object, coin, food, garment or piece of military kit; nobody knows the future or quotes the letter; nothing reverses the order of events in Acts. One line misreports Acts 19:15–16, one puts a modern scholar's observation into Paul's mouth, and five are small factual slips or firmer than the evidence. The portrayals of the synagogue, of Artemis worship and of slavery are accurate and respectful; I found no later stereotype in any of them.
+
+## D4. Lines that need a change
+
+### D4.1 zosimus [sceva2]: misreports Acts 19:15–16
+- **At fault.** "The man with the spirit said he knew Jesus and knew Paul, but who were they? Then he drove all seven out of the house, bruised and without their clothes, and nobody in my trade laughed."
+- **Problem.** (a) In Acts 19:15 it is the evil spirit that answers, and in 19:16 the man "in whom the evil spirit was" who leaps on them; the line gives the words to the man. (b) "All seven" is firmer than the text. The best manuscripts say he overpowered "both" (*amphoteron*); most translators take that in its looser sense of "all", but it is a known difficulty, and the WEB simply says "them" [web: textual note at ebible.org; Rius-Camps and Read-Heimerdinger in *Filología Neotestamentaria*]. (c) Acts says "naked and wounded"; "bruised" softens the second word. "Without their clothes" is fine for the first.
+- **Fix.** "The spirit answered that it knew Jesus and knew Paul, but who were they? Then the man it lived in leapt on them, and they ran from the house wounded and without their clothes. Nobody in my trade laughed."
+- **Bin.** K (as text).
+
+### D4.2 metrodorus [mystery2]: a scholar's observation given to Paul
+- **At fault.** "He says the idea comes from the Jewish prophets, like Daniel."
+- **Problem.** Paul nowhere says where he got the word. The link to Daniel 2 (where God "reveals mysteries", Greek *mysteria*, Dan 2:18–19, 27–30, 47) is the modern scholarly explanation (see E4 above). "He says" makes it Paul's own statement, and the `paul` entry promises that the game gives him no invented words.
+- **Fix.** "The Jews in here tell me their prophet Daniel used the word the same way."
+- **Bin.** Daniel's usage: K. That it lies behind Paul's: R. Paul saying so: I.
+
+### D4.3 priscillaAquila [apollos3]: Apollos was probably back by now
+- **At fault.** "we hear he has been a great help there."
+- **Problem.** Fine for the first part of Paul's stay (Acts 18:27–19:1). But 1 Cor 16:12, written from Ephesus late in the stay (16:8), shows Apollos with Paul again and unwilling to return to Corinth just yet [web]. The game's moment is late (bonfire past, Demetrius about to call the trades), so "we hear" and the present perfect imply he is still away.
+- **Fix.** "by all accounts he was a great help there."
+- **Bin.** K (texts); the exact overlap is R.
+
+### D4.4 demetrius [craft2]: the wrong Artemis
+- **At fault.** "then pick out every fold of her robe with a point finer than a fish bone."
+- **Problem.** This suggests the Greek huntress in a flowing dress. The Ephesian image, already shown on coins from the 2nd century BC, is a stiff figure in a tight apron-like garment divided into panels of animals (lions, bulls, deer, griffins, sphinxes, bees), with the rows of rounded objects on the chest [web: Kunsthistorisches Museum, Vienna, on the "Great Artemis"]. Her robe is known for its beasts, not its folds.
+- **Fix.** "then pick out every little beast on her robe with a point finer than a fish bone."
+- **Bin.** The image type in the 50s: K. A silver shrine with her in the doorway: R (none survives). Hammering from behind and chasing with a point are correct ancient techniques: K [memory].
+
+### D4.5 metrodorus [asia]: "up the coast"
+- **At fault.** "Smyrna is only a couple of days up the coast."
+- **Problem.** The time is right, the route is not. Strabo 14.1.2: Ephesus to Smyrna is 320 stadia (about 60 km) by the direct inland road through Metropolis, but nearly 2,200 stadia by sea round the coast [web]. Nobody went "up the coast" in two days.
+- **Fix.** "Smyrna is only a couple of days’ walk north of here."
+- **Bin.** K.
+
+### D4.6 metrodorus [daily2]: who Tyrannus was is unknown
+- **At fault.** "Tyrannus’s usual students would not know what to make of us."
+- **Problem.** Acts 19:9 says only "the school of Tyrannus". He may have been a teacher, or the owner of the building. The `tyrannus` plaque says so; this line says he had students.
+- **Fix.** "The hall’s usual crowd would not know what to make of us."
+- **Bin.** Tyrannus as a teacher with students: R at best.
+
+### D4.7 theodotus [place]: Greek was not just the children's language
+- **At fault.** "in Greek, since that is what our children speak."
+- **Problem.** It implies the older generation used Hebrew or Aramaic. Jews had lived in the Ionian cities since the 3rd century BC (Josephus, *Antiquities* 12.125; *Against Apion* 2.39) and their inscriptions and Scriptures there are Greek [memory]. Theodotus himself would have grown up in Greek.
+- **Fix.** "in Greek, since that is the language we all speak."
+- **Bin.** Greek Scriptures in the synagogues of Asia: K/R.
+
+## D5. Optional changes (not wrong, but firmer or thinner than they should be)
+
+| Character [node] | Phrase | Point | Optional replacement | Bin / check |
+|---|---|---|---|---|
+| zosimus [scrolls2] | "so a scroll from this city fetches a high price" | The Ephesian letters are real and proverbial. That an Ephesian origin raised the price of a spell-book is our inference; the only evidence that such books were costly is Acts 19:19 itself. | "so a spell-seller from this city never lacks customers." | Term: K [web]. Price premium: I |
+| eirene [leave] | "And go where? A runaway is hunted, and the law belongs to the owner, not to me." | True. But Ephesus had one famous answer to "go where?": Artemis's temple was an asylum (Tacitus, *Annals* 3.60–61 [web]; Plutarch says debtors fled there [web]), and slaves used it (Achilles Tatius 7.13 [web, index entry only]; Cicero, *Against Verres* 2.1.85 [memory]). It gave a hearing or a change of owner at best, not freedom. Ammia [city2] says people in trouble run there, so a sharp player may ask. | "And go where? A runaway is hunted. Artemis’s temple may shelter a slave for a while, but it cannot free her, and the law belongs to the owner." | Asylum: K. How it worked for slaves at Ephesus in the 50s: R |
+| ammia [way] | "A sandal-maker by the gate said" | Roads from Sardis reach the temple plain from the north-east before they reach the city, so a pilgrim from Sardis would not come out through a city gate to get to the temple [memory]. Her spot on the Sacred Road is a liberty; this phrase is the only line that depends on it. | "A sandal-maker on the road said" | Route: R [memory]. Her placement: I |
+| priscillaAquila [paulNow] | "Most days, at the hall of Tyrannus." | Acts 19:9 says "daily". | "Every day, at the hall of Tyrannus." | K (text) |
+| theodotus [you] | "more often this year than in the ten before it" | Paul left the synagogue more than two years before the riot (Acts 19:8–10). "This year" is not wrong, but reads as if the three months were recent. | "more often these two years than in the twenty before" | R |
+| paul (scripture text) | "I didn’t shrink…" | The WEB sentence begins "how I didn’t shrink" (it continues from verse 18–19) [web]. The opening word has been dropped silently. Punctuation after "God" differs between WEB editions; check against ebible.org. | "…how I didn’t shrink from declaring…" | K |
+
+## D6. Answers to the writer's ten questions
+
+Everything in this table is fine as written unless a D4 or D5 number is given.
+
+| # | Point | Verdict | Bin / check |
+|---|---|---|---|
+| 1 | Zosimus: "Ephesian letters" | The term is attested from the 4th century BC (the comic poet Anaxilas) to Plutarch (*Moralia* 706E) and Clement; six words, worn as amulets. "Everyone has heard of" is fair. Price claim: D5. | K [web] |
+| 1 | Zosimus [scrolls]: lead strips, charms worn round the neck, "Ephesus is famous for them" | Lead curse tablets and rolled amulets in neck cases are standard. The city's fame rests mostly on the phrase "Ephesian letters" and on Acts 19; acceptable as a seller's boast. | K for the objects [memory]; fame R |
+| 1 | Zosimus [sceva2] | Change: D4.1. | K (text) |
+| 2 | Ammia [city]: "women, children and wild things" | Right for Artemis in general (protector of the young, mistress of animals); the Ephesian statue is covered in animals. | K/R [web: KHM] |
+| 2 | Ammia [city]: "the Great One and Saviour" | "Great" is Acts 19:28, 34 and the inscriptions. "Saviour" (*Soteira*) is widely asserted for Ephesian Artemis; one scholar (Clinton, cited by Rigsby in *Kernos*) doubts the Soteira shrine near Ephesus belongs to the Artemis of the great temple. As "people call her", it stands. "She listens" also matches a real epithet, *epekoos* [memory]. | "Great": K. "Saviour": R [web, contested] |
+| 2 | Ammia: calling on her in childbirth | Artemis as helper in childbirth is K for the Greek world. For the Ephesian goddess the direct evidence is thin and the best-known argument for it (S. Glahn) is contested; Plutarch's story that the temple burned because Artemis was away at Alexander's birth (*Alexander* 3) points the same way. A vow and a thank-offering are exactly how such devotion worked. | R [web for the debate; memory for Plutarch] |
+| 2 | Ammia [city2]: "they say her image fell from the sky" | Acts 19:35 is the only source for this at Ephesus. "They say" is the right strength. | K (as text) |
+| 2 | Ammia [city2]: shelter at the temple | Asylum at the Artemision: Strabo 14.1.23; defended before the Roman Senate in AD 22 (Tacitus, *Annals* 3.60–61). | K [web] |
+| 2 | Ammia [hello]: four days from Sardis | Herodotus 5.54: 540 stadia (about 100 km), which he counts as three days. Four days for an older woman is right. | K [web] |
+| 2 | Ammia: roof seen from the Sacred Road; clay shrine | Sightline matches A7. Small terracotta shrines are the surviving type. See D5 for her route. | R |
+| 3 | Metrodorus [asia]: Smyrna | Two days is right; "up the coast" is not: D4.5. | K [web] |
+| 3 | Metrodorus [asia2]: Laodicea, Hierapolis, Sardis; "go to court" | Acts 19:10; Col 4:13 names believers at Laodicea and Hierapolis within a few years, people Paul had not met (Col 2:1). Ephesus was an assize city (Acts 19:38). Sardis and Laodicea had assizes of their own, but the line does not say those listeners came for court. | Courts: K. Listeners: R |
+| 3 | Metrodorus [daily2]: "women with wax tablets", "dyers with blue hands" | Tablets and note-taking at lectures: K. Women doing it: possible, not attested. Blue (woad) dyeing existed; purple and red were the famous dyes of this region, so "purple hands" would be even more at home, but blue is not wrong. | I, harmless |
+| 3 | Metrodorus [mystery]: secret rites, oath of silence | Secrecy was binding in the mysteries, and oaths of silence are attested for several. Fees and grades of initiation are also real, so "no fee, no rank" is a fair contrast. | K/R [memory] |
+| 3 | Metrodorus [mystery2]: Daniel | Change the attribution: D4.2. | — |
+| 3 | Metrodorus [mystery2], [mystery3]: too close to the letter? | No. "Hidden … and now made known" is already in 1 Cor 2:7 and 4:1, written from Ephesus during these years. "Jews and Greeks … one people" is 1 Cor 12:13 and Gal 3:28. He quotes neither, and "as far as I follow it" keeps it a student's summary. One honesty point for the journal, not the dialogue: it is Ephesians 3:6 (and Romans 11:25) that calls the joining of Jew and Gentile "the mystery"; in 1 Corinthians the word is used more broadly. | R |
+| 4 | Theodotus [place]: Law and Prophets in Greek each Sabbath, then discussion | Acts 13:15 and 15:21 for the readings; Greek Scriptures in the diaspora. Language clause: D4.7. | K/R |
+| 4 | Theodotus [place3]: "Rome has upheld our right…" | Josephus preserves the documents for Ephesus itself: Dolabella's letter (*Antiquities* 14.225–227), the city's decree on the Sabbath (14.262–264), Agrippa and the proconsul (16.167–173). | K [memory] |
+| 4 | Theodotus [place3]: Gentiles who come to listen | Acts 18:4 and 19:10, 17 assume Greeks around the synagogues; nothing from Ephesus itself. "A few" is the right size. | R |
+| 4 | Theodotus [place2]: "Jerusalem is weeks away" | Two to three weeks by sea and road in the sailing season; Paul's own trip from Miletus took longer with stops (Acts 20–21). Jews from Asia at the Temple: Acts 2:9; 21:27. | R [memory] |
+| 4 | Theodotus [paul] | Acts 19:8 mentions only "the Kingdom of God". "From the Scriptures" and "Jesus is the Messiah" are borrowed from Acts 17:2–3 and 18:5. Fair for an invented witness. | R |
+| 4 | Theodotus [notPersuaded], [hope], [hope2], [parting]: tone and fact | Accurate and respectful. The objections are the real first-century ones (1 Cor 1:23; the world not yet mended). The hope is drawn from the Prophets (Isaiah 2:2–4; 11; Zechariah 8:20–23). "Some spoke harshly" keeps Acts 19:9's "some". No rabbi, no later customs, no blame. Jewish hopes varied in this period; he speaks for his own community, which is fine. | K/R |
+| 5 | Aquila [work]: "leather and goat-hair cloth" | Covers both readings of the trade word in Acts 18:3. | R |
+| 5 | Priscilla [paulWork]: Paul at their bench in Ephesus | That Paul worked with his hands at Ephesus is K (Acts 20:34; 1 Cor 4:12). That it was at their bench is R; Acts says so only for Corinth. | K + R |
+| 5 | Aquila [rome]: Claudius, Pontus | Acts 18:2 exactly. He does not call Claudius the present emperor. | K |
+| 5 | Aquila [apollos3]: sailing with a letter | Acts 18:27. "Sailed" is the natural way to cross to Achaia. Tense: D4.3. | K; "sailed" R |
+| 5 | Priscilla [church], Aquila [church2] | Prayer, singing, breaking bread and Scripture match 1 Cor 11 and 14. Slave and free together: 1 Cor 12:13. A shipowner in the room is an optimistic guest (1 Cor 1:26) but possible. | R; guests I |
+| 6 | Valens [belt] | Right. Soldiers were punished by being made to stand without their belts (Suetonius, *Augustus* 24). | K [memory] |
+| 6 | Valens [mail], [helmet], [sword] | Right for the 50s. Bronze helmets were at least as common as iron; iron is not wrong. | K [web, secondary; memory] |
+| 6 | Valens [boots] | Right. Josephus tells of a centurion whose hobnails slid on the Temple paving (*Jewish War* 6.85). | K [memory; search confirmed only the episode] |
+| 6 | Valens [shield] | Right for a legionary's shield (layered wood, hide cover, metal boss). "A heavy door" suits Paul's word *thyreos*. It makes Valens a legionary, so model the tall curved shield, not an auxiliary's flat oval. | K; his unit I |
+| 6 | Valens [duty], [order], [hub] | Consistent with A4. "Until the watch changes" is fine in English. | R |
+| 7 | Menander [order], [who], [wife] | A Greek householder under city and gods; a steward who is himself one of the nine; the wife with the keys (the ideal of Xenophon's *Oeconomicus*); nine slaves as modest beside thirty. All plausible. A son "learning the wool trade" makes this a merchant family. The courtyard pool matches P1.10. | R; numbers I |
+| 7 | Menander [slaves2]: "bought at the market" | Ephesus had a slave market: a statue base of AD 42/43 was set up by "those who do business in the slave market" (IEph 3025). | K [web: Harland] |
+| 7 | Menander [slaves2]: oxen | Deliberate and true to the period (Aristotle, *Politics* 1.2: the ox is the poor man's slave). | K as attitude |
+| 8 | Marriage arranged at about fifteen | Normal for a girl of this class. | K/R [memory] |
+| 8 | Charite [day], [day2] | Going out accompanied and for festivals fits (girls walked in Artemis's processions). Basic letters from her mother is plausible; many girls of her class had more. Slaves eating apart is right. | R |
+| 8 | Charite [tent2]: "the tent-maker's wife teaches, and men listen" | As rumour it matches Acts 18:26, where Priscilla, named first, explains the Way to Apollos with Aquila. Do not make it firmer than that. | R |
+| 9 | Eirene [name] | Renaming by dealer or buyer was routine. Eirene does mean "peace". | K [memory] |
+| 9 | Eirene [family] | Phrygia was a proverbial source of slaves; families were sold apart. | K/R [memory] |
+| 9 | Eirene [leave], [leave2] | Right: runaways were hunted, the law was the owner's, freedom came by the owner's gift or by savings he allowed. See D5 for the temple asylum. | K |
+| 9 | Eirene [days], [days2] | Public fountains (the city had aqueduct water from Augustus's time), hand grinding, rising before light: all fine. | R |
+| 10 | Demetrius [craft], [craft2] | Shrine form: R, per D3. Technique: K. Robe detail: D4.4. Eleven workers, wax tallies: I, plausible. "The festival": Artemis had a yearly festival in the spring month named for her; the decree usually cited is 2nd century, the festival is older. | R [memory] |
+| — | paul | Acts 20:20–21 is the right reference; spoken at Miletus to the elders of the church in Ephesus (Acts 20:17). Wording: D5. | K [web] |
+
+## D7. Bins for the dialogue as a whole
+
+- **K (texts).** Everything the characters report from Acts 18–19: Claudius's order, Pontus, Corinth, the voyage to Ephesus, Apollos, three months in the synagogue, the move to the hall, daily teaching, hearers from all Asia, the sons of Sceva, the confession and the bonfire, 50,000 pieces of silver as the total, "gods made by hands", "the Way", the image fallen from the sky.
+- **K (other evidence).** Ephesian letters; curse tablets and amulets; asylum at the temple; Jewish rights at Ephesus; the slave market; assizes; no legion in Asia; the soldier's kit; wax tablets, scrolls, hand spindles, fish sauce, harbor silting.
+- **R.** Paul at the couple's bench; Gentile sympathisers at this synagogue; Artemis of Ephesus as helper in childbirth and "Saviour"; shrine shapes; a soldier on the governor's staff; the household's size and routines; slave and free at one table among the believers.
+- **I.** Every invented character and everything personal about them; Demetrius's eleven workers and falling sales; the church meeting among the benches; the women with tablets; the shipowner; the sandal-maker.
+
+## D8. Could not verify in this pass
+
+1. Josephus, *Jewish War* 6.85 (hobnails), Suetonius, *Augustus* 24 (belts), Cicero, *Against Verres* 2.1.85 and Achilles Tatius 7.13 (slaves and the temple): cited from memory; searches confirmed only that the passages exist.
+2. *Soteira* and *epekoos* as titles of Ephesian Artemis in inscriptions of the 1st century: secondary claims only.
+3. The route of the Sardis road in its last few kilometres.
+4. Sailing time from Ephesus to Judaea.
+
+## Sources added in this pass (search results; pages not opened)
+
+- Ephesian letters: https://en.wikipedia.org/wiki/Ephesia_Grammata
+- Acts 19:16 "both": https://ebible.org/engtcent/ACT19.htm ; https://www.bsw.org/filologia-neotestamentaria/vol-26-2013/the-variant-readings-of-the-western-text-of-the-acts-of-the-aspostles-xxv-acts-18-24-19-40/656/article-p145.html
+- WEB text of Acts 20: https://ebible.org/engwebp/ACT20.htm
+- 1 Cor 16:12: https://www.esv.org/verses/1+Corinthians+16:12/
+- Strabo 14.1.2: https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/14A*.html
+- Herodotus 5.54: https://lexundria.com/hdt/5.54/mcly
+- The Ephesian image and its robe: https://www.khm.at/en/artworks/grosse-artemis-von-ephesos-705749
+- Artemis and childbirth, "Saviour": Glahn, "The First-Century Ephesian Artemis," *Bibliotheca Sacra* 172: https://www.galaxie.com/article/bsac172-688-05 ; Rigsby on Ephesian Artemis, *Kernos*: https://journals.openedition.org/kernos/4568
+- Slave market (IEph 3025): https://philipharland.com/greco-roman-associations/honors-by-merchants-in-the-slave-market-for-the-proconsul-sallustius-42-43-ce/ ; https://ancientassociations.ku.dk/assoc/1607
+- Asylum: Hogarth on Tacitus, *Annals* 3.61: https://digi.ub.uni-heidelberg.de/diglit/hogarth1908bd1/0013 ; Plutarch on debtors: https://sententiaeantiquae.com/tag/borrowing/
+- Legionary kit (secondary): https://www.erminestreetguard.co.uk/the-roman-army4 ; https://romancoins.info/MilitaryEquipment-Shield.html
+
+---
+
+# Phase 4–5 review: quest, riot and About text
+
+Reviewed 2026-11-16: `content/fragments.json`, `content/riot.json`, `content/about.json`, against Acts 18–20, the Ephesians passages named and the notes above. (The historian could not append to this file in that session, so this summary was added from its report.)
+
+Overall: no anachronism; the riot steps follow the order of Acts 19:23–41 and each scene matches its verses. All of the following changes were applied.
+
+| # | Where | Problem | Fix applied |
+|---|---|---|---|
+| 1 | riot, "outside" step | Acts 19:30–31: the disciples stopped Paul; the Asiarchs, his friends, sent word begging him. | Narration now says exactly that. |
+| 2 | fragments, citizens "why" | Made the readers literal non-citizens; in Eph 2:11–19 they are Gentiles and the civic words are a picture. | Reworded: "Paul borrows those words for Gentile believers…" |
+| 3 | about, authorship | "A decade or more later" had no anchor; those who hold this view usually date the letter about AD 80–90. | "after Paul’s death, perhaps around AD 80–90", plus a sentence that notes saying "Paul writes" follow the letter’s own words. |
+| 4 | fragments, armor "why" | The text names a sword (6:17) and feet, not boots. | Now quotes "the sword of the Spirit, which is the word of God". |
+| 5 | riot, first step | Acts 19:24–25 says craftsmen and workmen of like occupation, not everyone living off the temple. | Narrowed. |
+| 6 | riot, town clerk | "Chief official" is a modern summary, not a rank. | "one of the city’s most powerful officials". |
+| 7 | riot, journal "why" | "Anyone in Ephesus…" too sweeping. | "many in Ephesus…" |
+| 8 | fragments, mystery "why" | The word also meant an ordinary secret; only the Artemis and Demeter mysteries are well supported for the 50s. | Softened. |
+| 9 | fragments, light "why" | Ancient magic also covered healing and protection. | "Much of that magic…" |
+| 10 | about, date | AD 60–62 assumes the Roman imprisonment; Caesarea (about 57–59) is the other candidate. | "most likely… when Paul was held in Rome". |
+
+Judged fine as written: the Alexander step (states Acts 19:34 plainly, invents no motive); "Rome is watching" (an inference from 19:38–40); the seal, wall, body, household and power notes; the epilogue (Acts 20:1 names no place of departure; scene labelled imagined); both About pages apart from the edits above. In the household note, direct address to wives, children and slaves is the firmest of the "unusual in its setting" points; duties for masters and husbands also appear in Seneca and Plutarch, so that point should not be strengthened.
+
+Not verified in that pass: Sherwin-White on the town clerk; the exact positions of Kearsley and Friesen on the Asiarchs. Quotations inside the notes are checked mechanically against the WEB reference by `tools/check-content.mjs`.
+
+Sources added: Witetschek, "Artemis and Asiarchs," *Biblica* 90 (2009); Harland, *Associations in the Greco-Roman World* nos. 163 (IEph 213) and IEph 1600; Keener on the household codes; Lincoln, *Ephesians* (WBC) and Brown, *Introduction to the New Testament* on authorship (from memory).

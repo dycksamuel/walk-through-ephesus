@@ -17,6 +17,10 @@
     <div id="place" role="status" aria-live="polite"></div>
     <button id="mapBtn" type="button"><canvas id="miniMap"></canvas></button>
     <div id="stick" aria-hidden="true"><div class="knob"></div></div>
+    <div id="topBtns">
+      <button id="journalBtn" type="button" class="pill"></button>
+      <button id="menuBtn" type="button" class="pill"></button>
+    </div>
     <button id="actionBtn" type="button" hidden></button>
     <div id="hint" role="status" hidden></div>
     <div id="fps" hidden></div>
@@ -47,6 +51,87 @@
       <p id="cardImagined"></p>
     </div>
   </div>
+
+  <div id="talkPanel" class="panel low" hidden>
+    <div class="sheet card" id="talkSheet" role="dialog" aria-labelledby="talkName">
+      <div class="sheetHead">
+        <div>
+          <h2 id="talkName"></h2>
+          <p id="talkRole" class="role"></p>
+        </div>
+        <button id="talkClose" type="button" class="primary compact"></button>
+      </div>
+      <p id="talkAbout" class="small muted"></p>
+      <p id="talkText" class="speech" aria-live="polite"></p>
+      <p id="talkRef" class="ref" hidden></p>
+      <h3 id="talkNoteHead" hidden></h3>
+      <p id="talkNote" hidden></p>
+      <div id="talkChoices"></div>
+    </div>
+  </div>
+
+  <div id="foundPanel" class="panel low" hidden>
+    <div class="sheet card" role="dialog" aria-labelledby="foundTitle">
+      <p id="foundHead" class="role"></p>
+      <h2 id="foundTitle"></h2>
+      <p id="foundRef" class="ref"></p>
+      <p id="foundText" class="speech"></p>
+      <p id="foundCount" class="small muted"></p>
+      <div class="btnRow">
+        <button id="foundJournal" type="button" class="primary"></button>
+        <button id="foundClose" type="button" class="secondary"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="invitePanel" class="panel low" hidden>
+    <div class="sheet card" role="dialog" aria-labelledby="inviteTitle">
+      <h2 id="inviteTitle"></h2>
+      <p id="inviteText"></p>
+      <div class="btnRow">
+        <button id="inviteGo" type="button" class="primary"></button>
+        <button id="inviteLater" type="button" class="secondary"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="journalPanel" class="panel" hidden>
+    <div class="sheet wide" id="journalSheet" role="dialog" aria-labelledby="journalTitle">
+      <div class="sheetHead">
+        <h2 id="journalTitle"></h2>
+        <div class="headBtns">
+          <button id="journalBack" type="button" class="secondary compact" hidden>&larr;</button>
+          <button id="journalClose" type="button" class="primary compact"></button>
+        </div>
+      </div>
+      <div id="journalBody"></div>
+    </div>
+  </div>
+
+  <div id="menuPanel" class="panel" hidden>
+    <div class="sheet wide narrow" id="menuSheet" role="dialog" aria-labelledby="menuTitle">
+      <div class="sheetHead">
+        <h2 id="menuTitle"></h2>
+        <button id="menuClose" type="button" class="primary compact"></button>
+      </div>
+      <div id="menuBody"></div>
+    </div>
+  </div>
+
+  <div id="riotBar" hidden>
+    <div id="riotChant" aria-hidden="true" hidden></div>
+    <div class="sheet" id="riotSheet">
+      <p id="riotTitle" class="role"></p>
+      <p id="riotNarration"></p>
+      <div id="riotVerses" class="verses"></div>
+      <p id="riotRef" class="ref"></p>
+      <div class="btnRow">
+        <button id="riotNext" type="button" class="primary"></button>
+        <button id="riotSkip" type="button" class="secondary"></button>
+      </div>
+    </div>
+  </div>
+  <div id="printArea"></div>
 
   <div id="startPanel" class="panel">
     <div class="sheet center">
