@@ -211,7 +211,7 @@ async function boot() {
     $('talkText').classList.toggle('scripture', quote);
     $('talkRef').hidden = !quote; $('talkNoteHead').hidden = !quote; $('talkNote').hidden = !quote;
     if (quote) {     // Paul: his own words from Scripture, nothing invented
-      $('talkText').textContent = '\u201C' + c.scripture.text + '\u201D';
+      $('talkText').textContent = '\u201C' + (c.scripture.partial ? '\u2026 ' : '') + c.scripture.text + '\u201D';   // "partial" = the quotation starts mid-sentence
       $('talkRef').textContent = c.scripture.ref + ' (WEB)'; $('talkNote').textContent = c.note || '';
       const box = $('talkChoices'); box.textContent = '';
       const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'end'; btn.textContent = text.close;
